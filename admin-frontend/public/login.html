@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>初中道德法制知识库系统 - 登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="https://unpkg.com/amis@6.8.0/lib/themes/default.css" />
+    <link rel="stylesheet" href="https://unpkg.com/amis@6.8.0/lib/helper.css" />
+    <script src="https://unpkg.com/amis@6.8.0/sdk/sdk.js"></script>
+    <style>
+        html, body, .app-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="root" class="app-wrapper"></div>
+    <script type="module">
+        import config from './config.js'; // 导入配置文件
+
+        (function () {
+            let amis = amisRequire('amis/embed');
+            let amisJSON = {
+                "type": "form",
+                "api": {
+                    "url": `${config.API_HOST}/login`,
+                    "method": "post",
+                    "adaptor": function (payload) {
+                        console.log('Login response:', payload); // 添加日志
+                        if (payload.status === 0 && payload.data) {
+                            localStorage.setItem('jwt', payload.data.token);
+                            localStorage.setItem('username', payload.data.username);
+                            location.href = '/';
+                        }
+                        return payload;
+                    },
+                },
+                "title": "登录",
+                "controls": [
+                    {
+                        "type": "text",
+                        "name": "username",
+                        "label": "用户名",
+                        "required": true
+                    },
+                    {
+                        "type": "password",
+                        "name": "password",
+                        "label": "密码",
+                        "required": true
+                    }
+                ]
+            };
+            let amisScoped = amis.embed('#root', amisJSON);
+        })();
+    </script>
+</body>
+</html>

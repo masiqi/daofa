@@ -1,0 +1,55 @@
+# 环境变量文件
+.env
+
+# Node.js
+admin-frontend/node_modules/
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+.pnpm-debug.log
+.npm
+
+# Golang
+/backend/backend
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+/vendor/
+/Godeps/
+
+# 编辑器和 IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 操作系统
+.DS_Store
+Thumbs.db
+
+# 日志文件
+*.log
+
+# 编译输出
+/dist
+/tmp
+/out-tsc
+
+# 依赖管理
+/bower_components
+
+# 其他
+*.bak
+*.tmp
+*.temp
+
+# 上传的文件
+/uploads
+
+# Go 工作区文件
+go.work

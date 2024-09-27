@@ -1,0 +1,78 @@
+package handler
+
+import (
+	"context"
+	"net/http"
+	"strconv"
+
+	"daofa/backend/dal"
+	"daofa/backend/model"
+
+	"github.com/gin-gonic/gin"
+)
+
+// GetKnowledgePoints 获取所有知识点
+// @router /api/v1/knowledge_point/list [GET]
+func GetKnowledgePoints(ctx context.Context, c *gin.Context) {
+	knowledgePoints, err := dal.Q.KnowledgePoint.WithContext(ctx).Find()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"status": 1, "msg": "获取知识点列表失败"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"status": 0,
+		"msg":    "",
+		"data": gin.H{
+			"items": knowledgePoints,
+			"total": len(knowledgePoints),
+		},
+	})
+}
+
+// CreateKnowledgePoint 创建知识点
+// @router /api/v1/knowledge_point/create [POST]
+func CreateKnowledgePoint(ctx context.Context, c *gin.Context) {
+	var knowledgePoint model.KnowledgePoint
+	if err := c.ShouldBindJSON(&knowledgePoint); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"status": 1, "msg": err.Error()})
+		return
+	}
+
+	err := dal.Q.KnowledgePoint.WithContext(ctx).Create(&knowledgePoint)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"status": 1, "msg": "创建知识点失败"})
+		return
+	}
+	c.JSON(http.StatusCreated, gin.H{"status": 0, "msg": "知识点创建成功", "data": knowledgePoint})
+}
+
+// UpdateKnowledgePoint 更新知识点信息
+// @router /api/v1/knowledge_point/update/:id [PUT]
+func UpdateKnowledgePoint(ctx context.Context, c *gin.Context) {
+	id, _ := strconv.Atoi(c.Param("id"))
+	var knowledgePoint model.KnowledgePoint
+	if err := c.ShouldBindJSON(&knowledgePoint); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"status": 1, "msg": err.Error()})
+		return
+	}
+
+	knowledgePoint.ID = int32(id)
+	_, err := dal.Q.KnowledgePoint.WithContext(ctx).Where(dal.Q.KnowledgePoint.ID.Eq(knowledgePoint.ID)).Updates(knowledgePoint)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"status": 1, "msg": "更新知识点失败"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"status": 0, "msg": "知识点更新成功", "data": knowledgePoint})
+}
+
+// DeleteKnowledgePoint 删除知识点
+// @router /api/v1/knowledge_point/delete/:id [DELETE]
+func DeleteKnowledgePoint(ctx context.Context, c *gin.Context) {
+	id, _ := strconv.Atoi(c.Param("id"))
+	_, err := dal.Q.KnowledgePoint.WithContext(ctx).Where(dal.Q.KnowledgePoint.ID.Eq(int32(id))).Delete()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"status": 1, "msg": "删除知识点失败"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"status": 0, "msg": "知识点删除成功"})
+}
