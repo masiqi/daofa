@@ -163,16 +163,22 @@ async def ocr(file: UploadFile = File(...), multi_page: bool = Form(False), rend
         
         # 转换输出格式
         converted_result = convert_output_format(result, output_format)
+        ocr_method = "GOT_OCR"
+        
         # 修改判断条件，检查是否只包含空白字符或LaTeX表格标记
         if len(converted_result.strip()) == 0 or converted_result.strip() == r"\begin{tabular}{l|l|l|l|l|}\hline\end{tabular}":
             logger.info("GOT_OCR 未检测到有效文本，使用PaddleOCR")
             converted_result = paddle_ocr_process(image)
             logger.info(f"PaddleOCR 处理后结果: {converted_result}")
             logger.info(f"PaddleOCR result length: {len(converted_result)}")
+            ocr_method = "PADDLE_OCR"
         
         logger.info(f"最终转换结果: {converted_result}")
         
-        return {"result": converted_result}
+        return {
+            "result": converted_result,
+            "ocr_method": ocr_method
+        }
     except Exception as e:
         logger.error(f"处理过程中发生错误: {str(e)}", exc_info=True)
         raise
