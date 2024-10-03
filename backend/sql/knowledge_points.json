@@ -1,0 +1,6940 @@
+[
+  {
+    "id": 20339,
+    "name": "时事热点",
+    "is_leaf": false,
+    "level": 1,
+    "children": [
+      {
+        "id": 179628,
+        "name": "时事热点常识",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 194171,
+            "name": "24年时政热点",
+            "is_leaf": true,
+            "level": 3
+          },
+          {
+            "id": 192139,
+            "name": "23年时政热点",
+            "is_leaf": true,
+            "level": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 196548,
+    "name": "个人成长",
+    "is_leaf": false,
+    "level": 1,
+    "children": [
+      {
+        "id": 179654,
+        "name": "成长的节拍",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 179655,
+            "name": "中学时代",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179656,
+                "name": "中学序曲",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179657,
+                    "name": "新起点",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179658,
+                    "name": "中学阶段独特的价值和意义",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179659,
+                    "name": "中学生活的机会与挑战",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179660,
+                    "name": "正确对待中学生活的机会与挑战",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179661,
+                "name": "少年有梦",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179662,
+                    "name": "梦想的意义",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179663,
+                    "name": "少年梦的特点及作用",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179664,
+                    "name": "少年梦与中国梦的关系",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179665,
+                    "name": "努力的含义",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179666,
+                    "name": "努力的基本要求",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 179667,
+            "name": "学习新天地",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179668,
+                "name": "学习伴成长",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179669,
+                    "name": "对学习的新认识",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179670,
+                    "name": "学习的重要意义",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179671,
+                "name": "享受学习",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179672,
+                    "name": "正确看待学习中的苦与乐",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179673,
+                    "name": "发现并保持学习的兴趣",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179674,
+                    "name": "掌握科学的学习方法",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179675,
+                    "name": "善于运用不同的学习方式",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 179676,
+            "name": "发现自己",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179677,
+                "name": "认识自己",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179678,
+                    "name": "正确认识自己的意义",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179679,
+                    "name": "正确认识自己的方法",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179680,
+                    "name": "自我评价的方法和作用",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179681,
+                    "name": "正确对待他人评价的方法",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179682,
+                "name": "做更好的自己",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179683,
+                    "name": "积极接纳自我",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179684,
+                    "name": "欣赏自己的表现",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179685,
+                    "name": "做更好自己的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179686,
+                    "name": "潜能及如何激发自己的潜能",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179687,
+                    "name": "改正缺点的方法",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 179730,
+        "name": "生命的思考",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 179731,
+            "name": "探问生命",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179732,
+                "name": "生命可以永恒吗",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179733,
+                    "name": "生命有时尽",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179734,
+                    "name": "生命有接续",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179735,
+                "name": "敬畏生命",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179736,
+                    "name": "树立生命至上的观念",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179737,
+                    "name": "敬畏生命的价值",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 179738,
+            "name": "珍视生命",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179739,
+                "name": "守护生命",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179740,
+                    "name": "爱护身体",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179741,
+                    "name": "养成健康的生活方式、习惯",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179742,
+                    "name": "自救自护的方法",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179743,
+                    "name": "养护精神的意义",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179744,
+                    "name": "养护精神的途径",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179745,
+                "name": "增强生命的韧性",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179746,
+                    "name": "挫折的内涵",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179747,
+                    "name": "面对挫折的不同认识和态度",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179748,
+                    "name": "挫折的双重作用",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179749,
+                    "name": "正确对待挫折的方法",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179750,
+                    "name": "磨砺坚强意志",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 179751,
+            "name": "绽放生命之花",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179752,
+                "name": "感受生命的意义",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179753,
+                    "name": "生命的意义和价值",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179754,
+                    "name": "生命的意义需要自己发现和创造",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179755,
+                "name": "活出生命的精彩",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179756,
+                    "name": "让生命充盈的路径",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179757,
+                    "name": "人与人需要彼此关切",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179758,
+                    "name": "在平凡中创造伟大",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 179759,
+        "name": "青春时光",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 179760,
+            "name": "青春的邀约",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179761,
+                "name": "悄悄变化的我",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179762,
+                    "name": "青春期身体变化的主要表现",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179763,
+                    "name": "青春期生理变化带来的影响",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179764,
+                    "name": "正确对待青春期身体的变化",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179765,
+                    "name": "青春期心理变化的表现",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179766,
+                    "name": "青春期心理变化的特点",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179767,
+                    "name": "青春期的矛盾心理",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179768,
+                    "name": "青春期心理调节的方法",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179769,
+                "name": "成长的不仅仅是身体",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179770,
+                    "name": "学会独立思考",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179771,
+                    "name": "培养批判精神",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179772,
+                    "name": "开发创造潜力",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 179773,
+            "name": "青春的心弦",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179774,
+                "name": "男生女生",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179775,
+                    "name": "青春期男女生的性别差异",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179776,
+                    "name": "正确看待性别刻板印象",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179777,
+                    "name": "正确认识性别角色",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179778,
+                    "name": "正确对待性别差异",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179779,
+                "name": "青春萌动",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179780,
+                    "name": "青春期心理萌动的表现",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179781,
+                    "name": "正确看待与异性相处",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179782,
+                    "name": "正确看待异性情感",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179783,
+                    "name": "异性情感与爱情",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 179784,
+            "name": "青春的证明",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179785,
+                "name": "青春飞扬",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179786,
+                    "name": "对青春的认识",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179787,
+                    "name": "青春的探索需要自信",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179788,
+                    "name": "青春的探索需要自强",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179789,
+                "name": "青春有格",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179790,
+                    "name": "行己有耻的内涵及要求",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179791,
+                    "name": "止于至善的内涵及要求",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 179792,
+        "name": "做情绪情感的主人",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 179793,
+            "name": "揭开情绪的面纱",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179794,
+                "name": "青春的情绪",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179795,
+                    "name": "情绪的类型",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179796,
+                    "name": "影响情绪的因素",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179797,
+                    "name": "情绪的作用",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179798,
+                    "name": "青春期情绪的特点及应对",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179799,
+                "name": "情绪的管理",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179800,
+                    "name": "情绪表达的影响",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179801,
+                    "name": "情绪调节的重要性",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179802,
+                    "name": "情绪调节的方法",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 179803,
+            "name": "品出情感的韵味",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179804,
+                "name": "我们的情感世界",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179805,
+                    "name": "情感与情绪的关系",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179806,
+                    "name": "情感是复杂的",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179807,
+                    "name": "情感的作用",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179808,
+                "name": "在品味情感中成长",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179809,
+                    "name": "感受美好情感",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179810,
+                    "name": "正确面对负面情感",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179811,
+                    "name": "创造美好情感",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179812,
+                    "name": "传递情感正能量",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 207873,
+        "name": "少年有梦",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 207874,
+            "name": "开启初中生活",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 207875,
+                "name": "奏响中学序曲",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207876,
+                    "name": "初中阶段的新变化（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207877,
+                    "name": "初中阶段的独特价值（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207878,
+                    "name": "正确面对初中生活的方法（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 207879,
+                "name": "规划初中生活",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207880,
+                    "name": "规划的含义及重要性（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207881,
+                    "name": "规划初中生活的方法（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207882,
+                    "name": "实现规划的方法（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207883,
+                    "name": "努力的方法（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207884,
+                    "name": "高效时间安排的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 207885,
+            "name": "正确认识自我",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 207886,
+                "name": "认识自己",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207887,
+                    "name": "正确认识自己的意义（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207888,
+                    "name": "自我全面分析的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207889,
+                    "name": "他人评价的意义（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207890,
+                    "name": "正确对待他人评价的方法（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207891,
+                    "name": "在生活实践中认识自己（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 207892,
+                "name": "做更好的自己",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207893,
+                    "name": "做更好的自己的原因（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207894,
+                    "name": "学会欣赏自己的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207895,
+                    "name": "学会接纳自己的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207896,
+                    "name": "不断完善自己的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207897,
+                    "name": "改正缺点的方法（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207898,
+                    "name": "不断发掘自己潜能的途径（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207899,
+                    "name": "成长的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 207900,
+            "name": "梦想始于当下",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 207901,
+                "name": "做有梦想的少年",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207902,
+                    "name": "梦想的含义及重要性（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207903,
+                    "name": "少年的梦想的特点（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 207904,
+                "name": "学习成就梦想",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207905,
+                    "name": "学习的重要性（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207906,
+                    "name": "学习的内容及具体形式（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207907,
+                    "name": "学习与梦想的关系（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207908,
+                    "name": "知识学习的四个层次（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207909,
+                    "name": "学习的方法（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 207910,
+        "name": "珍爱我们的生命",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 207911,
+            "name": "生命可贵",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 207912,
+                "name": "认识生命",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207913,
+                    "name": "人的生命的价值（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207914,
+                    "name": "生命的特点（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207915,
+                    "name": "生命的传承（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 207916,
+                "name": "敬畏生命",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207917,
+                    "name": "敬畏生命的情怀（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207918,
+                    "name": "尊重生命存在和发展的规律（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207919,
+                    "name": "关爱他人的生命（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207920,
+                    "name": "坚持人民至上、生命至上（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 207921,
+            "name": "守护生命安全",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 207922,
+                "name": "增强安全意识",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207923,
+                    "name": "树立安全意识的价值（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207924,
+                    "name": "树立规则意识（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207925,
+                    "name": "增强风险意识（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 207926,
+                "name": "提高防护能力",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207927,
+                    "name": "提高防护能力的价值（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207928,
+                    "name": "提高危险预判能力（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207929,
+                    "name": "提高避险和逃生能力（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207930,
+                    "name": "学习防护和急救的知识和技能（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207931,
+                    "name": "拥挤踩踏事件的预防与自护方法（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 207932,
+            "name": "保持身心健康",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 207933,
+                "name": "爱护身体",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207934,
+                    "name": "身体的重要性（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207935,
+                    "name": "关注自己的身体状况（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207936,
+                    "name": "养成健康的的生活方式（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207937,
+                    "name": "参加合适的体育锻炼（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207938,
+                    "name": "科学健身有方法（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 207939,
+                "name": "滋养心灵",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207940,
+                    "name": "健康的内心世界（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207941,
+                    "name": "滋养心灵的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207942,
+                    "name": "心理健康的含义（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207943,
+                    "name": "保持心理健康的做法（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207944,
+                    "name": "增强生命韧性的方法（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 207945,
+        "name": "追求美好人生",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 207946,
+            "name": "确立人生目标",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 207947,
+                "name": "探问人生目标",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207948,
+                    "name": "人生目标的重要性（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207949,
+                    "name": "人生目标的设立（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 207950,
+                "name": "树立正确的人生目标",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207951,
+                    "name": "个人与社会的关系（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207952,
+                    "name": "树立人生目标应考虑的因素（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 207953,
+            "name": "端正人生态度",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 207954,
+                "name": "拥有积极的人生态度",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207955,
+                    "name": "人生态度的含义和影响（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207956,
+                    "name": "积极的人生态度的表现（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 207957,
+                "name": "正确对待顺境和逆境",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207958,
+                    "name": "正确对待顺境和逆境的重要性（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207959,
+                    "name": "对待顺境和逆境的正确态度（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207960,
+                    "name": "顺境和逆境的关系（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 207961,
+            "name": "实现人生价值",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 207962,
+                "name": "在劳动中创造人生价值",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207963,
+                    "name": "人生价值的含义（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207964,
+                    "name": "劳动对个人成长和社会发展的作用（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207965,
+                    "name": "人生价值的判定标准（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 207966,
+                "name": "在奉献中成就精彩人生",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207967,
+                    "name": "正确认识不同职业的价值（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207968,
+                    "name": "实现人生价值的做法（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 209468,
+        "name": "珍惜青春时光",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 209469,
+            "name": "青春正当时",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 209470,
+                "name": "青春的邀约",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 210727,
+                    "name": "青春期身体变化的主要表现（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210728,
+                    "name": "青春期生理变化带来的影响（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210729,
+                    "name": "正确对待青春期身体的变化（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210730,
+                    "name": "青春期心理变化的表现（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210731,
+                    "name": "青春期心理变化的特点（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210732,
+                    "name": "青春期的矛盾心理（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210733,
+                    "name": "青春期心理调节的方法（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209471,
+                    "name": "青春期的影响（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 209472,
+                "name": "男生女生",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 209473,
+                    "name": "男生女生的特点和优势（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209474,
+                    "name": "正确对待青春期心理现象（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210734,
+                    "name": "正确看待与异性相处（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210735,
+                    "name": "异性情感与爱情（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210736,
+                    "name": "正确看待异性情感（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 209475,
+                "name": "学会自我保护",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 209476,
+                    "name": "树立正确性观念的原因（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209477,
+                    "name": "获取性知识的途径（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209478,
+                    "name": "正确对待涉性的问题（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209479,
+                    "name": "增强自我保护意识的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210737,
+                    "name": "学会自我保护（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 209480,
+            "name": "做情绪情感的主人",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 209481,
+                "name": "揭开情绪的面纱",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 210738,
+                    "name": "情绪的类型（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209482,
+                    "name": "情绪的含义（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210739,
+                    "name": "情绪的作用（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210740,
+                    "name": "影响情绪的因素（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 209483,
+                "name": "学会管理情绪",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 209484,
+                    "name": "管理好情绪的重要性（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209485,
+                    "name": "学会认识自己的情绪（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210741,
+                    "name": "情绪调节的方法（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210742,
+                    "name": "情绪表达的影响（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209486,
+                    "name": "培养积极健康情绪的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 209487,
+                "name": "品味美好情感",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 210743,
+                    "name": "情感与情绪的关系（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210744,
+                    "name": "情感是复杂的（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210745,
+                    "name": "情感的作用（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209488,
+                    "name": "增加积极情感体验的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209489,
+                    "name": "学会承受和转化消极情感（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209490,
+                    "name": "提升情感境界的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 209491,
+        "name": "焕发青春活力",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 209492,
+            "name": "人贵自尊",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 209493,
+                "name": "人须有自尊",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 209494,
+                    "name": "自尊的表现（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209495,
+                    "name": "自尊的含义（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209496,
+                    "name": "自尊的人的优点（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 209497,
+                "name": "做自尊的人",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 209498,
+                    "name": "维护人格尊严的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209499,
+                    "name": "不断提升自己的意义（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209500,
+                    "name": "尊重他人的原因和要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 209501,
+            "name": "自信给人力量",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 209502,
+                "name": "人要有自信",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 210746,
+                    "name": "青春的探索需要自信（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209503,
+                    "name": "正确认识自信（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209504,
+                    "name": "自信的意义（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209505,
+                    "name": "正确认识自负与自卑（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209506,
+                    "name": "自信的来源（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 209507,
+                "name": "做自信的人",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 209508,
+                    "name": "做自信的人的重要性（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209509,
+                    "name": "做自信的人的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 209510,
+            "name": "人生当自强",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 209511,
+                "name": "人要自强",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 210747,
+                    "name": "青春的探索需要自强（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209512,
+                    "name": "正确认识自强（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209513,
+                    "name": "自强对个人的作用（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209514,
+                    "name": "自强对民族的作用（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 209515,
+                "name": "做自强不息的中国人",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 209516,
+                    "name": "正确认识自强不息（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209517,
+                    "name": "做自强不息中国人的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209518,
+                    "name": "树立远大理想的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209519,
+                    "name": "苦干实干的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 196549,
+    "name": "道德修养",
+    "is_leaf": false,
+    "level": 1,
+    "children": [
+      {
+        "id": 179688,
+        "name": "友谊的天空",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 179689,
+            "name": "友谊与成长同行",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179690,
+                "name": "和朋友在一起",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179691,
+                    "name": "正确认识朋友圈",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179692,
+                    "name": "友谊的力量",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179693,
+                "name": "深深浅浅话友谊",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179694,
+                    "name": "友谊的特质",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179695,
+                    "name": "澄清对友谊的片面认识",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179696,
+                    "name": "友谊不是一成不变的",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179697,
+                    "name": "竞争并不必然伤害友谊",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179698,
+                    "name": "友谊必须坚守原则",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 179699,
+            "name": "交友的智慧",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179700,
+                "name": "让友谊之树常青",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179701,
+                    "name": "建立友谊的方法",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179702,
+                    "name": "呵护友谊的方法",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179703,
+                    "name": "处理冲突的基本策略",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179704,
+                "name": "网上交友新时空",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179705,
+                    "name": "网上交往的特点及必要性",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179706,
+                    "name": "网络交往要注意的问题",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179707,
+                    "name": "处理好虚拟交往和现实交往的关系",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 179708,
+        "name": "师长情谊",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 179709,
+            "name": "师生之间",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179710,
+                "name": "走近老师",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179711,
+                    "name": "教师的职业意义与要求",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179712,
+                    "name": "接纳风格不同的老师",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179713,
+                "name": "师生交往",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179714,
+                    "name": "正确面对老师的引领和指导",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179715,
+                    "name": "正确对待老师的表扬和批评",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179716,
+                    "name": "与老师彼此尊重",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179717,
+                    "name": "与老师平等相待、相互促进",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 179718,
+            "name": "亲情之爱",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179719,
+                "name": "家的意味",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179720,
+                    "name": "家的内涵与功能",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179721,
+                    "name": "中华文化中“家”的内涵",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179722,
+                    "name": "孝亲敬长的内涵和要求",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179723,
+                "name": "爱在家人间",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179724,
+                    "name": "亲情的表现形式",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179725,
+                    "name": "亲子冲突的表现及产生原因",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179726,
+                    "name": "与父母沟通的方法和技巧",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179727,
+                "name": "让家更美好",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179728,
+                    "name": "现代家庭的变化",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179729,
+                    "name": "构建和谐家庭的重要性和方法",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 179813,
+        "name": "在集体中成长",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 179814,
+            "name": "“我”和“我们”",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179815,
+                "name": "集体生活邀请我",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179816,
+                    "name": "集体的含义",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179817,
+                    "name": "集体生活满足个人的情感需要",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179818,
+                    "name": "集体力量的来源及作用",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179819,
+                "name": "集体生活成就我",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179820,
+                    "name": "集体生活对涵养品格的作用",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179821,
+                    "name": "集体生活对发展个性的作用",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 179822,
+            "name": "共奏和谐乐章",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179823,
+                "name": "单音与和声",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179824,
+                    "name": "正确对待集体规则",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179825,
+                    "name": "正确处理个人利益与集体利益的关系",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179826,
+                    "name": "正确处理与集体中其他成员的关系",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179827,
+                "name": "节奏与旋律",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179828,
+                    "name": "不同集体下角色之间的冲突",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179829,
+                    "name": "排解集体角色冲突的策略",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179830,
+                    "name": "小群体的产生与影响",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179831,
+                    "name": "坚持集体主义反对小团体主义",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 179832,
+            "name": "美好集体有我在",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179833,
+                "name": "憧憬美好集体",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179834,
+                    "name": "集体愿景的内涵",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179835,
+                    "name": "集体愿景的作用",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179836,
+                    "name": "美好集体的特征",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179837,
+                    "name": "正确对待竞争与合作",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179838,
+                "name": "我与集体共成长",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179839,
+                    "name": "在集体共建中尽责的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179840,
+                    "name": "承担责任促进集体发展与个人成长",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 179861,
+        "name": "走进社会生活",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 179862,
+            "name": "丰富的社会生活",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179863,
+                "name": "我与社会",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179864,
+                    "name": "社会生活的丰富性和延展性",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179865,
+                    "name": "个人与社会的关系",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179866,
+                    "name": "几种主要的社会关系",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179867,
+                "name": "在社会中成长",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179868,
+                    "name": "人的成长是不断社会化的过程",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179869,
+                    "name": "人的生存和发展离不开社会",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179870,
+                    "name": "青少年养成亲社会行为的表现",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179871,
+                    "name": "青少年养成亲社会行为的必要性",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179872,
+                    "name": "养成亲社会行为的途径",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 179873,
+            "name": "网络生活新空间",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179874,
+                "name": "网络改变世界",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179875,
+                    "name": "网络丰富个人生活的表现",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179876,
+                    "name": "网络推动社会进步的表现",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179877,
+                    "name": "网络的负面影响",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179878,
+                "name": "合理利用网络",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179879,
+                    "name": "理性参与网络生活的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179880,
+                    "name": "传播网络正能量的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 179881,
+        "name": "遵守社会规则",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 179882,
+            "name": "社会生活离不开规则",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179883,
+                "name": "维护秩序",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179884,
+                    "name": "社会秩序的内容",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179885,
+                    "name": "社会秩序的重要性",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179886,
+                    "name": "社会规则的形成和种类",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179887,
+                    "name": "社会规则对保障社会秩序的作用",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179888,
+                "name": "遵守规则",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179889,
+                    "name": "我们身边的规则",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179890,
+                    "name": "自由和社会规则的关系",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179891,
+                    "name": "自觉遵守规则",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179892,
+                    "name": "坚定维护规则",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179893,
+                    "name": "积极改进规则",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 179894,
+            "name": "社会生活讲道德",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179895,
+                "name": "尊重他人",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179896,
+                    "name": "尊重他人的重要性",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179897,
+                    "name": "尊重他人的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179898,
+                    "name": "积极关注、重视他人",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179899,
+                    "name": "平等对待他人",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179900,
+                    "name": "学会换位思考",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179901,
+                    "name": "学会欣赏他人",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179902,
+                "name": "以礼待人",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179903,
+                    "name": "文明有礼的重要意义",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179904,
+                    "name": "做文明有礼人的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179905,
+                "name": "诚实守信",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179906,
+                    "name": "诚信的含义",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179907,
+                    "name": "诚信的重要性",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179908,
+                    "name": "践行诚信的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 179909,
+            "name": "做守法的公民",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179910,
+                "name": "法不可违",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179911,
+                    "name": "法律是最刚性的社会规则",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179912,
+                    "name": "违法行为的含义及其分类",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179913,
+                    "name": "一般违法行为和犯罪的区别与联系",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179914,
+                    "name": "遵章守法 防范一般违法行为",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179915,
+                "name": "预防犯罪",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179916,
+                    "name": "刑法的含义和功能",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179917,
+                    "name": "犯罪的定义和基本特征",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179918,
+                    "name": "刑罚的定义和种类",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179919,
+                    "name": "预防犯罪的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179920,
+                "name": "善用法律",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179921,
+                    "name": "依法求助的途径",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179922,
+                    "name": "同违法犯罪作斗争的意义和要求",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 179923,
+        "name": "勇担社会责任",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 179924,
+            "name": "责任与角色同在",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179925,
+                "name": "我对谁负责 谁对我负责",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179926,
+                    "name": "角色与责任",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179927,
+                    "name": "我对自己负责",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179928,
+                    "name": "他人对我负责",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179929,
+                    "name": "我对他人负责",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179930,
+                "name": "做负责任的人",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179931,
+                    "name": "承担责任的代价与回报",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179932,
+                    "name": "自觉承担责任的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179933,
+                    "name": "正确对待非自愿选择的责任",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179934,
+                    "name": "崇尚无私奉献精神\n                        勇于承担社会责任",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 179935,
+            "name": "积极奉献社会",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179936,
+                "name": "关爱他人",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179937,
+                    "name": "关爱与被关爱的表现",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179938,
+                    "name": "关爱他人的意义",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179939,
+                    "name": "关爱他人的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179940,
+                "name": "服务社会",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179941,
+                    "name": "服务社会的意义",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179942,
+                    "name": "奉献社会的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 207969,
+        "name": "成长的时空",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 207970,
+            "name": "幸福和睦的家庭",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 207971,
+                "name": "家的意味",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207972,
+                    "name": "家的内涵与功能（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207973,
+                    "name": "优良家风的重要性（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 207974,
+                "name": "让家更美好",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207975,
+                    "name": "亲情的表现形式（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207976,
+                    "name": "建设美好家庭的重要性和方法（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 207977,
+            "name": "和谐的师生关系",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 207978,
+                "name": "走近老师",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207979,
+                    "name": "教师的职业意义与要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 208507,
+                    "name": "与老师彼此尊重（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 207980,
+                "name": "珍惜师生情谊",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207981,
+                    "name": "师生交往理想状态的表现（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207982,
+                    "name": "正确面对老师的引领和指导（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207983,
+                    "name": "正确对待老师的表扬和批评（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207984,
+                    "name": "接纳风格不同的老师（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207985,
+                    "name": "与老师解决矛盾的做法（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 207986,
+            "name": "友谊之树常青",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 207987,
+                "name": "友谊的真谛",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207988,
+                    "name": "和朋友在一起（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207989,
+                    "name": "友谊的特质（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 207990,
+                "name": "交友的智慧",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 207991,
+                    "name": "对交友的正确认识（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207992,
+                    "name": "交友需要真诚和热情（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207993,
+                    "name": "交友需要慎重选择（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207994,
+                    "name": "学会关心和尊重朋友（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207995,
+                    "name": "正确认识朋友间的矛盾和冲突（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207996,
+                    "name": "交友需要讲原则（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207997,
+                    "name": "处理冲突的基本策略（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 207998,
+                    "name": "对人际关系的正确认识（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 207999,
+            "name": "在集体中成长",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 208000,
+                "name": "集体生活成就我",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 208001,
+                    "name": "集体的含义（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 208002,
+                    "name": "感知集体的温暖（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 208003,
+                    "name": "集体生活对涵养品格的作用（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 208004,
+                    "name": "集体生活对发展个性的作用（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 208005,
+                "name": "共建美好集体",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 208006,
+                    "name": "美好集体的愿景（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 208007,
+                    "name": "建设美好集体的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 208008,
+                    "name": "坚持集体主义原则（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 208009,
+                    "name": "集体生活中的合作策略（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 196550,
+    "name": "法治观念",
+    "is_leaf": false,
+    "level": 1,
+    "children": [
+      {
+        "id": 179841,
+        "name": "走进法治天地",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 179842,
+            "name": "法律在我们身边",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179843,
+                "name": "生活需要法律",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179844,
+                    "name": "生活离不开法律",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179845,
+                    "name": "法律的本质",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179846,
+                    "name": "法律与其他社会规则的关系",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179847,
+                    "name": "法治的含义",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179848,
+                    "name": "法治的作用",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179849,
+                "name": "法律保障生活",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179850,
+                    "name": "法律的特征",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179851,
+                    "name": "法律的作用",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 179852,
+            "name": "法律伴我们成长",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179853,
+                "name": "法律为我们护航",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179854,
+                    "name": "对未成年人实行特殊保护的原因",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179855,
+                    "name": "保护未成年人合法权益的法律",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179856,
+                    "name": "学会自我保护",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179857,
+                    "name": "保护未成年人合法权益的防线",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179858,
+                "name": "我们与法律同行",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179859,
+                    "name": "依法办事的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179860,
+                    "name": "树立法治意识",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 179969,
+        "name": "坚持宪法至上",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 179970,
+            "name": "维护宪法权威",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179971,
+                "name": "党的主张和人民意志的统一",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179972,
+                    "name": "坚持中国共产党的领导",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180042,
+                    "name": "中国共产党的性质、宗旨",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180043,
+                    "name": "中国特色社会主义最本质的特征",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179988,
+                    "name": "中国共产党领导立法、保证执法、支持司法、带头守法",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179973,
+                    "name": "宪法的基本原则",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179974,
+                    "name": "宪法确认我国的国家性质",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179975,
+                    "name": "宪法明确国家权力属于人民的具体规定",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179976,
+                    "name": "人权的实质内容和目标",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179977,
+                    "name": "我国人权的主体和内容",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179978,
+                    "name": "我国尊重和保障人权的具体要求",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179979,
+                "name": "治国安邦的总章程",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179980,
+                    "name": "组织国家机构的方式、内容和原则",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179981,
+                    "name": "规范国家权力运行的必要性",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179982,
+                    "name": "宪法的核心价值追求",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179983,
+                    "name": "规范国家权力运行的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 179984,
+            "name": "保障宪法实施",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179985,
+                "name": "坚持依宪治国",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179986,
+                    "name": "宪法是党和人民意志的集中体现",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179987,
+                    "name": "宪法是根本活动准则的表现",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179989,
+                    "name": "宪法是国家的根本法",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179990,
+                "name": "加强宪法监督",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179991,
+                    "name": "宪法监督制度具有基础性意义",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179992,
+                    "name": "宪法监督制度的主要内容",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179993,
+                    "name": "健全宪法实施和监督制度的举措",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179994,
+                    "name": "增强宪法意识的原因和要求",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 179995,
+        "name": "理解权利义务",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 179996,
+            "name": "公民权利",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179997,
+                "name": "公民基本权利",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179998,
+                    "name": "我国公民享有的政治权利和自由",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179999,
+                    "name": "选举权和被选举权",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180000,
+                    "name": "政治自由",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180001,
+                    "name": "监督权",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180002,
+                    "name": "人身自由的含义及地位",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180003,
+                    "name": "人身自由不受侵犯",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180004,
+                    "name": "人格尊严不受侵犯",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180005,
+                    "name": "住宅不受侵犯",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180006,
+                    "name": "通信自由和通信秘密受法律保护",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180007,
+                    "name": "社会经济与文化教育权利",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180008,
+                    "name": "财产权",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180009,
+                    "name": "劳动权",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180010,
+                    "name": "物质帮助权",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180011,
+                    "name": "受教育权",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180012,
+                    "name": "文化权利",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180013,
+                    "name": "消费者权益",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180014,
+                "name": "依法行使权利",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180015,
+                    "name": "公民行使权利的界限",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180016,
+                    "name": "公民维护权利的途径和方式",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 180017,
+            "name": "公民义务",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 180018,
+                "name": "公民基本义务",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180019,
+                    "name": "遵守宪法和法律",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180020,
+                    "name": "维护国家利益",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180021,
+                    "name": "依法服兵役",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180022,
+                    "name": "依法纳税",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180023,
+                "name": "依法履行义务",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180024,
+                    "name": "公民权利与义务的关系",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180025,
+                    "name": "公民要坚持权利和义务的统一",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180026,
+                    "name": "公民必须履行法定义务的原因",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180027,
+                    "name": "违反义务须承担的责任",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 180070,
+        "name": "崇尚法治精神",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 180071,
+            "name": "尊重自由平等",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 180072,
+                "name": "自由平等的真谛",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180073,
+                    "name": "法治与自由的关系",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180074,
+                    "name": "在法律意义上平等的含义",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180075,
+                    "name": "法律面前人人平等的表现",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180076,
+                "name": "自由平等的追求",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180077,
+                    "name": "珍视自由的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180078,
+                    "name": "践行平等的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 180079,
+            "name": "维护公平正义",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 180080,
+                "name": "公平正义的价值",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180081,
+                    "name": "公平的内涵",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180082,
+                    "name": "公平的价值",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180083,
+                    "name": "正义的内涵",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180084,
+                    "name": "正义的力量",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180085,
+                "name": "公平正义的守护",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180086,
+                    "name": "个人维护公平",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180087,
+                    "name": "制度保障公平",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180088,
+                    "name": "个人守护正义",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180089,
+                    "name": "司法维护正义",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 209520,
+        "name": "生活在法治社会",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 209521,
+            "name": "法律为我们护航",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 209522,
+                "name": "日益完善的法律体系",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 210748,
+                    "name": "法律的本质（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209523,
+                    "name": "法律体系的来源（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209524,
+                    "name": "法律体系完善的意义（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209525,
+                    "name": "健全法律体系的措施（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209526,
+                    "name": "完善法律体系的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 209527,
+                "name": "法律保障生活",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 210749,
+                    "name": "法律的作用（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209528,
+                    "name": "法律对社会秩序的作用（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209529,
+                    "name": "法律对社会公共利益的作用（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209530,
+                    "name": "社会公共利益的含义（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209531,
+                    "name": "法律对社会发展的作用（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 209532,
+            "name": "走近民法典",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 209533,
+                "name": "认识民法典",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 209534,
+                    "name": "民法典的含义及内容（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209535,
+                    "name": "民法典的意义（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209536,
+                    "name": "民法典的道德体现（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209537,
+                    "name": "民法典的作用（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 209538,
+                "name": "保护人身权",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 209539,
+                    "name": "人身权的重要性（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209540,
+                    "name": "生命和健康的重要性和要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209541,
+                    "name": "保护肖像权的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209542,
+                    "name": "隐私的含义（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209543,
+                    "name": "保护隐私权的意义（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 209544,
+                "name": "保障财产权",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 209545,
+                    "name": "财产的重要性（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209546,
+                    "name": "财产所有权的内容（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209547,
+                    "name": "保护财产权的意义（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209548,
+                    "name": "保护合同当事人合法权益的意义（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209549,
+                    "name": "知识产权的重要性和要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209550,
+                    "name": "知识产权的内容（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209551,
+                    "name": "财产继承的方式及内容（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 209552,
+            "name": "远离违法犯罪",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 209553,
+                "name": "法不可违",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 210750,
+                    "name": "法律是最刚性的社会规则（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210751,
+                    "name": "违法行为的含义及其分类（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209554,
+                    "name": "违法行为的危害（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209555,
+                    "name": "一般违法行为的处罚（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 209556,
+                "name": "犯罪与刑罚",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 210752,
+                    "name": "刑法的含义和功能（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210753,
+                    "name": "犯罪的定义和基本特征（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210754,
+                    "name": "刑罚的定义和种类（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210755,
+                    "name": "同违法犯罪作斗争的意义和要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 209557,
+                "name": "严于律己",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 209558,
+                    "name": "依法自律的必要性（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210756,
+                    "name": "预防犯罪的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209559,
+                    "name": "依法自律的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 196551,
+    "name": "国情国策",
+    "is_leaf": false,
+    "level": 1,
+    "children": [
+      {
+        "id": 179943,
+        "name": "维护国家利益",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 179944,
+            "name": "国家利益至上",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179945,
+                "name": "国家好 大家才会好",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179946,
+                    "name": "国家利益的含义和内容",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179947,
+                    "name": "国家的核心利益",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179948,
+                    "name": "国家利益与人民利益的关系",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179949,
+                "name": "坚持国家利益至上",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179950,
+                    "name": "树立维护国家利益的意识",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179951,
+                    "name": "捍卫国家利益的做法",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 179952,
+            "name": "树立总体国家安全观",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179953,
+                "name": "认识总体国家安全观",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179954,
+                    "name": "国家安全的重要性",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179955,
+                    "name": "总体国家安全观的内容及贯彻落实",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179956,
+                "name": "维护国家安全",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179957,
+                    "name": "推进国防和军队现代化建设的原因和要求",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179958,
+                    "name": "积极承担维护国家安全的责任",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179959,
+                    "name": "积极履行维护国家安全的法律义务",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 179960,
+            "name": "建设美好祖国",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 179961,
+                "name": "关心国家发展",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179962,
+                    "name": "感受国家发展",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179963,
+                    "name": "正视国家发展中的问题",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 179964,
+                "name": "天下兴亡 匹夫有责",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 179965,
+                    "name": "建设美好祖国需要辛勤劳动",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179966,
+                    "name": "劳动的作用及尊重劳动者",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179967,
+                    "name": "建设美好祖国需要埋头实干",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 179968,
+                    "name": "实干创造未来的原因及做法",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 180028,
+        "name": "人民当家作主",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 180029,
+            "name": "我国的政治和经济制度",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 180036,
+                "name": "根本政治制度",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180037,
+                    "name": "人民代表大会制度的地位和基本内容",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180038,
+                    "name": "人大代表的职权和义务",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180039,
+                    "name": "人民代表大会制度的优越性",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180040,
+                    "name": "坚持和完善人民代表大会制度",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180041,
+                "name": "基本政治制度",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180044,
+                    "name": "中国共产党领导的多党合作和政治协商制度",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180045,
+                    "name": "民族区域自治制度",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180046,
+                    "name": "基层群众自治制度",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180030,
+                "name": "基本经济制度",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180031,
+                    "name": "公有制为主体、多种所有制经济共同发展",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180032,
+                    "name": "公有制经济的构成",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180033,
+                    "name": "国有经济的地位",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180034,
+                    "name": "按劳分配为主体、多种分配方式并存",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180035,
+                    "name": "社会主义市场经济体制",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 180047,
+            "name": "我国的国家机构",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 180048,
+                "name": "国家权力机关",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180049,
+                    "name": "人民代表大会的产生及地位",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180050,
+                    "name": "全国人民代表大会和地方各级人民代表大会",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180051,
+                    "name": "人民代表大会的职权",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180052,
+                "name": "中华人民共和国主席",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180053,
+                    "name": "国家主席的地位",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180054,
+                    "name": "国家主席的职权",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180055,
+                "name": "国家行政机关",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180056,
+                    "name": "行政机关与权力机关的关系",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180057,
+                    "name": "行政机关的职权",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180058,
+                    "name": "行政机关必须依法行政",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180059,
+                    "name": "加强对行政权的监督和制约",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180060,
+                "name": "国家监察机关",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180061,
+                    "name": "监察委员会的性质",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180062,
+                    "name": "监察机关的产生",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180063,
+                    "name": "监察委员会依法独立行使监察权",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180064,
+                    "name": "监察机关的职责",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180065,
+                "name": "国家司法机关",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180066,
+                    "name": "人民法院的性质及基本职权",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180067,
+                    "name": "人民法院依法独立行使审判权",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180068,
+                    "name": "人民检察院的性质及基本职权",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180069,
+                    "name": "人民检察院依法独立行使检察权",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 180090,
+        "name": "富强与创新",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 180091,
+            "name": "踏上强国之路",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 180092,
+                "name": "坚持改革开放",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180093,
+                    "name": "中国共产党在改革开放中的作用",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180094,
+                    "name": "改革开放的开启和辉煌成就",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180095,
+                    "name": "改革开放是决定当代中国命运的关键抉择",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180096,
+                "name": "走向共同富裕",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180097,
+                    "name": "全面深化改革的原因",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180098,
+                    "name": "新时代我国社会主要矛盾",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180099,
+                    "name": "经济发展的新阶段、新挑战",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180100,
+                    "name": "实现共同富裕",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180101,
+                    "name": "坚持以人民为中心的发展思想",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 180102,
+            "name": "创新驱动发展",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 180103,
+                "name": "创新改变生活",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180104,
+                    "name": "创新是一种生活方式",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180105,
+                    "name": "创新让生活更美好",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180106,
+                    "name": "现阶段我国需要创新的原因",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180107,
+                    "name": "实施创新驱动发展战略",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180108,
+                "name": "创新永无止境",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180109,
+                    "name": "我国科技创新能力现状",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180110,
+                    "name": "建设创新型国家的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180111,
+                    "name": "大众创业、万众创新",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180112,
+                    "name": "企业是社会创新的重要力量",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180113,
+                    "name": "弘扬创新精神",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180114,
+                    "name": "尊重保护知识产权",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180754,
+                    "name": "教育的重要性",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 180115,
+        "name": "民主与法治",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 180116,
+            "name": "追求民主价值",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 180117,
+                "name": "生活在新型民主国家",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180118,
+                    "name": "民主及民主价值的实现",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180119,
+                    "name": "社会主义民主的不懈探索",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180120,
+                    "name": "社会主义民主政治的本质特征",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180121,
+                    "name": "社会主义民主的特点",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180122,
+                    "name": "协商民主",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180123,
+                "name": "参与民主生活",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180124,
+                    "name": "公民行使民主权利的方式",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180125,
+                    "name": "公民参与民主生活的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180126,
+                    "name": "公民增强民主意识的途径",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 180127,
+            "name": "建设法治中国",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 180128,
+                "name": "夯实法治基础",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180129,
+                    "name": "法治的内涵和要求",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 187966,
+                    "name": "法治的重要性",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180130,
+                    "name": "中国特色社会主义的本质要求和重要保障",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180131,
+                    "name": "全面依法治国的基本要求",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180132,
+                "name": "凝聚法治共识",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180133,
+                    "name": "我国政府的宗旨",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180134,
+                    "name": "法治政府的内涵",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180135,
+                    "name": "建设法治政府的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180136,
+                    "name": "厉行法治的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180137,
+                    "name": "依法治国和以德治国相结合",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 180138,
+        "name": "文明与家园",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 180139,
+            "name": "守望精神家园",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 180140,
+                "name": "延续文化血脉",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180141,
+                    "name": "中华文化的特点",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180142,
+                    "name": "中华优秀传统文化的地位",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180143,
+                    "name": "中华文化一脉相承的原因",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180144,
+                    "name": "文化自信",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180145,
+                    "name": "发展中国特色社会主义文化",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180146,
+                    "name": "中华传统美德的内涵和作用",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180147,
+                    "name": "弘扬中华传统美德",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180148,
+                "name": "凝聚价值追求",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180149,
+                    "name": "民族精神对民族生存发展的重要性",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180150,
+                    "name": "中华民族精神的内涵和表现",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180151,
+                    "name": "中华民族精神的作用",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180152,
+                    "name": "传承和弘扬民族精神的表现",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180153,
+                    "name": "社会主义核心价值观的内涵",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180154,
+                    "name": "社会主义核心价值观的作用",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180155,
+                    "name": "践行社会主义核心价值观的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 180156,
+            "name": "建设美丽中国",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 180157,
+                "name": "正视发展挑战",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180158,
+                    "name": "人口特点和人口问题",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180159,
+                    "name": "计划生育基本国策必须长期坚持",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180160,
+                    "name": "当前我国的资源形势",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180161,
+                    "name": "当前我国面临的资源危机",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180162,
+                    "name": "当前我国的环境形势",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180163,
+                    "name": "解决人口、资源、环境问题的出路",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180164,
+                "name": "共筑生命家园",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180165,
+                    "name": "坚持人与自然和谐共生的原因",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180166,
+                    "name": "实现人与自然和谐共生的途径",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180167,
+                    "name": "坚持绿色发展道路",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 180168,
+        "name": "和谐与梦想",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 180169,
+            "name": "中华一家亲",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 180170,
+                "name": "促进民族团结",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180171,
+                    "name": "我国处理新型民族关系的基本原则",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180172,
+                    "name": "我国社会主义新型民族关系",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 187967,
+                    "name": "民族分布特点",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180173,
+                    "name": "民族平等",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180174,
+                    "name": "民族团结",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180175,
+                    "name": "民族地区共同繁荣",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180176,
+                "name": "维护祖国统一",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180177,
+                    "name": "维护国家统一反对分裂",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180178,
+                    "name": "“一国两制”的内涵及实践",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180179,
+                    "name": "台湾问题",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 180180,
+            "name": "中国人 中国梦",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 180181,
+                "name": "我们的梦想",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180182,
+                    "name": "“两个百年”奋斗目标",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180183,
+                    "name": "正确理解中国梦",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180184,
+                    "name": "中国特色社会主义进入新时代的意义",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180185,
+                    "name": "新时代中国特色社会主义的指导思想",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180186,
+                    "name": "我国第二个百年奋斗目标的两个阶段",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180187,
+                "name": "共圆中国梦",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180188,
+                    "name": "实现中国梦的途径",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180189,
+                    "name": "走中国道路",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180190,
+                    "name": "弘扬中国精神",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180191,
+                    "name": "凝聚中国力量",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180192,
+                    "name": "中国自信、民族自信的根本所在",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180193,
+                    "name": "做自信的中国人",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 209560,
+        "name": "传承中华优秀传统文化",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 209561,
+            "name": "传承核心思想理念",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 209562,
+                "name": "历久弥新的思想理念",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 209563,
+                    "name": "思想理念的重要性（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209564,
+                    "name": "道法自然、天人合一思想的内涵（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209565,
+                    "name": "脚踏实地、实事求是思想的内涵（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209566,
+                    "name": "革故鼎新、与时俱进思想的内涵（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209567,
+                    "name": "惠民利民、安民富民思想的内涵（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 209568,
+                "name": "做核心思想理念的传承者",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 209569,
+                    "name": "正确认识核心思想理念（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209570,
+                    "name": "讲仁爱的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209571,
+                    "name": "重民本的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209572,
+                    "name": "守诚信的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209573,
+                    "name": "崇正义的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209574,
+                    "name": "尚和合的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209575,
+                    "name": "求大同的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 209576,
+            "name": "弘扬中华人文精神",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 209577,
+                "name": "影响深远的人文精神",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 209578,
+                    "name": "中华人文精神的来源（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209579,
+                    "name": "中华人文精神的主要体现（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209580,
+                    "name": "处世方法的内涵和作用（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209581,
+                    "name": "教化思想的重要意义（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209582,
+                    "name": "美学追求的影响（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209583,
+                    "name": "生活理念的内容和意义（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 209584,
+                "name": "做中华人文精神的弘扬者",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 209585,
+                    "name": "弘扬人文精神的内涵（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209586,
+                    "name": "弘扬思想文化的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 209587,
+            "name": "践行中华传统美德",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 209588,
+                "name": "薪火相传的传统美德",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 209589,
+                    "name": "中华优秀传统文化和传统美德的关系（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209590,
+                    "name": "中华优秀传统文化的影响（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 210757,
+                    "name": "中华传统美德的内涵和作用（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209591,
+                    "name": "正确认识孝悌忠信、礼义廉耻（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209592,
+                    "name": "崇德向善、见贤思齐的意义（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209593,
+                    "name": "精忠报国、振兴中华的作用（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209594,
+                    "name": "树立担当意识的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 209595,
+                "name": "做中华传统美德的践行者",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 210758,
+                    "name": "弘扬中华传统美德（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209596,
+                    "name": "做自强不息的人（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209597,
+                    "name": "做敬业乐群的人（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209598,
+                    "name": "做扶危济困的人（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209599,
+                    "name": "做见义勇为的人（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209600,
+                    "name": "做孝老爱亲的人（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 209601,
+                    "name": "传承中华传统美德的要求（新教材）",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 196552,
+    "name": "世界舞台",
+    "is_leaf": false,
+    "level": 1,
+    "children": [
+      {
+        "id": 180194,
+        "name": "我们共同的世界",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 180195,
+            "name": "同住地球村",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 180196,
+                "name": "开放互动的世界",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180197,
+                    "name": "当今世界的特征",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180198,
+                    "name": "经济全球化的表现",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180199,
+                    "name": "经济全球化的影响",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180200,
+                    "name": "积极应对经济全球化",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180201,
+                    "name": "正确理解文化多样性",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180202,
+                    "name": "正确面对文化多样性",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180203,
+                "name": "复杂多变的关系",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180204,
+                    "name": "当今世界格局的变化",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180205,
+                    "name": "世界多极化格局的意义",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180206,
+                    "name": "当今国际竞争的实质",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180207,
+                    "name": "当今国家之间关系复杂多变的表现",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180208,
+                    "name": "影响国际关系的主要因素",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 180209,
+            "name": "构建人类命运共同体",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 180210,
+                "name": "推动和平发展",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180211,
+                    "name": "和平与发展是当今时代的主题",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180212,
+                    "name": "威胁世界和平的因素",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180213,
+                    "name": "维护世界和平需要每一个人的努力",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180214,
+                    "name": "影响世界发展的因素",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180215,
+                    "name": "解决发展问题的有效途径",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180216,
+                "name": "谋求互利共赢",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180217,
+                    "name": "构建人类命运共同体的必要性",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180218,
+                    "name": "构建人类命运共同体的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180219,
+                    "name": "构建人类命运共同体的意义",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 180220,
+        "name": "世界舞台上的中国",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 180221,
+            "name": "与世界紧相连",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 180222,
+                "name": "中国担当",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180223,
+                    "name": "中国积极主动承担国际责任",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180224,
+                    "name": "中国担当向世界展现中国智慧",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180225,
+                "name": "与世界深度互动",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180226,
+                    "name": "中国文化对世界的影响",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180227,
+                    "name": "中国经济对世界的影响",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180228,
+                    "name": "中国是世界格局中的重要力量",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180229,
+                    "name": "坚持以我为主、兼收并蓄",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180230,
+                    "name": "中华文明在交流互鉴中发展",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 180231,
+            "name": "与世界共发展",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 180232,
+                "name": "中国的机遇与挑战",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180233,
+                    "name": "中国面临的发展条件和契机",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180234,
+                    "name": "当代中国发展面临的风险与挑战",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180235,
+                    "name": "中国积极应对机遇和挑战",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180236,
+                "name": "携手促发展",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180237,
+                    "name": "中国积极谋求发展的举措",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180238,
+                    "name": "中国积极与各国共享发展机遇",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 180239,
+        "name": "走向未来的少年",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 180240,
+            "name": "少年的担当",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 180241,
+                "name": "走向世界大舞台",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180242,
+                    "name": "走向世界的形式",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180243,
+                    "name": "走向世界带给我们的收获",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180244,
+                    "name": "努力为人类和世界贡献智慧和力量",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180245,
+                    "name": "适应世界发展趋势全面提升个人素养",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180246,
+                "name": "少年当自强",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180247,
+                    "name": "当代青少年的历史使命",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180248,
+                    "name": "青少年要成为中华民族的栋梁",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180249,
+                    "name": "青少年要承担起推动人类共同发展的责任",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 180250,
+            "name": "我的毕业季",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 180251,
+                "name": "学无止境",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180252,
+                    "name": "积极面对学习的压力",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180253,
+                    "name": "缓解考试压力的方法",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180254,
+                    "name": "在实践中学习的意义",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180255,
+                    "name": "在实践中学习的要求",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180256,
+                    "name": "树立终身学习的理念",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180257,
+                "name": "多彩的职业",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180258,
+                    "name": "做好职业准备、规划职业生涯",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180259,
+                    "name": "职业选择的影响因素",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180260,
+                    "name": "青少年如何适应当代社会多种就业机会和方式",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180261,
+                    "name": "就业方式多种多样",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180262,
+                    "name": "敬业精神的表现",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180263,
+                    "name": "正确处理职业与兴趣的关系",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 180265,
+            "name": "从这里出发",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 180266,
+                "name": "回望成长",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180267,
+                    "name": "初中三年的收获、体验和感悟",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180268,
+                    "name": "把握人生的关键性选择",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              },
+              {
+                "id": 180269,
+                "name": "走向未来",
+                "is_leaf": false,
+                "level": 4,
+                "children": [
+                  {
+                    "id": 180270,
+                    "name": "畅想未来的意义和要求",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180271,
+                    "name": "树立伟大理想担当时代责任",
+                    "is_leaf": true,
+                    "level": 5
+                  },
+                  {
+                    "id": 180272,
+                    "name": "成为德智体美劳全面发展的社会主义建设者和接班人",
+                    "is_leaf": true,
+                    "level": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 182911,
+    "name": "习近平新时代中国特色社会主义思想学生读本",
+    "is_leaf": false,
+    "level": 1,
+    "children": [
+      {
+        "id": 193732,
+        "name": "中国特色社会主义新时代",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 193733,
+            "name": "我国发展新的历史方位",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 194015,
+                "name": "中国特色社会主义新时代的内涵",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 194016,
+                "name": "我国社会主要矛盾的转化",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          },
+          {
+            "id": 193734,
+            "name": "新思想引领新征程",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 194017,
+                "name": "新时代孕育新思想",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 194018,
+                "name": "习近平新时代中国特色社会主义思想的主要内容",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 182912,
+        "name": "中华民族伟大复兴的中国梦",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 182913,
+            "name": "几代中国人的美好夙愿",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 182914,
+                "name": "中国梦是跨越百年的伟大梦想",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 182915,
+                "name": "中国梦的本质是实现国家富强、民族振兴、人民幸福",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          },
+          {
+            "id": 193735,
+            "name": "以中国式现代化全面推进中华民族伟大复兴",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 194019,
+                "name": "社会主义现代化建设是一场接力跑",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 194020,
+                "name": "中国式现代化的鲜明特色",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 182926,
+        "name": "中国特色社会主义的总体布局和战略布局",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 182927,
+            "name": "统筹推进“五位一体”总体布局",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 182928,
+                "name": "“五位一体”总体布局的地位",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 182929,
+                "name": "“五位一体”战略目标",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          },
+          {
+            "id": 182930,
+            "name": "协调推进“四个全面”战略布局",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 182931,
+                "name": "“四个全面”的内涵",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 182932,
+                "name": "“四个全面”战略布局的地位",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 182933,
+                "name": "坚定“四个自信”",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 182934,
+        "name": "将全面深化改革进行到底",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 182935,
+            "name": "“涉险滩”与“啃硬骨头”",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 182936,
+                "name": "改革开放的地位",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 182937,
+                "name": "改革开放只有进行时，没有完成时",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          },
+          {
+            "id": 182938,
+            "name": "中国之制与中国之治",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 182939,
+                "name": "完善中国之制",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 182940,
+                "name": "实现中国之治",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 182941,
+        "name": "法治兴则国家兴",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 182942,
+            "name": "奉法者强则国强",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 182943,
+                "name": "依法治国的追求历程",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 182944,
+                "name": "全面依法治国的意义",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          },
+          {
+            "id": 182945,
+            "name": "密织法律之网和强化法治之力",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 182946,
+                "name": "中国特色社会主义法治体系",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 182947,
+                "name": "全国依法治国的基本要求",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 182948,
+        "name": "筑牢坚不可摧的钢铁长城",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 182949,
+            "name": "强国必须强军",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 182950,
+                "name": "应对世界形势的必然要求",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 182951,
+                "name": "中华民族复兴伟业的战略支撑",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          },
+          {
+            "id": 182952,
+            "name": "军强才能国安",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 182953,
+                "name": "始终坚持党对人民军队的绝对领导",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 182954,
+                "name": "全面提高新时代备战打仗能力",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 182955,
+                "name": "推进国防和军队现代化建设",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 182956,
+        "name": "携手构建人类命运共同体",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 182957,
+            "name": "人类生活在同一个地球村",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 182958,
+                "name": "我们的世界，共同的家园",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 182959,
+                "name": "中国智慧与大国担当",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          },
+          {
+            "id": 182960,
+            "name": "坚持走和平发展道路",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 182961,
+                "name": "“一带一路”联通世界",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 182962,
+                "name": "推进中国特色大国外交",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 182963,
+                "name": "始终不渝走和平发展道路",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 182964,
+        "name": "中国共产党是民族复兴的引路人",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 182965,
+            "name": "党中央是坐镇中军帐的“帅”",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 182966,
+                "name": "坚持党对一切工作的领导",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 182967,
+                "name": "加强党的全貌领导，践行“两个维护”",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          },
+          {
+            "id": 193736,
+            "name": "以伟大自我革命引领伟大社会革命",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 194021,
+                "name": "不忘初心，牢记使命",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 194022,
+                "name": "自我革命，从严治党",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 188424,
+    "name": "中华民族大团结",
+    "is_leaf": false,
+    "level": 1,
+    "children": [
+      {
+        "id": 188425,
+        "name": "伟大的中华民族",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 188426,
+            "name": "爱我中华",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 188427,
+                "name": "中华民族有悠久的历史",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188428,
+                "name": "中华民族有壮丽的山河",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188429,
+                "name": "中华民族有灿烂的文化",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188430,
+                "name": "中华民族有多元一体的优势",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          },
+          {
+            "id": 188431,
+            "name": "中华民族的形成发展",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 188432,
+                "name": "中华民族的起源和早期发展",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188433,
+                "name": "古代中华民族的发展",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188434,
+                "name": "近现代以来中华民族的发展",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          },
+          {
+            "id": 188435,
+            "name": "中华民族精神",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 188436,
+                "name": "中华民族精神的核心",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188437,
+                "name": "中华民族精神的主要内容",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188438,
+                "name": "中华民族精神的丰富和发展",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 188439,
+        "name": "共同铸就美好国家",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 188440,
+            "name": "共同开发建设祖国",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 188441,
+                "name": "我国各族人民共同开拓了祖国的疆域",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188442,
+                "name": "我国各族人民共同开发建设美丽家园",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188443,
+                "name": "我国各族人民相互学习、共同进步",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          },
+          {
+            "id": 188444,
+            "name": "共同保卫伟大祖国",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 188445,
+                "name": "我国各族人民共同抵御外来侵略",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188446,
+                "name": "我国各族人民坚决维护国家统一",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188447,
+                "name": "牢记保卫国家主权和安全的神圣使命",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          },
+          {
+            "id": 188448,
+            "name": "共同筑牢民族团结基石",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 188449,
+                "name": "贯彻民族平等团结原则",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188450,
+                "name": "坚持和完善民族区域自治制度",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188451,
+                "name": "依法治理民族事务",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 188452,
+        "name": "共同建设精神家园",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 188453,
+            "name": "共同创造科学成就",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 188454,
+                "name": "光辉灿烂的发明创造",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188455,
+                "name": "造福人民的中医药",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188456,
+                "name": "百花齐放的思想宝库",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          },
+          {
+            "id": 188457,
+            "name": "共同繁荣文学艺术",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 188458,
+                "name": "悠久多样的语言文字",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188459,
+                "name": "各具魅力的文学作品",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188460,
+                "name": "多姿多彩的歌舞戏剧",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188461,
+                "name": "异彩纷呈的美术作品",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          },
+          {
+            "id": 188462,
+            "name": "共同弘扬中华传统美德",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 188463,
+                "name": "中华传统美德是中华文化的精髓",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188464,
+                "name": "中华传统美德是各民族优良传统的结晶",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188465,
+                "name": "以社会主义核心价值观为引领弘扬中华传统美德",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 188466,
+        "name": "同心共筑中国梦",
+        "is_leaf": false,
+        "level": 2,
+        "children": [
+          {
+            "id": 188467,
+            "name": "伟大梦想 共同追求",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 188468,
+                "name": "近代以来的不懈追求",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188469,
+                "name": "新时代的宏伟蓝图",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188470,
+                "name": "各族人民的共同梦想",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          },
+          {
+            "id": 188471,
+            "name": "团结奋斗 繁荣发展",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 188472,
+                "name": "促进交往交流交融",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188473,
+                "name": "一道实现全面小康和现代化",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188474,
+                "name": "筑牢中华民族共同体意识",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          },
+          {
+            "id": 188475,
+            "name": "党的领导 根本保证",
+            "is_leaf": false,
+            "level": 3,
+            "children": [
+              {
+                "id": 188476,
+                "name": "中国共产党领导中华民族站起来",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188477,
+                "name": "中国共产党领导中华民族富起来",
+                "is_leaf": true,
+                "level": 4
+              },
+              {
+                "id": 188478,
+                "name": "中国共产党领导中华民族强起来",
+                "is_leaf": true,
+                "level": 4
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

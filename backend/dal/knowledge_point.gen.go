@@ -178,18 +178,176 @@ type IKnowledgePointDo interface {
 	UnderlyingDB() *gorm.DB
 	schema.Tabler
 
-	CreateKnowledgePoint(subjectID uint, parentID *uint, name string, description *string, isLeaf bool) (err error)
-	UpdateKnowledgePoint(id uint, subjectID uint, parentID *uint, name string, description *string, isLeaf bool) (err error)
-	DeleteKnowledgePoint(id uint) (err error)
-	ListKnowledgePointsWithPagination(subjectID uint, offset int, limit int) (result []*model.KnowledgePoint, err error)
-	CountKnowledgePoints(subjectID uint) (result int64, err error)
-	GetKnowledgePointByID(id uint) (result *model.KnowledgePoint, err error)
-	SearchKnowledgePoints(subjectID uint, name string, offset int, limit int) (result []*model.KnowledgePoint, err error)
-	GetChildKnowledgePoints(parentID uint) (result []*model.KnowledgePoint, err error)
+	GetKnowledgePointByID(id int32) (result *model.KnowledgePoint, err error)
+	ListKnowledgePointsBySubject(subjectID int32, offset int, limit int) (result []*model.KnowledgePoint, err error)
+	GetChildKnowledgePoints(parentID int32) (result []*model.KnowledgePoint, err error)
+	GetRootKnowledgePoints(subjectID int32) (result []*model.KnowledgePoint, err error)
+	SearchKnowledgePoints(subjectID int32, parentID *int32, name string, isLeaf *bool, level int32, offset int, limit int) (result []*model.KnowledgePoint, err error)
+	CountKnowledgePoints(subjectID int32, parentID *int32, name string, isLeaf *bool, level int32) (result int64, err error)
+	CreateKnowledgePoint(subjectID int32, parentID *int32, name string, description *string, isLeaf bool, level int32) (err error)
+	UpdateKnowledgePoint(id int32, subjectID int32, parentID *int32, name string, description *string, isLeaf *bool, level int32) (err error)
+	DeleteKnowledgePoint(id int32) (err error)
+	GetKnowledgePointByName(name string) (result *model.KnowledgePoint, err error)
 }
 
-// INSERT INTO @@table (subject_id, parent_id, name, description, is_leaf) VALUES (@subjectID, @parentID, @name, @description, @isLeaf)
-func (k knowledgePointDo) CreateKnowledgePoint(subjectID uint, parentID *uint, name string, description *string, isLeaf bool) (err error) {
+// SELECT * FROM @@table WHERE id=@id LIMIT 1
+func (k knowledgePointDo) GetKnowledgePointByID(id int32) (result *model.KnowledgePoint, err error) {
+	var params []interface{}
+
+	var generateSQL strings.Builder
+	params = append(params, id)
+	generateSQL.WriteString("SELECT * FROM knowledge_point WHERE id=? LIMIT 1 ")
+
+	var executeSQL *gorm.DB
+	executeSQL = k.UnderlyingDB().Raw(generateSQL.String(), params...).Take(&result) // ignore_security_alert
+	err = executeSQL.Error
+
+	return
+}
+
+// SELECT * FROM @@table WHERE subject_id=@subjectID ORDER BY id LIMIT @limit OFFSET @offset
+func (k knowledgePointDo) ListKnowledgePointsBySubject(subjectID int32, offset int, limit int) (result []*model.KnowledgePoint, err error) {
+	var params []interface{}
+
+	var generateSQL strings.Builder
+	params = append(params, subjectID)
+	params = append(params, limit)
+	params = append(params, offset)
+	generateSQL.WriteString("SELECT * FROM knowledge_point WHERE subject_id=? ORDER BY id LIMIT ? OFFSET ? ")
+
+	var executeSQL *gorm.DB
+	executeSQL = k.UnderlyingDB().Raw(generateSQL.String(), params...).Find(&result) // ignore_security_alert
+	err = executeSQL.Error
+
+	return
+}
+
+// SELECT * FROM @@table WHERE parent_id=@parentID ORDER BY id
+func (k knowledgePointDo) GetChildKnowledgePoints(parentID int32) (result []*model.KnowledgePoint, err error) {
+	var params []interface{}
+
+	var generateSQL strings.Builder
+	params = append(params, parentID)
+	generateSQL.WriteString("SELECT * FROM knowledge_point WHERE parent_id=? ORDER BY id ")
+
+	var executeSQL *gorm.DB
+	executeSQL = k.UnderlyingDB().Raw(generateSQL.String(), params...).Find(&result) // ignore_security_alert
+	err = executeSQL.Error
+
+	return
+}
+
+// SELECT * FROM @@table WHERE subject_id=@subjectID AND parent_id IS NULL ORDER BY id
+func (k knowledgePointDo) GetRootKnowledgePoints(subjectID int32) (result []*model.KnowledgePoint, err error) {
+	var params []interface{}
+
+	var generateSQL strings.Builder
+	params = append(params, subjectID)
+	generateSQL.WriteString("SELECT * FROM knowledge_point WHERE subject_id=? AND parent_id IS NULL ORDER BY id ")
+
+	var executeSQL *gorm.DB
+	executeSQL = k.UnderlyingDB().Raw(generateSQL.String(), params...).Find(&result) // ignore_security_alert
+	err = executeSQL.Error
+
+	return
+}
+
+// SELECT * FROM @@table
+//
+//	{{where}}
+//	  {{if subjectID != 0}}subject_id=@subjectID{{end}}
+//	  {{if parentID != nil}}AND parent_id=@parentID{{end}}
+//	  {{if name != ""}}AND name LIKE CONCAT('%', @name, '%'){{end}}
+//	  {{if isLeaf != nil}}AND is_leaf=@isLeaf{{end}}
+//	  {{if level != 0}}AND level=@level{{end}}
+//	{{end}}
+//
+// ORDER BY id LIMIT @limit OFFSET @offset
+func (k knowledgePointDo) SearchKnowledgePoints(subjectID int32, parentID *int32, name string, isLeaf *bool, level int32, offset int, limit int) (result []*model.KnowledgePoint, err error) {
+	var params []interface{}
+
+	var generateSQL strings.Builder
+	generateSQL.WriteString("SELECT * FROM knowledge_point ")
+	var whereSQL0 strings.Builder
+	if subjectID != 0 {
+		params = append(params, subjectID)
+		whereSQL0.WriteString("subject_id=? ")
+	}
+	if parentID != nil {
+		params = append(params, parentID)
+		whereSQL0.WriteString("AND parent_id=? ")
+	}
+	if name != "" {
+		params = append(params, name)
+		whereSQL0.WriteString("AND name LIKE CONCAT('%', ?, '%') ")
+	}
+	if isLeaf != nil {
+		params = append(params, isLeaf)
+		whereSQL0.WriteString("AND is_leaf=? ")
+	}
+	if level != 0 {
+		params = append(params, level)
+		whereSQL0.WriteString("AND level=? ")
+	}
+	helper.JoinWhereBuilder(&generateSQL, whereSQL0)
+	params = append(params, limit)
+	params = append(params, offset)
+	generateSQL.WriteString("ORDER BY id LIMIT ? OFFSET ? ")
+
+	var executeSQL *gorm.DB
+	executeSQL = k.UnderlyingDB().Raw(generateSQL.String(), params...).Find(&result) // ignore_security_alert
+	err = executeSQL.Error
+
+	return
+}
+
+// SELECT COUNT(*) FROM @@table
+//
+//	{{where}}
+//	  {{if subjectID != 0}}subject_id=@subjectID{{end}}
+//	  {{if parentID != nil}}AND parent_id=@parentID{{end}}
+//	  {{if name != ""}}AND name LIKE CONCAT('%', @name, '%'){{end}}
+//	  {{if isLeaf != nil}}AND is_leaf=@isLeaf{{end}}
+//	  {{if level != 0}}AND level=@level{{end}}
+//	{{end}}
+func (k knowledgePointDo) CountKnowledgePoints(subjectID int32, parentID *int32, name string, isLeaf *bool, level int32) (result int64, err error) {
+	var params []interface{}
+
+	var generateSQL strings.Builder
+	generateSQL.WriteString("SELECT COUNT(*) FROM knowledge_point ")
+	var whereSQL0 strings.Builder
+	if subjectID != 0 {
+		params = append(params, subjectID)
+		whereSQL0.WriteString("subject_id=? ")
+	}
+	if parentID != nil {
+		params = append(params, parentID)
+		whereSQL0.WriteString("AND parent_id=? ")
+	}
+	if name != "" {
+		params = append(params, name)
+		whereSQL0.WriteString("AND name LIKE CONCAT('%', ?, '%') ")
+	}
+	if isLeaf != nil {
+		params = append(params, isLeaf)
+		whereSQL0.WriteString("AND is_leaf=? ")
+	}
+	if level != 0 {
+		params = append(params, level)
+		whereSQL0.WriteString("AND level=? ")
+	}
+	helper.JoinWhereBuilder(&generateSQL, whereSQL0)
+
+	var executeSQL *gorm.DB
+	executeSQL = k.UnderlyingDB().Raw(generateSQL.String(), params...).Take(&result) // ignore_security_alert
+	err = executeSQL.Error
+
+	return
+}
+
+// INSERT INTO @@table (subject_id, parent_id, name, description, is_leaf, level)
+// VALUES (@subjectID, @parentID, @name, @description, @isLeaf, @level)
+func (k knowledgePointDo) CreateKnowledgePoint(subjectID int32, parentID *int32, name string, description *string, isLeaf bool, level int32) (err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder
@@ -198,7 +356,8 @@ func (k knowledgePointDo) CreateKnowledgePoint(subjectID uint, parentID *uint, n
 	params = append(params, name)
 	params = append(params, description)
 	params = append(params, isLeaf)
-	generateSQL.WriteString("INSERT INTO knowledge_point (subject_id, parent_id, name, description, is_leaf) VALUES (?, ?, ?, ?, ?) ")
+	params = append(params, level)
+	generateSQL.WriteString("INSERT INTO knowledge_point (subject_id, parent_id, name, description, is_leaf, level) VALUES (?, ?, ?, ?, ?, ?) ")
 
 	var executeSQL *gorm.DB
 	executeSQL = k.UnderlyingDB().Exec(generateSQL.String(), params...) // ignore_security_alert
@@ -213,10 +372,11 @@ func (k knowledgePointDo) CreateKnowledgePoint(subjectID uint, parentID *uint, n
 //	{{if parentID != nil}}parent_id=@parentID,{{end}}
 //	{{if name != ""}}name=@name,{{end}}
 //	{{if description != nil}}description=@description,{{end}}
-//	is_leaf=@isLeaf
+//	{{if isLeaf != nil}}is_leaf=@isLeaf,{{end}}
+//	{{if level != 0}}level=@level{{end}}
 //
 // WHERE id=@id
-func (k knowledgePointDo) UpdateKnowledgePoint(id uint, subjectID uint, parentID *uint, name string, description *string, isLeaf bool) (err error) {
+func (k knowledgePointDo) UpdateKnowledgePoint(id int32, subjectID int32, parentID *int32, name string, description *string, isLeaf *bool, level int32) (err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder
@@ -237,9 +397,16 @@ func (k knowledgePointDo) UpdateKnowledgePoint(id uint, subjectID uint, parentID
 		params = append(params, description)
 		generateSQL.WriteString("description=?, ")
 	}
-	params = append(params, isLeaf)
+	if isLeaf != nil {
+		params = append(params, isLeaf)
+		generateSQL.WriteString("is_leaf=?, ")
+	}
+	if level != 0 {
+		params = append(params, level)
+		generateSQL.WriteString("level=? ")
+	}
 	params = append(params, id)
-	generateSQL.WriteString("is_leaf=? WHERE id=? ")
+	generateSQL.WriteString("WHERE id=? ")
 
 	var executeSQL *gorm.DB
 	executeSQL = k.UnderlyingDB().Exec(generateSQL.String(), params...) // ignore_security_alert
@@ -249,7 +416,7 @@ func (k knowledgePointDo) UpdateKnowledgePoint(id uint, subjectID uint, parentID
 }
 
 // DELETE FROM @@table WHERE id=@id
-func (k knowledgePointDo) DeleteKnowledgePoint(id uint) (err error) {
+func (k knowledgePointDo) DeleteKnowledgePoint(id int32) (err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder
@@ -263,121 +430,16 @@ func (k knowledgePointDo) DeleteKnowledgePoint(id uint) (err error) {
 	return
 }
 
-// SELECT kp.*, s.name as subject_name, p.name as parent_name
-// FROM @@table kp
-// LEFT JOIN subject s ON kp.subject_id = s.id
-// LEFT JOIN @@table p ON kp.parent_id = p.id
-// {{where}}
-//
-//	{{if subjectID != 0}}kp.subject_id = @subjectID{{end}}
-//
-// {{end}}
-// LIMIT @limit OFFSET @offset
-func (k knowledgePointDo) ListKnowledgePointsWithPagination(subjectID uint, offset int, limit int) (result []*model.KnowledgePoint, err error) {
+// SELECT * FROM @@table WHERE name = @name LIMIT 1
+func (k knowledgePointDo) GetKnowledgePointByName(name string) (result *model.KnowledgePoint, err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder
-	generateSQL.WriteString("SELECT kp.*, s.name as subject_name, p.name as parent_name FROM knowledge_point kp LEFT JOIN subject s ON kp.subject_id = s.id LEFT JOIN knowledge_point p ON kp.parent_id = p.id ")
-	var whereSQL0 strings.Builder
-	if subjectID != 0 {
-		params = append(params, subjectID)
-		whereSQL0.WriteString("kp.subject_id = ? ")
-	}
-	helper.JoinWhereBuilder(&generateSQL, whereSQL0)
-	params = append(params, limit)
-	params = append(params, offset)
-	generateSQL.WriteString("LIMIT ? OFFSET ? ")
-
-	var executeSQL *gorm.DB
-	executeSQL = k.UnderlyingDB().Raw(generateSQL.String(), params...).Find(&result) // ignore_security_alert
-	err = executeSQL.Error
-
-	return
-}
-
-// SELECT COUNT(*) FROM @@table WHERE subject_id=@subjectID
-func (k knowledgePointDo) CountKnowledgePoints(subjectID uint) (result int64, err error) {
-	var params []interface{}
-
-	var generateSQL strings.Builder
-	params = append(params, subjectID)
-	generateSQL.WriteString("SELECT COUNT(*) FROM knowledge_point WHERE subject_id=? ")
+	params = append(params, name)
+	generateSQL.WriteString("SELECT * FROM knowledge_point WHERE name = ? LIMIT 1 ")
 
 	var executeSQL *gorm.DB
 	executeSQL = k.UnderlyingDB().Raw(generateSQL.String(), params...).Take(&result) // ignore_security_alert
-	err = executeSQL.Error
-
-	return
-}
-
-// SELECT kp.*, s.name as subject_name, p.name as parent_name
-// FROM @@table kp
-// LEFT JOIN subject s ON kp.subject_id = s.id
-// LEFT JOIN @@table p ON kp.parent_id = p.id
-// WHERE kp.id=@id LIMIT 1
-func (k knowledgePointDo) GetKnowledgePointByID(id uint) (result *model.KnowledgePoint, err error) {
-	var params []interface{}
-
-	var generateSQL strings.Builder
-	params = append(params, id)
-	generateSQL.WriteString("SELECT kp.*, s.name as subject_name, p.name as parent_name FROM knowledge_point kp LEFT JOIN subject s ON kp.subject_id = s.id LEFT JOIN knowledge_point p ON kp.parent_id = p.id WHERE kp.id=? LIMIT 1 ")
-
-	var executeSQL *gorm.DB
-	executeSQL = k.UnderlyingDB().Raw(generateSQL.String(), params...).Take(&result) // ignore_security_alert
-	err = executeSQL.Error
-
-	return
-}
-
-// SELECT kp.*, s.name as subject_name, p.name as parent_name
-// FROM @@table kp
-// LEFT JOIN subject s ON kp.subject_id = s.id
-// LEFT JOIN @@table p ON kp.parent_id = p.id
-// {{where}}
-//
-//	kp.subject_id=@subjectID
-//	{{if name != ""}}AND kp.name LIKE CONCAT('%', @name, '%'){{end}}
-//
-// {{end}}
-// LIMIT @limit OFFSET @offset
-func (k knowledgePointDo) SearchKnowledgePoints(subjectID uint, name string, offset int, limit int) (result []*model.KnowledgePoint, err error) {
-	var params []interface{}
-
-	var generateSQL strings.Builder
-	generateSQL.WriteString("SELECT kp.*, s.name as subject_name, p.name as parent_name FROM knowledge_point kp LEFT JOIN subject s ON kp.subject_id = s.id LEFT JOIN knowledge_point p ON kp.parent_id = p.id ")
-	var whereSQL0 strings.Builder
-	params = append(params, subjectID)
-	whereSQL0.WriteString("kp.subject_id=? ")
-	if name != "" {
-		params = append(params, name)
-		whereSQL0.WriteString("AND kp.name LIKE CONCAT('%', ?, '%') ")
-	}
-	helper.JoinWhereBuilder(&generateSQL, whereSQL0)
-	params = append(params, limit)
-	params = append(params, offset)
-	generateSQL.WriteString("LIMIT ? OFFSET ? ")
-
-	var executeSQL *gorm.DB
-	executeSQL = k.UnderlyingDB().Raw(generateSQL.String(), params...).Find(&result) // ignore_security_alert
-	err = executeSQL.Error
-
-	return
-}
-
-// SELECT kp.*, s.name as subject_name, p.name as parent_name
-// FROM @@table kp
-// LEFT JOIN subject s ON kp.subject_id = s.id
-// LEFT JOIN @@table p ON kp.parent_id = p.id
-// WHERE kp.parent_id=@parentID
-func (k knowledgePointDo) GetChildKnowledgePoints(parentID uint) (result []*model.KnowledgePoint, err error) {
-	var params []interface{}
-
-	var generateSQL strings.Builder
-	params = append(params, parentID)
-	generateSQL.WriteString("SELECT kp.*, s.name as subject_name, p.name as parent_name FROM knowledge_point kp LEFT JOIN subject s ON kp.subject_id = s.id LEFT JOIN knowledge_point p ON kp.parent_id = p.id WHERE kp.parent_id=? ")
-
-	var executeSQL *gorm.DB
-	executeSQL = k.UnderlyingDB().Raw(generateSQL.String(), params...).Find(&result) // ignore_security_alert
 	err = executeSQL.Error
 
 	return

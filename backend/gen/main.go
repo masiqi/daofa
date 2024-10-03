@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// AdminQuerier defines the query interface for Admin table
+// AdminQuerier 定义 Admin 表的查询接口
 type AdminQuerier interface {
 	// SELECT * FROM @@table WHERE username=@username AND password=@password LIMIT 1
 	Login(username, password string) (*gen.T, error)
@@ -20,10 +20,10 @@ type AdminQuerier interface {
 	//   {{if username != ""}}username=@username,{{end}}
 	//   {{if password != ""}}password=@password,{{end}}
 	// WHERE id=@id
-	UpdateAdmin(id uint, username, password string) error
+	UpdateAdmin(id int32, username, password string) error
 
 	// DELETE FROM @@table WHERE id=@id
-	DeleteAdmin(id uint) error
+	DeleteAdmin(id int32) error
 
 	// SELECT * FROM @@table LIMIT @limit OFFSET @offset
 	ListAdminsWithPagination(offset, limit int) ([]*gen.T, error)
@@ -32,7 +32,7 @@ type AdminQuerier interface {
 	CountAdmins() (int64, error)
 
 	// SELECT * FROM @@table WHERE id=@id LIMIT 1
-	GetAdminByID(id uint) (*gen.T, error)
+	GetAdminByID(id int32) (*gen.T, error)
 
 	// SELECT * FROM @@table
 	//   {{where}}
@@ -42,7 +42,7 @@ type AdminQuerier interface {
 	SearchAdmins(username string, offset, limit int) ([]*gen.T, error)
 }
 
-// SubjectQuerier defines the query interface for Subject table
+// SubjectQuerier 定义 Subject 表的查询接口
 type SubjectQuerier interface {
 	// INSERT INTO @@table (name, description) VALUES (@name, @description)
 	CreateSubject(name string, description *string) error
@@ -51,10 +51,10 @@ type SubjectQuerier interface {
 	//   {{if name != ""}}name=@name,{{end}}
 	//   {{if description != nil}}description=@description,{{end}}
 	// WHERE id=@id
-	UpdateSubject(id uint, name string, description *string) error
+	UpdateSubject(id int32, name string, description *string) error
 
 	// DELETE FROM @@table WHERE id=@id
-	DeleteSubject(id uint) error
+	DeleteSubject(id int32) error
 
 	// SELECT * FROM @@table LIMIT @limit OFFSET @offset
 	ListSubjectsWithPagination(offset, limit int) ([]*gen.T, error)
@@ -63,7 +63,7 @@ type SubjectQuerier interface {
 	CountSubjects() (int64, error)
 
 	// SELECT * FROM @@table WHERE id=@id LIMIT 1
-	GetSubjectByID(id uint) (*gen.T, error)
+	GetSubjectByID(id int32) (*gen.T, error)
 
 	// SELECT * FROM @@table
 	//   {{where}}
@@ -75,158 +75,194 @@ type SubjectQuerier interface {
 
 // KnowledgePointQuerier defines the query interface for KnowledgePoint table
 type KnowledgePointQuerier interface {
-	// INSERT INTO @@table (subject_id, parent_id, name, description, is_leaf) VALUES (@subjectID, @parentID, @name, @description, @isLeaf)
-	CreateKnowledgePoint(subjectID uint, parentID *uint, name string, description *string, isLeaf bool) error
+	// SELECT * FROM @@table WHERE id=@id LIMIT 1
+	GetKnowledgePointByID(id int32) (*gen.T, error)
+
+	// SELECT * FROM @@table WHERE subject_id=@subjectID ORDER BY id LIMIT @limit OFFSET @offset
+	ListKnowledgePointsBySubject(subjectID int32, offset, limit int) ([]*gen.T, error)
+
+	// SELECT * FROM @@table WHERE parent_id=@parentID ORDER BY id
+	GetChildKnowledgePoints(parentID int32) ([]*gen.T, error)
+
+	// SELECT * FROM @@table WHERE subject_id=@subjectID AND parent_id IS NULL ORDER BY id
+	GetRootKnowledgePoints(subjectID int32) ([]*gen.T, error)
+
+	// SELECT * FROM @@table
+	//   {{where}}
+	//     {{if subjectID != 0}}subject_id=@subjectID{{end}}
+	//     {{if parentID != nil}}AND parent_id=@parentID{{end}}
+	//     {{if name != ""}}AND name LIKE CONCAT('%', @name, '%'){{end}}
+	//     {{if isLeaf != nil}}AND is_leaf=@isLeaf{{end}}
+	//     {{if level != 0}}AND level=@level{{end}}
+	//   {{end}}
+	// ORDER BY id LIMIT @limit OFFSET @offset
+	SearchKnowledgePoints(subjectID int32, parentID *int32, name string, isLeaf *bool, level int32, offset, limit int) ([]*gen.T, error)
+
+	// SELECT COUNT(*) FROM @@table
+	//   {{where}}
+	//     {{if subjectID != 0}}subject_id=@subjectID{{end}}
+	//     {{if parentID != nil}}AND parent_id=@parentID{{end}}
+	//     {{if name != ""}}AND name LIKE CONCAT('%', @name, '%'){{end}}
+	//     {{if isLeaf != nil}}AND is_leaf=@isLeaf{{end}}
+	//     {{if level != 0}}AND level=@level{{end}}
+	//   {{end}}
+	CountKnowledgePoints(subjectID int32, parentID *int32, name string, isLeaf *bool, level int32) (int64, error)
+
+	// INSERT INTO @@table (subject_id, parent_id, name, description, is_leaf, level) 
+	// VALUES (@subjectID, @parentID, @name, @description, @isLeaf, @level)
+	CreateKnowledgePoint(subjectID int32, parentID *int32, name string, description *string, isLeaf bool, level int32) error
 
 	// UPDATE @@table SET
 	//   {{if subjectID != 0}}subject_id=@subjectID,{{end}}
 	//   {{if parentID != nil}}parent_id=@parentID,{{end}}
 	//   {{if name != ""}}name=@name,{{end}}
 	//   {{if description != nil}}description=@description,{{end}}
-	//   is_leaf=@isLeaf
+	//   {{if isLeaf != nil}}is_leaf=@isLeaf,{{end}}
+	//   {{if level != 0}}level=@level{{end}}
 	// WHERE id=@id
-	UpdateKnowledgePoint(id, subjectID uint, parentID *uint, name string, description *string, isLeaf bool) error
+	UpdateKnowledgePoint(id int32, subjectID int32, parentID *int32, name string, description *string, isLeaf *bool, level int32) error
 
 	// DELETE FROM @@table WHERE id=@id
-	DeleteKnowledgePoint(id uint) error
+	DeleteKnowledgePoint(id int32) error
 
-	// SELECT kp.*, s.name as subject_name, p.name as parent_name
-	// FROM @@table kp
-	// LEFT JOIN subject s ON kp.subject_id = s.id
-	// LEFT JOIN @@table p ON kp.parent_id = p.id
-	// {{where}}
-	//   {{if subjectID != 0}}kp.subject_id = @subjectID{{end}}
-	// {{end}}
-	// LIMIT @limit OFFSET @offset
-	ListKnowledgePointsWithPagination(subjectID uint, offset, limit int) ([]*gen.T, error)
-
-	// SELECT COUNT(*) FROM @@table WHERE subject_id=@subjectID
-	CountKnowledgePoints(subjectID uint) (int64, error)
-
-	// SELECT kp.*, s.name as subject_name, p.name as parent_name
-	// FROM @@table kp
-	// LEFT JOIN subject s ON kp.subject_id = s.id
-	// LEFT JOIN @@table p ON kp.parent_id = p.id
-	// WHERE kp.id=@id LIMIT 1
-	GetKnowledgePointByID(id uint) (*gen.T, error)
-
-	// SELECT kp.*, s.name as subject_name, p.name as parent_name
-	// FROM @@table kp
-	// LEFT JOIN subject s ON kp.subject_id = s.id
-	// LEFT JOIN @@table p ON kp.parent_id = p.id
-	// {{where}}
-	//   kp.subject_id=@subjectID
-	//   {{if name != ""}}AND kp.name LIKE CONCAT('%', @name, '%'){{end}}
-	// {{end}}
-	// LIMIT @limit OFFSET @offset
-	SearchKnowledgePoints(subjectID uint, name string, offset, limit int) ([]*gen.T, error)
-
-	// SELECT kp.*, s.name as subject_name, p.name as parent_name
-	// FROM @@table kp
-	// LEFT JOIN subject s ON kp.subject_id = s.id
-	// LEFT JOIN @@table p ON kp.parent_id = p.id
-	// WHERE kp.parent_id=@parentID
-	GetChildKnowledgePoints(parentID uint) ([]*gen.T, error)
+	// SELECT * FROM @@table WHERE name = @name LIMIT 1
+	GetKnowledgePointByName(name string) (*gen.T, error)
 }
 
-// ExerciseMaterialQuerier defines the query interface for ExerciseMaterial table
-type ExerciseMaterialQuerier interface {
-	// INSERT INTO @@table (content, image_path) VALUES (@content, @imagePath)
-	CreateMaterial(content, imagePath string) error
+// QuestionTypeQuerier 定义 QuestionType 表的查询接口
+type QuestionTypeQuerier interface {
+	// INSERT INTO @@table (name, description) VALUES (@name, @description)
+	CreateQuestionType(name string, description *string) error
+
+	// UPDATE @@table SET
+	//   {{if name != ""}}name=@name,{{end}}
+	//   {{if description != nil}}description=@description,{{end}}
+	// WHERE id=@id
+	UpdateQuestionType(id int32, name string, description *string) error
+
+	// DELETE FROM @@table WHERE id=@id
+	DeleteQuestionType(id int32) error
+
+	// SELECT * FROM @@table LIMIT @limit OFFSET @offset
+	ListQuestionTypesWithPagination(offset, limit int) ([]*gen.T, error)
+
+	// SELECT COUNT(*) FROM @@table
+	CountQuestionTypes() (int64, error)
+
+	// SELECT * FROM @@table WHERE id=@id LIMIT 1
+	GetQuestionTypeByID(id int32) (*gen.T, error)
+
+	// SELECT * FROM @@table
+	//   {{where}}
+	//     {{if name != ""}}name LIKE CONCAT('%', @name, '%'){{end}}
+	//   {{end}}
+	// LIMIT @limit OFFSET @offset
+	SearchQuestionTypes(name string, offset, limit int) ([]*gen.T, error)
+
+	// SELECT * FROM @@table WHERE name = @name LIMIT 1
+	GetQuestionTypeByName(name string) (*gen.T, error)
+}
+
+// QuestionQuerier 定义 Question 表的查询接口
+type QuestionQuerier interface {
+	// INSERT INTO @@table (content, image_path, ocr_text, answer, explanation, type_id, hash)
+	// VALUES (@content, @imagePath, @ocrText, @answer, @explanation, @typeID, @hash)
+	CreateQuestion(content string, imagePath *string, ocrText *string, answer string, explanation *string, typeID int32, hash string) error
 
 	// UPDATE @@table SET
 	//   {{if content != ""}}content=@content,{{end}}
-	//   {{if imagePath != ""}}image_path=@imagePath,{{end}}
+	//   {{if imagePath != nil}}image_path=@imagePath,{{end}}
+	//   {{if ocrText != nil}}ocr_text=@ocrText,{{end}}
+	//   {{if answer != ""}}answer=@answer,{{end}}
+	//   {{if explanation != nil}}explanation=@explanation,{{end}}
+	//   {{if typeID != 0}}type_id=@typeID,{{end}}
+	//   {{if hash != ""}}hash=@hash{{end}}
 	// WHERE id=@id
-	UpdateMaterial(id uint, content, imagePath string) error
+	UpdateQuestion(id int32, content string, imagePath *string, ocrText *string, answer string, explanation *string, typeID int32, hash string) error
 
 	// DELETE FROM @@table WHERE id=@id
-	DeleteMaterial(id uint) error
+	DeleteQuestion(id int32) error
 
 	// SELECT * FROM @@table LIMIT @limit OFFSET @offset
-	ListMaterialsWithPagination(offset, limit int) ([]*gen.T, error)
+	ListQuestionsWithPagination(offset, limit int) ([]*gen.T, error)
 
 	// SELECT COUNT(*) FROM @@table
-	CountMaterials() (int64, error)
+	CountQuestions() (int64, error)
 
 	// SELECT * FROM @@table WHERE id=@id LIMIT 1
-	GetMaterialByID(id uint) (*gen.T, error)
+	GetQuestionByID(id int32) (*gen.T, error)
+
+	// SELECT * FROM @@table WHERE hash=@hash LIMIT 1
+	GetQuestionByHash(hash string) (*gen.T, error)
 
 	// SELECT * FROM @@table
 	//   {{where}}
 	//     {{if content != ""}}content LIKE CONCAT('%', @content, '%'){{end}}
+	//     {{if typeID != 0}}AND type_id = @typeID{{end}}
 	//   {{end}}
+	// ORDER BY id DESC
 	// LIMIT @limit OFFSET @offset
-	SearchMaterials(content string, offset, limit int) ([]*gen.T, error)
+	SearchQuestions(content string, typeID int32, offset, limit int) ([]*gen.T, error)
 }
 
-// ExerciseQuestionQuerier defines the query interface for ExerciseQuestion table
-type ExerciseQuestionQuerier interface {
-	// INSERT INTO @@table (material_id, question, answer, explanation) VALUES (@materialID, @question, @answer, @explanation)
-	CreateQuestion(materialID uint, question, answer string, explanation *string) error
+// QuestionKnowledgePointQuerier 定义 QuestionKnowledgePoint 表的查询接口
+type QuestionKnowledgePointQuerier interface {
+	// INSERT INTO @@table (question_id, knowledge_point_id) VALUES (@questionID, @knowledgePointID)
+	CreateQuestionKnowledgePoint(questionID, knowledgePointID int32) error
 
-	// UPDATE @@table SET
-	//   {{if question != ""}}question=@question,{{end}}
-	//   {{if answer != ""}}answer=@answer,{{end}}
-	//   {{if explanation != nil}}explanation=@explanation,{{end}}
-	// WHERE id=@id
-	UpdateQuestion(id uint, question, answer string, explanation *string) error
+	// DELETE FROM @@table WHERE question_id=@questionID AND knowledge_point_id=@knowledgePointID
+	DeleteQuestionKnowledgePoint(questionID, knowledgePointID int32) error
 
-	// DELETE FROM @@table WHERE id=@id
-	DeleteQuestion(id uint) error
+	// SELECT * FROM @@table WHERE question_id=@questionID
+	GetKnowledgePointsByQuestionID(questionID int32) ([]*gen.T, error)
 
-	// SELECT * FROM @@table WHERE material_id=@materialID LIMIT @limit OFFSET @offset
-	ListQuestionsWithPagination(materialID uint, offset, limit int) ([]*gen.T, error)
+	// SELECT * FROM @@table WHERE knowledge_point_id=@knowledgePointID
+	GetQuestionsByKnowledgePointID(knowledgePointID int32) ([]*gen.T, error)
 
-	// SELECT COUNT(*) FROM @@table WHERE material_id=@materialID
-	CountQuestions(materialID uint) (int64, error)
+	// SELECT COUNT(*) FROM @@table WHERE question_id=@questionID
+	CountKnowledgePointsByQuestionID(questionID int32) (int64, error)
 
-	// SELECT * FROM @@table WHERE id=@id LIMIT 1
-	GetQuestionByID(id uint) (*gen.T, error)
-
-	// SELECT * FROM @@table
-	//   {{where}}
-	//     material_id=@materialID
-	//     {{if question != ""}}AND question LIKE CONCAT('%', @question, '%'){{end}}
-	//   {{end}}
-	// LIMIT @limit OFFSET @offset
-	SearchQuestions(materialID uint, question string, offset, limit int) ([]*gen.T, error)
+	// SELECT COUNT(*) FROM @@table WHERE knowledge_point_id=@knowledgePointID
+	CountQuestionsByKnowledgePointID(knowledgePointID int32) (int64, error)
 }
 
 func main() {
-	// Connect to the database
+	// 连接到数据库
 	dsn := "daofa:123456@tcp(localhost:3306)/daofa?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
-		panic(fmt.Errorf("cannot connect to database: %w", err))
+		panic(fmt.Errorf("无法连接到数据库: %w", err))
 	}
 
-	// Initialize the generator
+	// 初始化生成器
 	g := gen.NewGenerator(gen.Config{
 		OutPath:       "../dal",
 		Mode:          gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface,
 		FieldNullable: true,
+		FieldSignable: true,
 	})
 
-	// Use the database connection
+	// 使用数据库连接
 	g.UseDB(db)
 
-	// Generate models and query files for all tables
+	// 为所有表生成模型和查询文件
 	g.ApplyBasic(
 		g.GenerateModel("admin"),
 		g.GenerateModel("subject"),
 		g.GenerateModel("knowledge_point"),
-		g.GenerateModel("exercise_material"),
-		g.GenerateModel("exercise_question"),
+		g.GenerateModel("question_type"),
+		g.GenerateModel("question"),
+		g.GenerateModel("question_knowledge_point"),
 	)
 
-	// Apply custom query interfaces
+	// 应用自定义查询接口
 	g.ApplyInterface(func(AdminQuerier) {}, g.GenerateModel("admin"))
 	g.ApplyInterface(func(SubjectQuerier) {}, g.GenerateModel("subject"))
 	g.ApplyInterface(func(KnowledgePointQuerier) {}, g.GenerateModel("knowledge_point"))
-	g.ApplyInterface(func(ExerciseMaterialQuerier) {}, g.GenerateModel("exercise_material"))
-	g.ApplyInterface(func(ExerciseQuestionQuerier) {}, g.GenerateModel("exercise_question"))
+	g.ApplyInterface(func(QuestionTypeQuerier) {}, g.GenerateModel("question_type"))
+	g.ApplyInterface(func(QuestionQuerier) {}, g.GenerateModel("question"))
+	g.ApplyInterface(func(QuestionKnowledgePointQuerier) {}, g.GenerateModel("question_knowledge_point"))
 
-	// Generate code
+	// 生成代码
 	g.Execute()
 }

@@ -20,7 +20,7 @@ app.use(cookieParser());
 const checkToken = (req, res, next) => {
     const token = req.cookies.jwt;
     if (token) {
-        jwt.verify(token, 'your_jwt_secret', (err, decoded) => {
+        jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
             if (err) {
                 return res.redirect('/login');
             }

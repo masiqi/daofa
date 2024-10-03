@@ -5,20 +5,24 @@
   <meta charset="UTF-8" />
   <title>初中道德法制知识库系统</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <!-- 引入amis的CSS文件 -->
   <link rel="stylesheet" href="https://unpkg.com/amis@6.8.0/lib/themes/default.css" />
   <link rel="stylesheet" href="https://unpkg.com/amis@6.8.0/lib/helper.css" />
+  <!-- 引入amis的JS SDK -->
   <script src="https://unpkg.com/amis@6.8.0/sdk/sdk.js"></script>
   <script type="module">
-    import config from './config.js'; // 导入配置文件
+    // 导入配置文件
+    import config from './config.js';
 
     (function () {
-      // 检查 JWT token
+      // 检查JWT token是否存在
       if (!localStorage.getItem('jwt')) {
         location.href = '/login'; // 未登录用户重定向到登录页面
         return; // 确保后续代码不执行
       }
 
       let amis = amisRequire('amis/embed');
+      // 定义amis页面JSON配置
       let amisJSON = {
         "type": "app",
         "brandName": "初中道德法制知识库系统",
@@ -51,7 +55,18 @@
                   "title": "学科管理",
                   "body": {
                     "type": "crud",
-                    "api": "${API_HOST}/admin/subjects",
+                    "api": {
+                      "method": "get",
+                      "url": "${API_HOST}/admin/subjects?page=${page}&pageSize=${perPage}",
+                      "adaptor": "return {\
+                        ...payload,\
+                        count: payload.total\
+                      };"
+                    },
+                    "syncLocation": true,
+                    "perPage": 10,
+                    "pageField": "page",
+                    "perPageField": "pageSize",
                     "headerToolbar": [
                       {
                         "type": "button",
@@ -122,11 +137,22 @@
                   "title": "知识点管理",
                   "body": {
                     "type": "crud",
-                    "api": "${API_HOST}/admin/knowledge-points",
+                    "api": {
+                      "method": "get",
+                      "url": "${API_HOST}/admin/knowledge-points?page=${page}&pageSize=${perPage}",
+                      "adaptor": "return {\
+                        ...payload,\
+                        count: payload.total\
+                      };"
+                    },
+                    "syncLocation": true,
+                    "perPage": 10,
+                    "pageField": "page",
+                    "perPageField": "pageSize",
                     "headerToolbar": [
                       {
                         "type": "button",
-                        "label": "新增知识点",
+                        "label": "新增知点",
                         "actionType": "dialog",
                         "dialog": {
                           "title": "新增知识点",
@@ -178,7 +204,7 @@
                                 "type": "switch",
                                 "name": "is_leaf",
                                 "label": "是否为叶子节点",
-                                "onText": "是",
+                                "onText": "���",
                                 "offText": "否"
                               }
                             ]
@@ -329,30 +355,40 @@
               },
               {
                 "label": "习题管理",
-                "url": "/exercises",
-                "icon": "fa fa-pencil-alt",
+                "url": "/questions",
                 "schema": {
                   "type": "page",
                   "title": "习题管理",
                   "body": {
                     "type": "crud",
-                    "api": "${API_HOST}/admin/exercise-materials",
-                    "syncLocation": false,
-                    "headerToolbar": [
-                      {
-                        "type": "button",
-                        "label": "新增素材",
-                        "actionType": "link",
-                        "link": "/exercise-material-add"
-                      }
-                    ],
+                    "api": {
+                      "url": "${API_HOST}/admin/questions",
+                      "method": "get"
+                    },
+                    "filter": {
+                      "title": "搜索",
+                      "body": [
+                        {
+                          "type": "input-text",
+                          "name": "keyword",
+                          "placeholder": "输入关键词索"
+                        }
+                      ]
+                    },
                     "columns": [
-                      { "name": "id", "label": "ID" },
+                      {
+                        "name": "id",
+                        "label": "ID"
+                      },
                       {
                         "name": "content",
-                        "label": "素材内容",
+                        "label": "题目内容",
                         "type": "tpl",
-                        "tpl": "<div class='text-ellipsis' title='${content}'>${content|truncate:50}</div>"
+                        "tpl": "<div class='text-ellipsis' title='${content}'>${content}</div>"
+                      },
+                      {
+                        "name": "type.name",
+                        "label": "题目类型"
                       },
                       {
                         "type": "operation",
@@ -363,175 +399,40 @@
                             "label": "编辑",
                             "actionType": "dialog",
                             "dialog": {
-                              "title": "编辑素材",
-                              "size": "lg",
+                              "title": "编辑习题",
                               "body": {
                                 "type": "form",
                                 "api": {
                                   "method": "put",
-                                  "url": "${API_HOST}/admin/exercise-materials/$id"
+                                  "url": "${API_HOST}/admin/questions/${id}"
                                 },
                                 "body": [
                                   {
                                     "type": "textarea",
                                     "name": "content",
-                                    "label": "素材内容",
+                                    "label": "题目内容",
                                     "required": true
                                   },
                                   {
-                                    "type": "input-file",
-                                    "name": "image",
-                                    "label": "上传图片",
-                                    "accept": "image/*",
-                                    "maxSize": 1024 * 1024 * 5, // 5MB
-                                    "receiver": {
-                                      "url": "${API_HOST}/admin/upload-image",
-                                      "method": "post"
-                                    }
-                                  },
-                                  {
-                                    "type": "input-table",
-                                    "name": "questions",
-                                    "label": "题目列表",
-                                    "addable": true,
-                                    "editable": true,
-                                    "removable": true,
-                                    "columns": [
-                                      {
-                                        "name": "question",
-                                        "label": "题目",
-                                        "type": "textarea"
-                                      },
-                                      {
-                                        "name": "answer",
-                                        "label": "答案",
-                                        "type": "textarea"
-                                      },
-                                      {
-                                        "name": "explanation",
-                                        "label": "解析",
-                                        "type": "textarea"
-                                      }
-                                    ]
-                                  }
-                                ]
-                              }
-                            }
-                          },
-                          {
-                            "type": "button",
-                            "label": "查看题目",
-                            "actionType": "drawer",
-                            "drawer": {
-                              "title": "相关题目",
-                              "body": {
-                                "type": "crud",
-                                "api": "${API_HOST}/admin/exercise-questions?material_id=$id",
-                                "syncLocation": false,
-                                "headerToolbar": [
-                                  {
-                                    "type": "button",
-                                    "label": "新增题目",
-                                    "actionType": "dialog",
-                                    "dialog": {
-                                      "title": "新增题目",
-                                      "body": {
-                                        "type": "form",
-                                        "api": {
-                                          "method": "post",
-                                          "url": "${API_HOST}/admin/exercise-questions"
-                                        },
-                                        "body": [
-                                          {
-                                            "type": "hidden",
-                                            "name": "material_id",
-                                            "value": "$id"
-                                          },
-                                          {
-                                            "type": "textarea",
-                                            "name": "question",
-                                            "label": "题目",
-                                            "required": true
-                                          },
-                                          {
-                                            "type": "textarea",
-                                            "name": "answer",
-                                            "label": "答案",
-                                            "required": true
-                                          },
-                                          {
-                                            "type": "textarea",
-                                            "name": "explanation",
-                                            "label": "解释"
-                                          }
-                                        ]
-                                      }
-                                    }
-                                  }
-                                ],
-                                "columns": [
-                                  { "name": "id", "label": "ID" },
-                                  {
-                                    "name": "question",
-                                    "label": "题目",
-                                    "type": "tpl",
-                                    "tpl": "<div class='text-ellipsis' title='${question}'>${question|truncate:30}</div>"
-                                  },
-                                  {
+                                    "type": "textarea",
                                     "name": "answer",
                                     "label": "答案",
-                                    "type": "tpl",
-                                    "tpl": "<div class='text-ellipsis' title='${answer}'>${answer|truncate:30}</div>"
+                                    "required": true
                                   },
                                   {
-                                    "type": "operation",
-                                    "label": "操作",
-                                    "buttons": [
-                                      {
-                                        "type": "button",
-                                        "label": "编辑",
-                                        "actionType": "dialog",
-                                        "dialog": {
-                                          "title": "编辑题目",
-                                          "body": {
-                                            "type": "form",
-                                            "api": {
-                                              "method": "put",
-                                              "url": "${API_HOST}/admin/exercise-questions/$id"
-                                            },
-                                            "body": [
-                                              {
-                                                "type": "textarea",
-                                                "name": "question",
-                                                "label": "题目",
-                                                "required": true
-                                              },
-                                              {
-                                                "type": "textarea",
-                                                "name": "answer",
-                                                "label": "答案",
-                                                "required": true
-                                              },
-                                              {
-                                                "type": "textarea",
-                                                "name": "explanation",
-                                                "label": "解释"
-                                              }
-                                            ]
-                                          }
-                                        }
-                                      },
-                                      {
-                                        "type": "button",
-                                        "label": "删除",
-                                        "actionType": "ajax",
-                                        "confirmText": "确定要删除该题目吗？",
-                                        "api": {
-                                          "method": "delete",
-                                          "url": "${API_HOST}/admin/exercise-questions/$id"
-                                        }
-                                      }
-                                    ]
+                                    "type": "textarea",
+                                    "name": "explanation",
+                                    "label": "解析"
+                                  },
+                                  {
+                                    "type": "select",
+                                    "name": "typeID",
+                                    "label": "题目类型",
+                                    "required": true,
+                                    "source": {
+                                      "method": "get",
+                                      "url": "${API_HOST}/admin/question-types"
+                                    }
                                   }
                                 ]
                               }
@@ -541,111 +442,315 @@
                             "type": "button",
                             "label": "删除",
                             "actionType": "ajax",
-                            "confirmText": "确定要删除该素材吗？相关的题目也会被删除。",
+                            "confirmText": "确定要删除该习题吗？",
                             "api": {
                               "method": "delete",
-                              "url": "${API_HOST}/admin/exercise-materials/$id"
+                              "url": "${API_HOST}/admin/questions/${id}"
                             }
                           }
                         ]
+                      }
+                    ],
+                    "bulkActions": [
+                      {
+                        "label": "批量删除",
+                        "actionType": "ajax",
+                        "api": {
+                          "method": "delete",
+                          "url": "${API_HOST}/admin/questions/${ids|raw}"
+                        },
+                        "confirmText": "确定要删除选中的习题吗？"
+                      }
+                    ],
+                    "headerToolbar": [
+                      {
+                        "type": "button",
+                        "label": "新增习题",
+                        "actionType": "dialog",
+                        "dialog": {
+                          "title": "新增习题",
+                          "body": {
+                            "type": "form",
+                            "api": {
+                              "method": "post",
+                              "url": "${API_HOST}/admin/questions"
+                            },
+                            "body": [
+                              {
+                                "type": "textarea",
+                                "name": "content",
+                                "label": "题目内容",
+                                "required": true
+                              },
+                              {
+                                "type": "textarea",
+                                "name": "answer",
+                                "label": "答案",
+                                "required": true
+                              },
+                              {
+                                "type": "textarea",
+                                "name": "explanation",
+                                "label": "解析"
+                              },
+                              {
+                                "type": "select",
+                                "name": "typeID",
+                                "label": "题目类型",
+                                "required": true,
+                                "source": {
+                                  "method": "get",
+                                  "url": "${API_HOST}/admin/question-types"
+                                }
+                              }
+                            ]
+                          }
+                        }
                       }
                     ]
                   }
                 }
               },
               {
-                "label": "新增素材",
-                "url": "/exercise-material-add",
+                "label": "习题类型管理",
+                "url": "/question-types",
                 "schema": {
                   "type": "page",
-                  "title": "新增素材",
+                  "title": "习题类型管理",
                   "body": {
-                    "type": "form",
+                    "type": "crud",
                     "api": {
-                      "method": "post",
-                      "url": "${API_HOST}/admin/exercise-materials"
+                      "method": "get",
+                      "url": "${API_HOST}/admin/question-types?page=${page}&pageSize=${perPage}",
+                      "adaptor": "return {\
+                        ...payload,\
+                        count: payload.total\
+                      };"
                     },
-                    "redirect": "/exercises", // 添加这行，创建成功后跳转到列表页
-                    "body": [
+                    "syncLocation": true,
+                    "perPage": 10,
+                    "pageField": "page",
+                    "perPageField": "pageSize",
+                    "columns": [
                       {
-                        "type": "textarea",
-                        "name": "content",
-                        "label": "素材内容",
-                        "required": true
+                        "name": "id",
+                        "label": "ID"
                       },
                       {
-                        "type": "input-file",
-                        "name": "image",
-                        "label": "上传图片",
-                        "accept": "image/*",
-                        "maxSize": 1024 * 1024 * 5, // 5MB
-                        "receiver": {
-                          "url": "${API_HOST}/admin/upload-image",
-                          "method": "post"
-                        }
+                        "name": "name",
+                        "label": "类型名称"
                       },
                       {
-                        "type": "input-table",
-                        "name": "questions",
-                        "label": "题目列表",
-                        "addable": true,
-                        "editable": true,
-                        "removable": true,
-                        "columns": [
+                        "name": "description",
+                        "label": "描述"
+                      },
+                      {
+                        "type": "operation",
+                        "label": "操作",
+                        "buttons": [
                           {
-                            "name": "question",
-                            "label": "题目",
-                            "type": "textarea"
+                            "type": "button",
+                            "label": "编辑",
+                            "actionType": "dialog",
+                            "dialog": {
+                              "title": "编辑习题类型",
+                              "body": {
+                                "type": "form",
+                                "api": {
+                                  "method": "put",
+                                  "url": "${API_HOST}/admin/question-types/${id}"
+                                },
+                                "body": [
+                                  {
+                                    "type": "input-text",
+                                    "name": "name",
+                                    "label": "类型名称",
+                                    "required": true
+                                  },
+                                  {
+                                    "type": "textarea",
+                                    "name": "description",
+                                    "label": "描述"
+                                  }
+                                ]
+                              }
+                            }
                           },
                           {
-                            "name": "answer",
-                            "label": "答案",
-                            "type": "textarea"
-                          },
-                          {
-                            "name": "explanation",
-                            "label": "解析",
-                            "type": "textarea"
+                            "type": "button",
+                            "label": "删除",
+                            "actionType": "ajax",
+                            "confirmText": "确定要删除该习题类型吗？",
+                            "api": {
+                              "method": "delete",
+                              "url": "${API_HOST}/admin/question-types/${id}"
+                            }
                           }
                         ]
-                      },
+                      }
+                    ],
+                    "headerToolbar": [
                       {
                         "type": "button",
-                        "label": "提交",
-                        "actionType": "submit",
-                        "primary": true
+                        "label": "新增习题类型",
+                        "actionType": "dialog",
+                        "dialog": {
+                          "title": "新增习题类型",
+                          "body": {
+                            "type": "form",
+                            "api": {
+                              "method": "post",
+                              "url": "${API_HOST}/admin/question-types"
+                            },
+                            "body": [
+                              {
+                                "type": "input-text",
+                                "name": "name",
+                                "label": "类型名称",
+                                "required": true
+                              },
+                              {
+                                "type": "textarea",
+                                "name": "description",
+                                "label": "描述"
+                              }
+                            ]
+                          }
+                        }
                       }
                     ]
                   }
                 }
+              },
+              {
+                "label": "队列管理",
+                "icon": "fa fa-list",
+                "children": [
+                  {
+                    "label": "队列状态",
+                    "url": "queue-status",
+                    "schema": {
+                      "type": "page",
+                      "title": "队列状态",
+                      "body": [
+                        {
+                          "type": "service",
+                          "api": "${API_HOST}/admin/queue-status",
+                          "interval": 5000,
+                          "body": [
+                            {
+                              "type": "card",
+                              "header": {
+                                "title": "当前队列状态"
+                              },
+                              "body": [
+                                {
+                                  "type": "tpl",
+                                  "tpl": "待处理消息数量: ${queue_length}"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "label": "上传JSON文件",
+                    "url": "upload-json",
+                    "schema": {
+                      "type": "page",
+                      "title": "上传JSON文件",
+                      "body": {
+                        "type": "form",
+                        "api": {
+                          "method": "post",
+                          "url": "${API_HOST}/admin/enqueue-questions",
+                          "data": {
+                            "file": "${file}"
+                          },
+                          "headers": {
+                            "Content-Type": "multipart/form-data"
+                          }
+                        },
+                        "body": [
+                          {
+                            "type": "input-file",
+                            "name": "file",
+                            "label": "选择JSON文件",
+                            "accept": ".json",
+                            "maxSize": 10 * 1024 * 1024, // 10MB
+                            "asBlob": true,
+                            "autoUpload": true,
+                            "description": "请上传包含习题数据的JSON文件,文件大小不超过10MB"
+                          },
+                          {
+                            "type": "submit",
+                            "label": "提交",
+                            "primary": true
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
               }
             ]
           }
         ]
       };
 
+      // 初始化amis
       let amisScoped = amis.embed('#root', amisJSON, {
         data: {
           username: localStorage.getItem('username'),
-          API_HOST: config.API_HOST // 从配置文件中获取 API_HOST
+          API_HOST: config.API_HOST
         }
-      },
-        {
-          requestAdaptor: function (api) {
-            console.log('requestAdaptor is being called');
-            console.log('JWT token:', localStorage.getItem('jwt'));
-            api.headers = api.headers || {};
-            api.headers['Authorization'] = 'Bearer ' + localStorage.getItem('jwt');
-            return api;
+      }, {
+        // 请求适配器,用于添加JWT token到请求头
+        requestAdaptor: function (api) {
+          api.headers = api.headers || {};
+          api.headers['Authorization'] = 'Bearer ' + localStorage.getItem('jwt');
+          return api;
+        },
+        // 响应适配器,用于处理token过期的情况
+        responseAdaptor: function (api, response, query, request) {
+          if (response.status === 401 || (response.data && response.data.error === "Invalid or expired token")) {
+            console.log('Token expired, logging out');
+            logout();
+            return {
+              status: 401,
+              msg: 'Token expired, please login again'
+            };
           }
-        });
+          return response;
+        }
+      });
 
       // 登出函数
       window.logout = function () {
+        console.log('Logging out');
         localStorage.removeItem('jwt');
         localStorage.removeItem('username');
-        location.href = '/login'; // 登出后重定向到登录页面
+        location.href = '/login';
       };
+
+      // 全局错误处理
+      amisScoped.updateProps({
+        theme: 'cxd',
+        locale: 'zh-CN',
+        // 添加全局通知处理
+        notify: (type, msg) => {
+          console.log('Notification:', type, msg);
+          if (type === 'error' && (msg.includes('Token expired') || msg.includes('Invalid or expired token'))) {
+            console.log('Token expired notification, logging out');
+            logout();
+            return;
+          }
+          // 其他错误正常显示
+          amis.toast[type] ? amis.toast[type](msg, '系统通知') : console.warn('[Notify]', type, msg);
+        }
+      });
     })();
   </script>
 </head>

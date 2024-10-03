@@ -167,11 +167,11 @@ type ISubjectDo interface {
 	schema.Tabler
 
 	CreateSubject(name string, description *string) (err error)
-	UpdateSubject(id uint, name string, description *string) (err error)
-	DeleteSubject(id uint) (err error)
+	UpdateSubject(id int32, name string, description *string) (err error)
+	DeleteSubject(id int32) (err error)
 	ListSubjectsWithPagination(offset int, limit int) (result []*model.Subject, err error)
 	CountSubjects() (result int64, err error)
-	GetSubjectByID(id uint) (result *model.Subject, err error)
+	GetSubjectByID(id int32) (result *model.Subject, err error)
 	SearchSubjects(name string, offset int, limit int) (result []*model.Subject, err error)
 }
 
@@ -197,7 +197,7 @@ func (s subjectDo) CreateSubject(name string, description *string) (err error) {
 //	{{if description != nil}}description=@description,{{end}}
 //
 // WHERE id=@id
-func (s subjectDo) UpdateSubject(id uint, name string, description *string) (err error) {
+func (s subjectDo) UpdateSubject(id int32, name string, description *string) (err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder
@@ -221,7 +221,7 @@ func (s subjectDo) UpdateSubject(id uint, name string, description *string) (err
 }
 
 // DELETE FROM @@table WHERE id=@id
-func (s subjectDo) DeleteSubject(id uint) (err error) {
+func (s subjectDo) DeleteSubject(id int32) (err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder
@@ -264,7 +264,7 @@ func (s subjectDo) CountSubjects() (result int64, err error) {
 }
 
 // SELECT * FROM @@table WHERE id=@id LIMIT 1
-func (s subjectDo) GetSubjectByID(id uint) (result *model.Subject, err error) {
+func (s subjectDo) GetSubjectByID(id int32) (result *model.Subject, err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder

@@ -35,7 +35,7 @@ func JWTAuth() gin.HandlerFunc {
 		tokenString := parts[1]
 		claims := &CustomClaims{}
 		token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
-			return []byte(viper.GetString("jwt.secret")), nil
+			return []byte(viper.GetString("JWT_SECRET")), nil
 		})
 
 		if err != nil || !token.Valid {

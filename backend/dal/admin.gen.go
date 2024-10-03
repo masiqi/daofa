@@ -168,11 +168,11 @@ type IAdminDo interface {
 
 	Login(username string, password string) (result *model.Admin, err error)
 	CreateAdmin(username string, password string) (err error)
-	UpdateAdmin(id uint, username string, password string) (err error)
-	DeleteAdmin(id uint) (err error)
+	UpdateAdmin(id int32, username string, password string) (err error)
+	DeleteAdmin(id int32) (err error)
 	ListAdminsWithPagination(offset int, limit int) (result []*model.Admin, err error)
 	CountAdmins() (result int64, err error)
-	GetAdminByID(id uint) (result *model.Admin, err error)
+	GetAdminByID(id int32) (result *model.Admin, err error)
 	SearchAdmins(username string, offset int, limit int) (result []*model.Admin, err error)
 }
 
@@ -214,7 +214,7 @@ func (a adminDo) CreateAdmin(username string, password string) (err error) {
 //	{{if password != ""}}password=@password,{{end}}
 //
 // WHERE id=@id
-func (a adminDo) UpdateAdmin(id uint, username string, password string) (err error) {
+func (a adminDo) UpdateAdmin(id int32, username string, password string) (err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder
@@ -238,7 +238,7 @@ func (a adminDo) UpdateAdmin(id uint, username string, password string) (err err
 }
 
 // DELETE FROM @@table WHERE id=@id
-func (a adminDo) DeleteAdmin(id uint) (err error) {
+func (a adminDo) DeleteAdmin(id int32) (err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder
@@ -281,7 +281,7 @@ func (a adminDo) CountAdmins() (result int64, err error) {
 }
 
 // SELECT * FROM @@table WHERE id=@id LIMIT 1
-func (a adminDo) GetAdminByID(id uint) (result *model.Admin, err error) {
+func (a adminDo) GetAdminByID(id int32) (result *model.Admin, err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder

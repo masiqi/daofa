@@ -37,10 +37,10 @@ func Login(c *gin.Context) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"admin_id": admin.ID,
 		"username": admin.Username,
-		"exp":      time.Now().Add(viper.GetDuration("jwt.expiration")).Unix(),
+		"exp":      time.Now().Add(viper.GetDuration("JWT_EXPIRATION")).Unix(),
 	})
 
-	tokenString, err := token.SignedString([]byte(viper.GetString("jwt.secret")))
+	tokenString, err := token.SignedString([]byte(viper.GetString("JWT_SECRET")))
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"status": 1, "msg": "Could not generate token"})
 		return

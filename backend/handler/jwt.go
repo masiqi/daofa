@@ -1,17 +1,22 @@
 package handler
 
 import (
-    "github.com/dgrijalva/jwt-go"
-    "time"
+	"time"
+	"github.com/dgrijalva/jwt-go"
+	"github.com/spf13/viper"
 )
 
-var jwtSecret = []byte("your_jwt_secret") // 确保这里的密钥安全
-
 func generateJWT(username string) (string, error) {
-    claims := jwt.MapClaims{}
-    claims["username"] = username
-    claims["exp"] = time.Now().Add(time.Hour * 72).Unix() // 72小时过期
+	// 从配置中读取 JWT 密钥
+	jwtSecret := []byte(viper.GetString("JWT_SECRET"))
 
-    token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-    return token.SignedString(jwtSecret)
+	// 从配置中读取 JWT 过期时间
+	jwtExpiration := viper.GetDuration("JWT_EXPIRATION")
+
+	claims := jwt.MapClaims{}
+	claims["username"] = username
+	claims["exp"] = time.Now().Add(jwtExpiration).Unix()
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	return token.SignedString(jwtSecret)
 }

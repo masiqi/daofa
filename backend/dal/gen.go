@@ -16,54 +16,59 @@ import (
 )
 
 var (
-	Q                = new(Query)
-	Admin            *admin
-	ExerciseMaterial *exerciseMaterial
-	ExerciseQuestion *exerciseQuestion
-	KnowledgePoint   *knowledgePoint
-	Subject          *subject
+	Q                      = new(Query)
+	Admin                  *admin
+	KnowledgePoint         *knowledgePoint
+	Question               *question
+	QuestionKnowledgePoint *questionKnowledgePoint
+	QuestionType           *questionType
+	Subject                *subject
 )
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
 	Admin = &Q.Admin
-	ExerciseMaterial = &Q.ExerciseMaterial
-	ExerciseQuestion = &Q.ExerciseQuestion
 	KnowledgePoint = &Q.KnowledgePoint
+	Question = &Q.Question
+	QuestionKnowledgePoint = &Q.QuestionKnowledgePoint
+	QuestionType = &Q.QuestionType
 	Subject = &Q.Subject
 }
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
-		db:               db,
-		Admin:            newAdmin(db, opts...),
-		ExerciseMaterial: newExerciseMaterial(db, opts...),
-		ExerciseQuestion: newExerciseQuestion(db, opts...),
-		KnowledgePoint:   newKnowledgePoint(db, opts...),
-		Subject:          newSubject(db, opts...),
+		db:                     db,
+		Admin:                  newAdmin(db, opts...),
+		KnowledgePoint:         newKnowledgePoint(db, opts...),
+		Question:               newQuestion(db, opts...),
+		QuestionKnowledgePoint: newQuestionKnowledgePoint(db, opts...),
+		QuestionType:           newQuestionType(db, opts...),
+		Subject:                newSubject(db, opts...),
 	}
 }
 
 type Query struct {
 	db *gorm.DB
 
-	Admin            admin
-	ExerciseMaterial exerciseMaterial
-	ExerciseQuestion exerciseQuestion
-	KnowledgePoint   knowledgePoint
-	Subject          subject
+	Admin                  admin
+	KnowledgePoint         knowledgePoint
+	Question               question
+	QuestionKnowledgePoint questionKnowledgePoint
+	QuestionType           questionType
+	Subject                subject
 }
 
 func (q *Query) Available() bool { return q.db != nil }
 
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
-		db:               db,
-		Admin:            q.Admin.clone(db),
-		ExerciseMaterial: q.ExerciseMaterial.clone(db),
-		ExerciseQuestion: q.ExerciseQuestion.clone(db),
-		KnowledgePoint:   q.KnowledgePoint.clone(db),
-		Subject:          q.Subject.clone(db),
+		db:                     db,
+		Admin:                  q.Admin.clone(db),
+		KnowledgePoint:         q.KnowledgePoint.clone(db),
+		Question:               q.Question.clone(db),
+		QuestionKnowledgePoint: q.QuestionKnowledgePoint.clone(db),
+		QuestionType:           q.QuestionType.clone(db),
+		Subject:                q.Subject.clone(db),
 	}
 }
 
@@ -77,30 +82,33 @@ func (q *Query) WriteDB() *Query {
 
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
-		db:               db,
-		Admin:            q.Admin.replaceDB(db),
-		ExerciseMaterial: q.ExerciseMaterial.replaceDB(db),
-		ExerciseQuestion: q.ExerciseQuestion.replaceDB(db),
-		KnowledgePoint:   q.KnowledgePoint.replaceDB(db),
-		Subject:          q.Subject.replaceDB(db),
+		db:                     db,
+		Admin:                  q.Admin.replaceDB(db),
+		KnowledgePoint:         q.KnowledgePoint.replaceDB(db),
+		Question:               q.Question.replaceDB(db),
+		QuestionKnowledgePoint: q.QuestionKnowledgePoint.replaceDB(db),
+		QuestionType:           q.QuestionType.replaceDB(db),
+		Subject:                q.Subject.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
-	Admin            IAdminDo
-	ExerciseMaterial IExerciseMaterialDo
-	ExerciseQuestion IExerciseQuestionDo
-	KnowledgePoint   IKnowledgePointDo
-	Subject          ISubjectDo
+	Admin                  IAdminDo
+	KnowledgePoint         IKnowledgePointDo
+	Question               IQuestionDo
+	QuestionKnowledgePoint IQuestionKnowledgePointDo
+	QuestionType           IQuestionTypeDo
+	Subject                ISubjectDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
-		Admin:            q.Admin.WithContext(ctx),
-		ExerciseMaterial: q.ExerciseMaterial.WithContext(ctx),
-		ExerciseQuestion: q.ExerciseQuestion.WithContext(ctx),
-		KnowledgePoint:   q.KnowledgePoint.WithContext(ctx),
-		Subject:          q.Subject.WithContext(ctx),
+		Admin:                  q.Admin.WithContext(ctx),
+		KnowledgePoint:         q.KnowledgePoint.WithContext(ctx),
+		Question:               q.Question.WithContext(ctx),
+		QuestionKnowledgePoint: q.QuestionKnowledgePoint.WithContext(ctx),
+		QuestionType:           q.QuestionType.WithContext(ctx),
+		Subject:                q.Subject.WithContext(ctx),
 	}
 }
 

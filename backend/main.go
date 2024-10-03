@@ -1,46 +1,161 @@
 package main
 
 import (
+	"encoding/json"
+	"flag"
 	"fmt"
+	"io/ioutil"
 	"log"
+	"os"
 	"time"
 
-	"daofa/backend/config"
 	"daofa/backend/dal"
 	"daofa/backend/handler"
 	"daofa/backend/middleware"
+	"daofa/backend/queue"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/go-redis/redis/v8"
 	"github.com/spf13/viper"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+
+	"daofa/backend/model"
 )
 
-func main() {
-	config.LoadConfig()
+var redisClient *redis.Client
 
+type KnowledgePointJSON struct {
+	ID       int                  `json:"id"`
+	Name     string               `json:"name"`
+	IsLeaf   bool                 `json:"is_leaf"`
+	Level    int                  `json:"level"`
+	Children []KnowledgePointJSON `json:"children,omitempty"`
+}
+
+func main() {
+	// 加载配置文件
+	loadConfig()
+
+	// 定义命令行参数
+	importKnowledgePoints := flag.Bool("import-knowledge-points", false, "导入知识点数据")
+	flag.Parse()
+
+	// 连接数据库
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local",
-		viper.GetString("database.username"),
-		viper.GetString("database.password"),
-		viper.GetString("database.host"),
-		viper.GetInt("database.port"),
-		viper.GetString("database.dbname"))
+		viper.GetString("DB_USER"),
+		viper.GetString("DB_PASSWORD"),
+		viper.GetString("DB_HOST"),
+		viper.GetInt("DB_PORT"),
+		viper.GetString("DB_NAME"))
 
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatalf("failed to connect database: %v", err)
 	}
 
+	// 初始化 DAL
 	dal.SetDefault(db)
-	handler.InitDB(db) // 初始化 handler 包中的数据库连接
+
+	if *importKnowledgePoints {
+		importKnowledgePointsFromJSON()
+	} else {
+		// 其他主程序逻辑
+		runServer()
+	}
+}
+
+func loadConfig() {
+	viper.SetConfigFile(".env")
+	err := viper.ReadInConfig()
+	if err != nil {
+		log.Fatalf("Error reading config file: %s", err)
+	}
+
+	// 设置默认值
+	viper.SetDefault("SERVER_PORT", 8080)
+	viper.SetDefault("DB_PORT", 3306)
+	viper.SetDefault("REDIS_PORT", 6379)
+	viper.SetDefault("REDIS_DB", 0)
+}
+
+func importKnowledgePointsFromJSON() {
+	// 读取JSON文件
+	jsonFile, err := os.Open("sql/knowledge_points.json")
+	if err != nil {
+		log.Fatalf("无法打开JSON文件: %v", err)
+	}
+	defer jsonFile.Close()
+
+	byteValue, _ := ioutil.ReadAll(jsonFile)
+
+	var knowledgePoints []KnowledgePointJSON
+	json.Unmarshal(byteValue, &knowledgePoints)
+
+	// 插入知识点
+	insertKnowledgePoints(knowledgePoints, nil)
+
+	fmt.Println("知识点数据导入完成")
+}
+
+func insertKnowledgePoints(points []KnowledgePointJSON, parentID *int32) {
+	for _, point := range points {
+		newPoint := model.KnowledgePoint{
+			Name:      point.Name,
+			IsLeaf:    point.IsLeaf,
+			ParentID:  parentID,
+			SubjectID: 1, // 假设所有知识点属于同一个学科,实际使用时可能需要调整
+		}
+
+		err := dal.Q.KnowledgePoint.CreateKnowledgePoint(newPoint.SubjectID, newPoint.ParentID, newPoint.Name, nil, newPoint.IsLeaf, 0) // 添加了 level 参数，暂时设为 0
+		if err != nil {
+			log.Printf("插入知识点失败: %v", err)
+			continue
+		}
+
+		// 获取刚插入的知识点ID
+		insertedPoint, err := dal.Q.KnowledgePoint.GetKnowledgePointByName(newPoint.Name)
+		if err != nil {
+			log.Printf("获取插入的知识点失败: %v", err)
+			continue
+		}
+
+		newID := insertedPoint.ID
+
+		// 递归插入子节点
+		if len(point.Children) > 0 {
+			insertKnowledgePoints(point.Children, &newID)
+		}
+	}
+}
+
+func runServer() {
+	// Redis 连接
+	redisClient = redis.NewClient(&redis.Options{
+		Addr:     fmt.Sprintf("%s:%d", viper.GetString("REDIS_HOST"), viper.GetInt("REDIS_PORT")),
+		Password: viper.GetString("REDIS_PASSWORD"),
+		DB:       viper.GetInt("REDIS_DB"),
+	})
+
+	// 测试 Redis 连接
+	_, err := redisClient.Ping(redisClient.Context()).Result()
+	if err != nil {
+		log.Fatalf("failed to connect to Redis: %v", err)
+	}
+
+	// 初始化 Redis
+	queue.InitRedis(redisClient)
+
+	// 启动习题处理器
+	go handler.ProcessPendingQuestions(redisClient.Context())
 
 	r := gin.Default()
 
 	// CORS 中间件配置
 	r.Use(cors.New(cors.Config{
 		AllowOriginFunc: func(origin string) bool {
-			return true // 动态允许所有源，但会在响应中返回请求的具体源
+			return true // 动态允许所有源，但会在响应中返回请求的具体
 		},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization", "Accept", "Accept-Language", "Access-Control-Request-Headers", "Access-Control-Request-Method", "Cache-Control", "Connection", "Pragma", "Referer", "Sec-Fetch-Mode", "User-Agent"},
@@ -58,42 +173,50 @@ func main() {
 	admin.Use(middleware.JWTAuth())
 	{
 		// 科目相关API
-		admin.GET("/subjects", func(c *gin.Context) { handler.GetSubjects(c.Request.Context(), c) })
-		admin.POST("/subjects", func(c *gin.Context) { handler.CreateSubject(c.Request.Context(), c) })
-		admin.PUT("/subjects/:id", func(c *gin.Context) { handler.UpdateSubject(c.Request.Context(), c) })
-		admin.DELETE("/subjects/:id", func(c *gin.Context) { handler.DeleteSubject(c.Request.Context(), c) })
+		admin.GET("/subjects", handler.GetSubjects)
+		admin.POST("/subjects", handler.CreateSubject)
+		admin.PUT("/subjects/:id", handler.UpdateSubject)
+		admin.DELETE("/subjects/:id", handler.DeleteSubject)
 
 		// 知识点相关API
-		admin.GET("/knowledge-points", func(c *gin.Context) { handler.GetKnowledgePoints(c.Request.Context(), c) })
-		admin.POST("/knowledge-points", func(c *gin.Context) { handler.CreateKnowledgePoint(c.Request.Context(), c) })
-		admin.PUT("/knowledge-points/:id", func(c *gin.Context) { handler.UpdateKnowledgePoint(c.Request.Context(), c) })
-		admin.DELETE("/knowledge-points/:id", func(c *gin.Context) { handler.DeleteKnowledgePoint(c.Request.Context(), c) })
-
-		// 习题相关API
-		admin.GET("/exercises", func(c *gin.Context) { handler.GetExercises(c.Request.Context(), c) })
-		admin.POST("/exercises", func(c *gin.Context) { handler.CreateExercise(c.Request.Context(), c) })
-		admin.PUT("/exercises/:id", func(c *gin.Context) { handler.UpdateExercise(c.Request.Context(), c) })
-		admin.DELETE("/exercises/:id", func(c *gin.Context) { handler.DeleteExercise(c.Request.Context(), c) })
+		admin.GET("/knowledge-points", handler.GetKnowledgePoints)
+		admin.POST("/knowledge-points", handler.CreateKnowledgePoint)
+		admin.PUT("/knowledge-points/:id", handler.UpdateKnowledgePoint)
+		admin.DELETE("/knowledge-points/:id", handler.DeleteKnowledgePoint)
 
 		// 管理员相关API
-		admin.GET("/admins", func(c *gin.Context) { handler.GetAdmins(c.Request.Context(), c) })
-		admin.POST("/admins", func(c *gin.Context) { handler.CreateAdmin(c.Request.Context(), c) })
-		admin.PUT("/admins/:id", func(c *gin.Context) { handler.UpdateAdmin(c.Request.Context(), c) })
-		admin.DELETE("/admins/:id", func(c *gin.Context) { handler.DeleteAdmin(c.Request.Context(), c) })
+		admin.GET("/admins", handler.GetAdmins)
+		admin.POST("/admins", handler.CreateAdmin)
+		admin.PUT("/admins/:id", handler.UpdateAdmin)
+		admin.DELETE("/admins/:id", handler.DeleteAdmin)
 
-		// 素材相关API
-		admin.GET("/exercise-materials", handler.ListExerciseMaterials)
-		admin.POST("/exercise-materials", handler.CreateExerciseMaterial)
-		admin.PUT("/exercise-materials/:id", handler.UpdateExerciseMaterial)
-		admin.DELETE("/exercise-materials/:id", handler.DeleteExerciseMaterial)
-		admin.POST("/upload-image", handler.UploadImage)
+		// 新增的路由
+		admin.POST("/enqueue-questions", handler.EnqueueQuestions)
+		admin.GET("/queue-status", handler.GetQueueStatus)
 
-		// 新增的题目查询API
-		admin.GET("/exercise-questions", handler.GetExerciseQuestions)
+		// 新增题目相关的路由
+		admin.POST("/questions", handler.CreateQuestion)
+		admin.GET("/questions", handler.ListQuestions)
+		admin.GET("/questions/:id", handler.GetQuestion)
+		admin.PUT("/questions/:id", handler.UpdateQuestion)
+		admin.DELETE("/questions/:id", handler.DeleteQuestion)
+		admin.GET("/questions/search", handler.SearchQuestions)
+
+		// 题目知识点关联的路由
+		admin.POST("/questions/:id/knowledge-points", handler.AddQuestionKnowledgePoint)
+		admin.DELETE("/questions/:id/knowledge-points/:knowledge_point_id", handler.RemoveQuestionKnowledgePoint)
+		admin.GET("/questions/:id/knowledge-points", handler.GetQuestionKnowledgePoints)
+
+		// 题目类型关的路由
+		admin.POST("/question-types", handler.CreateQuestionType)
+		admin.GET("/question-types", handler.ListQuestionTypes)
+		admin.GET("/question-types/:id", handler.GetQuestionType)
+		admin.PUT("/question-types/:id", handler.UpdateQuestionType)
+		admin.DELETE("/question-types/:id", handler.DeleteQuestionType)
 	}
-	
+
 	// 提供图片加载接口，不需要JWT
 	r.StaticFS("/images", gin.Dir("./uploads", true))
 
-	r.Run(fmt.Sprintf(":%d", viper.GetInt("server.port")))
+	r.Run(fmt.Sprintf(":%d", viper.GetInt("SERVER_PORT")))
 }

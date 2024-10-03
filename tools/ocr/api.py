@@ -1,9 +1,9 @@
 from fastapi import FastAPI, File, UploadFile, Form
-from pydantic import BaseModel
+from pydantic import BaseModel, HttpUrl
 import torch
-from PIL import Image, ImageStat, ImageEnhance
+from PIL import Image
 import io
-import numpy as np
+import requests
 from crop import eval_model, dynamic_preprocess, convert_output_format
 from argparse import Namespace
 from transformers import AutoTokenizer
@@ -121,16 +121,32 @@ def paddle_ocr_process(image):
     logger.info(f"处理后的文本: {text}")
     return text
 
+class OCRRequest(BaseModel):
+    url: HttpUrl = None
+
 @app.post("/ocr")
-async def ocr(file: UploadFile = File(...), multi_page: bool = Form(False), render: bool = Form(False), output_format: str = Form("latex")):
+async def ocr(
+    file: UploadFile = File(None),
+    url: str = Form(None),
+    multi_page: bool = Form(False),
+    render: bool = Form(False),
+    output_format: str = Form("latex")
+):
     try:
-        contents = await file.read()
-        image = Image.open(io.BytesIO(contents))
-        logger.info(f"上传的图像大小: {image.size}, 模式: {image.mode}, 格式: {image.format}")
+        if file:
+            contents = await file.read()
+            image = Image.open(io.BytesIO(contents))
+        elif url:
+            response = requests.get(url)
+            image = Image.open(io.BytesIO(response.content))
+        else:
+            return {"error": "Either file or URL must be provided"}
+
+        logger.info(f"处理的图像大小: {image.size}, 模式: {image.mode}, 格式: {image.format}")
         
         # 创建一个目录来保存处理后的图像
         os.makedirs("processed_images", exist_ok=True)
-        save_path = f"processed_images/processed_{file.filename}"
+        save_path = f"processed_images/processed_image.png"
         
         # 处理图像格式
         image = process_image(image)
@@ -138,7 +154,7 @@ async def ocr(file: UploadFile = File(...), multi_page: bool = Form(False), rend
         
         # 处理图像
         if multi_page:
-            sub_images = [image]  # 在API中,我们假设只处理单个上传的图像
+            sub_images = [image]
         else:
             sub_images = dynamic_preprocess(image)
         logger.info(f"子图像数量: {len(sub_images)}")
@@ -165,7 +181,6 @@ async def ocr(file: UploadFile = File(...), multi_page: bool = Form(False), rend
         converted_result = convert_output_format(result, output_format)
         ocr_method = "GOT_OCR"
         
-        # 修改判断条件，检查是否只包含空白字符或LaTeX表格标记
         if len(converted_result.strip()) == 0 or converted_result.strip() == r"\begin{tabular}{l|l|l|l|l|}\hline\end{tabular}":
             logger.info("GOT_OCR 未检测到有效文本，使用PaddleOCR")
             converted_result = paddle_ocr_process(image)

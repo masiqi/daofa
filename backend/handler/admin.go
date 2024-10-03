@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"context"
 	"net/http"
 	"strconv"
 
@@ -14,7 +13,7 @@ import (
 
 // GetAdmins 获取所有管理员（支持分页）
 // @router /api/v1/admin/list [GET]
-func GetAdmins(ctx context.Context, c *gin.Context) {
+func GetAdmins(c *gin.Context) {
 	// 获取分页参数
 	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
 	perPage, _ := strconv.Atoi(c.DefaultQuery("perPage", "10"))
@@ -50,7 +49,7 @@ func GetAdmins(ctx context.Context, c *gin.Context) {
 
 // CreateAdmin 创建管理员
 // @router /api/v1/admin/create [POST]
-func CreateAdmin(ctx context.Context, c *gin.Context) {
+func CreateAdmin(c *gin.Context) {
 	var admin model.Admin
 	if err := c.ShouldBindJSON(&admin); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"status": 1, "msg": err.Error()})
@@ -59,7 +58,7 @@ func CreateAdmin(ctx context.Context, c *gin.Context) {
 
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(admin.Password), bcrypt.DefaultCost)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"status": 1, "msg": "密码加密败"})
+		c.JSON(http.StatusInternalServerError, gin.H{"status": 1, "msg": "密码加密失败"})
 		return
 	}
 
@@ -73,8 +72,8 @@ func CreateAdmin(ctx context.Context, c *gin.Context) {
 
 // UpdateAdmin 更新管理员信息
 // @router /api/v1/admin/update/:id [PUT]
-func UpdateAdmin(ctx context.Context, c *gin.Context) {
-	id, _ := strconv.Atoi(c.Param("id"))
+func UpdateAdmin(c *gin.Context) {
+	id, _ := strconv.ParseInt(c.Param("id"), 10, 32)
 	var admin model.Admin
 	if err := c.ShouldBindJSON(&admin); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"status": 1, "msg": err.Error()})
@@ -91,7 +90,7 @@ func UpdateAdmin(ctx context.Context, c *gin.Context) {
 		hashedPassword = string(hashed)
 	}
 
-	err := dal.Q.Admin.UpdateAdmin(uint(id), admin.Username, hashedPassword)
+	err := dal.Q.Admin.UpdateAdmin(int32(id), admin.Username, hashedPassword)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"status": 1, "msg": "更新管理员失败"})
 		return
@@ -99,11 +98,11 @@ func UpdateAdmin(ctx context.Context, c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"status": 0, "msg": "管理员更新成功"})
 }
 
-// DeleteAdmin 除管理员
+// DeleteAdmin 删除管理员
 // @router /api/v1/admin/delete/:id [DELETE]
-func DeleteAdmin(ctx context.Context, c *gin.Context) {
-	id, _ := strconv.Atoi(c.Param("id"))
-	err := dal.Q.Admin.DeleteAdmin(uint(id))
+func DeleteAdmin(c *gin.Context) {
+	id, _ := strconv.ParseInt(c.Param("id"), 10, 32)
+	err := dal.Q.Admin.DeleteAdmin(int32(id))
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"status": 1, "msg": "删除管理员失败"})
 		return
@@ -113,35 +112,12 @@ func DeleteAdmin(ctx context.Context, c *gin.Context) {
 
 // GetAdminByID 根据ID获取管理员
 // @router /api/v1/admin/:id [GET]
-func GetAdminByID(ctx context.Context, c *gin.Context) {
-	id, _ := strconv.Atoi(c.Param("id"))
-	admin, err := dal.Q.Admin.GetAdminByID(uint(id))
+func GetAdminByID(c *gin.Context) {
+	id, _ := strconv.ParseInt(c.Param("id"), 10, 32)
+	admin, err := dal.Q.Admin.GetAdminByID(int32(id))
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"status": 1, "msg": "获取管理员信息失败"})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"status": 0, "msg": "", "data": admin})
-}
-
-func AdminLogin(c *gin.Context) {
-	var loginInfo model.LoginInfo
-	if err := c.ShouldBindJSON(&loginInfo); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"status": 1, "msg": err.Error()})
-		return
-	}
-
-	admin, err := dal.Q.Admin.Login(loginInfo.Username, loginInfo.Password)
-	if err != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{"status": 1, "msg": "用户名或密码错误"})
-		return
-	}
-
-	// 生成 JWT
-	token, err := generateJWT(admin.Username) // 确保这里包含用户名
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"status": 1, "msg": "生成 token 失败"})
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{"status": 0, "msg": "登录成功", "data": gin.H{"token": token, "username": admin.Username}})
 }
