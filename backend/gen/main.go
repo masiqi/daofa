@@ -5,6 +5,7 @@ import (
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gen"
+	"gorm.io/gen/field"
 	"gorm.io/gorm"
 )
 
@@ -93,10 +94,9 @@ type KnowledgePointQuerier interface {
 	//     {{if parentID != nil}}AND parent_id=@parentID{{end}}
 	//     {{if name != ""}}AND name LIKE CONCAT('%', @name, '%'){{end}}
 	//     {{if isLeaf != nil}}AND is_leaf=@isLeaf{{end}}
-	//     {{if level != 0}}AND level=@level{{end}}
 	//   {{end}}
 	// ORDER BY id LIMIT @limit OFFSET @offset
-	SearchKnowledgePoints(subjectID int32, parentID *int32, name string, isLeaf *bool, level int32, offset, limit int) ([]*gen.T, error)
+	SearchKnowledgePoints(subjectID int32, parentID *int32, name string, isLeaf *bool, offset, limit int) ([]*gen.T, error)
 
 	// SELECT COUNT(*) FROM @@table
 	//   {{where}}
@@ -104,13 +104,15 @@ type KnowledgePointQuerier interface {
 	//     {{if parentID != nil}}AND parent_id=@parentID{{end}}
 	//     {{if name != ""}}AND name LIKE CONCAT('%', @name, '%'){{end}}
 	//     {{if isLeaf != nil}}AND is_leaf=@isLeaf{{end}}
-	//     {{if level != 0}}AND level=@level{{end}}
 	//   {{end}}
-	CountKnowledgePoints(subjectID int32, parentID *int32, name string, isLeaf *bool, level int32) (int64, error)
+	CountKnowledgePoints(subjectID int32, parentID *int32, name string, isLeaf *bool) (int64, error)
 
-	// INSERT INTO @@table (subject_id, parent_id, name, description, is_leaf, level) 
-	// VALUES (@subjectID, @parentID, @name, @description, @isLeaf, @level)
-	CreateKnowledgePoint(subjectID int32, parentID *int32, name string, description *string, isLeaf bool, level int32) error
+	// SELECT * FROM @@table ORDER BY id LIMIT @limit OFFSET @offset
+	ListKnowledgePointsWithPagination(offset, limit int) ([]*gen.T, error)
+
+	// INSERT INTO @@table (subject_id, parent_id, name, description, is_leaf )
+	// VALUES (@subjectID, @parentID, @name, @description, @isLeaf )
+	CreateKnowledgePoint(subjectID int32, parentID *int32, name string, description *string, isLeaf bool) error
 
 	// UPDATE @@table SET
 	//   {{if subjectID != 0}}subject_id=@subjectID,{{end}}
@@ -118,15 +120,21 @@ type KnowledgePointQuerier interface {
 	//   {{if name != ""}}name=@name,{{end}}
 	//   {{if description != nil}}description=@description,{{end}}
 	//   {{if isLeaf != nil}}is_leaf=@isLeaf,{{end}}
-	//   {{if level != 0}}level=@level{{end}}
 	// WHERE id=@id
-	UpdateKnowledgePoint(id int32, subjectID int32, parentID *int32, name string, description *string, isLeaf *bool, level int32) error
+	UpdateKnowledgePoint(id int32, subjectID int32, parentID *int32, name string, description *string, isLeaf *bool) error
 
 	// DELETE FROM @@table WHERE id=@id
 	DeleteKnowledgePoint(id int32) error
 
 	// SELECT * FROM @@table WHERE name = @name LIMIT 1
 	GetKnowledgePointByName(name string) (*gen.T, error)
+
+	// SELECT * FROM @@table WHERE subject_id = @subjectID AND name = @name LIMIT 1
+	GetKnowledgePointByNameAndSubject(name string, subjectID int32) (*gen.T, error)
+
+	// INSERT INTO @@table (subject_id, parent_id, name, description, is_leaf)
+	// VALUES (@subjectID, @parentID, @name, @description, @isLeaf)
+	CreateKnowledgePointWithSubject(subjectID int32, parentID *int32, name string, description *string, isLeaf bool) error
 }
 
 // QuestionTypeQuerier 定义 QuestionType 表的查询接口
@@ -213,17 +221,22 @@ type QuestionKnowledgePointQuerier interface {
 	// DELETE FROM @@table WHERE question_id=@questionID AND knowledge_point_id=@knowledgePointID
 	DeleteQuestionKnowledgePoint(questionID, knowledgePointID int32) error
 
-	// SELECT * FROM @@table WHERE question_id=@questionID
-	GetKnowledgePointsByQuestionID(questionID int32) ([]*gen.T, error)
-
-	// SELECT * FROM @@table WHERE knowledge_point_id=@knowledgePointID
-	GetQuestionsByKnowledgePointID(knowledgePointID int32) ([]*gen.T, error)
+	// SELECT * FROM @@table WHERE question_id=@questionID LIMIT @limit OFFSET @offset
+	GetKnowledgePointsByQuestionIDWithPagination(questionID int32, offset, limit int) ([]*gen.T, error)
 
 	// SELECT COUNT(*) FROM @@table WHERE question_id=@questionID
 	CountKnowledgePointsByQuestionID(questionID int32) (int64, error)
 
+	// SELECT * FROM @@table WHERE knowledge_point_id=@knowledgePointID LIMIT @limit OFFSET @offset
+	GetQuestionsByKnowledgePointIDWithPagination(knowledgePointID int32, offset, limit int) ([]*gen.T, error)
+
 	// SELECT COUNT(*) FROM @@table WHERE knowledge_point_id=@knowledgePointID
 	CountQuestionsByKnowledgePointID(knowledgePointID int32) (int64, error)
+
+	// SELECT k.* FROM @@table qkp
+	// JOIN knowledge_point k ON qkp.knowledge_point_id = k.id
+	// WHERE qkp.question_id = @questionID
+	GetKnowledgePointsByQuestionID(questionID int32) ([]*gen.T, error)
 }
 
 func main() {
@@ -245,22 +258,51 @@ func main() {
 	// 使用数据库连接
 	g.UseDB(db)
 
+	// 定义模型之间的关系
+	subject := g.GenerateModel("subject")
+
+	knowledgePoint := g.GenerateModel("knowledge_point",
+		gen.FieldRelate(field.BelongsTo, "Subject", subject, &field.RelateConfig{
+			GORMTag: field.GormTag{"foreignKey": []string{"subject_id"}},
+		}),
+		gen.FieldRelate(field.HasMany, "Children", g.GenerateModel("knowledge_point"), &field.RelateConfig{
+			RelateSlice: true,
+			GORMTag:     field.GormTag{"foreignKey": []string{"parent_id"}},
+		}),
+		gen.FieldRelate(field.BelongsTo, "Parent", g.GenerateModel("knowledge_point"), &field.RelateConfig{
+			RelatePointer: true,
+			GORMTag:       field.GormTag{"foreignKey": []string{"parent_id"}},
+		}),
+	)
+
+	questionType := g.GenerateModel("question_type")
+
+	question := g.GenerateModel("question",
+		gen.FieldRelate(field.BelongsTo, "QuestionType", questionType, &field.RelateConfig{
+			GORMTag: field.GormTag{"foreignKey": []string{"type_id"}},
+		}),
+		gen.FieldRelate(field.Many2Many, "KnowledgePoints", knowledgePoint, &field.RelateConfig{
+			RelateSlice: true,
+			GORMTag:     field.GormTag{"many2many": []string{"question_knowledge_point"}},
+		}),
+	)
+
 	// 为所有表生成模型和查询文件
 	g.ApplyBasic(
 		g.GenerateModel("admin"),
-		g.GenerateModel("subject"),
-		g.GenerateModel("knowledge_point"),
-		g.GenerateModel("question_type"),
-		g.GenerateModel("question"),
+		subject,
+		knowledgePoint,
+		questionType,
+		question,
 		g.GenerateModel("question_knowledge_point"),
 	)
 
 	// 应用自定义查询接口
 	g.ApplyInterface(func(AdminQuerier) {}, g.GenerateModel("admin"))
-	g.ApplyInterface(func(SubjectQuerier) {}, g.GenerateModel("subject"))
-	g.ApplyInterface(func(KnowledgePointQuerier) {}, g.GenerateModel("knowledge_point"))
-	g.ApplyInterface(func(QuestionTypeQuerier) {}, g.GenerateModel("question_type"))
-	g.ApplyInterface(func(QuestionQuerier) {}, g.GenerateModel("question"))
+	g.ApplyInterface(func(SubjectQuerier) {}, subject)
+	g.ApplyInterface(func(KnowledgePointQuerier) {}, knowledgePoint)
+	g.ApplyInterface(func(QuestionTypeQuerier) {}, questionType)
+	g.ApplyInterface(func(QuestionQuerier) {}, question)
 	g.ApplyInterface(func(QuestionKnowledgePointQuerier) {}, g.GenerateModel("question_knowledge_point"))
 
 	// 生成代码

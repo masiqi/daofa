@@ -12,14 +12,17 @@ const TableNameKnowledgePoint = "knowledge_point"
 
 // KnowledgePoint mapped from table <knowledge_point>
 type KnowledgePoint struct {
-	ID          int32      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	SubjectID   int32      `gorm:"column:subject_id;not null" json:"subject_id"`
-	ParentID    *int32     `gorm:"column:parent_id" json:"parent_id"`
-	Name        string     `gorm:"column:name;not null" json:"name"`
-	Description *string    `gorm:"column:description" json:"description"`
-	IsLeaf      bool       `gorm:"column:is_leaf;not null" json:"is_leaf"`
-	CreatedAt   *time.Time `gorm:"column:created_at;default:CURRENT_TIMESTAMP" json:"created_at"`
-	UpdatedAt   *time.Time `gorm:"column:updated_at;default:CURRENT_TIMESTAMP" json:"updated_at"`
+	ID          int32            `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
+	SubjectID   int32            `gorm:"column:subject_id;not null" json:"subject_id"`
+	ParentID    *int32           `gorm:"column:parent_id" json:"parent_id"`
+	Name        string           `gorm:"column:name;not null" json:"name"`
+	Description *string          `gorm:"column:description" json:"description"`
+	IsLeaf      bool             `gorm:"column:is_leaf;not null" json:"is_leaf"`
+	CreatedAt   *time.Time       `gorm:"column:created_at;default:CURRENT_TIMESTAMP" json:"created_at"`
+	UpdatedAt   *time.Time       `gorm:"column:updated_at;default:CURRENT_TIMESTAMP" json:"updated_at"`
+	Subject     Subject          `gorm:"foreignKey:subject_id" json:"subject"`
+	Children    []KnowledgePoint `gorm:"foreignKey:parent_id" json:"children"`
+	Parent      *KnowledgePoint  `gorm:"foreignKey:parent_id" json:"parent"`
 }
 
 // TableName KnowledgePoint's table name

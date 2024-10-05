@@ -12,16 +12,18 @@ const TableNameQuestion = "question"
 
 // Question mapped from table <question>
 type Question struct {
-	ID          int32      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	Content     string     `gorm:"column:content;not null" json:"content"`
-	ImagePath   *string    `gorm:"column:image_path" json:"image_path"`
-	OcrText     *string    `gorm:"column:ocr_text" json:"ocr_text"`
-	Answer      string     `gorm:"column:answer;not null" json:"answer"`
-	Explanation *string    `gorm:"column:explanation" json:"explanation"`
-	TypeID      int32      `gorm:"column:type_id;not null" json:"type_id"`
-	Hash        string     `gorm:"column:hash;not null" json:"hash"`
-	CreatedAt   *time.Time `gorm:"column:created_at;default:CURRENT_TIMESTAMP" json:"created_at"`
-	UpdatedAt   *time.Time `gorm:"column:updated_at;default:CURRENT_TIMESTAMP" json:"updated_at"`
+	ID              int32            `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
+	Content         string           `gorm:"column:content;not null" json:"content"`
+	ImagePath       *string          `gorm:"column:image_path" json:"image_path"`
+	OcrText         *string          `gorm:"column:ocr_text" json:"ocr_text"`
+	Answer          string           `gorm:"column:answer;not null" json:"answer"`
+	Explanation     *string          `gorm:"column:explanation" json:"explanation"`
+	TypeID          int32            `gorm:"column:type_id;not null" json:"type_id"`
+	Hash            string           `gorm:"column:hash;not null" json:"hash"`
+	CreatedAt       *time.Time       `gorm:"column:created_at;default:CURRENT_TIMESTAMP" json:"created_at"`
+	UpdatedAt       *time.Time       `gorm:"column:updated_at;default:CURRENT_TIMESTAMP" json:"updated_at"`
+	QuestionType    QuestionType     `gorm:"foreignKey:type_id" json:"question_type"`
+	KnowledgePoints []KnowledgePoint `gorm:"many2many:question_knowledge_point" json:"knowledge_points"`
 }
 
 // TableName Question's table name

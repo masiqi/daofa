@@ -14,7 +14,15 @@ import (
 
 // CreateQuestion 创建新的题目
 func CreateQuestion(c *gin.Context) {
-	var input model.Question
+	var input struct {
+		Content         string  `json:"content" binding:"required"`
+		ImagePath       *string `json:"image_path"`
+		OcrText         *string `json:"ocr_text"`
+		Answer          string  `json:"answer" binding:"required"`
+		Explanation     *string `json:"explanation"`
+		TypeID          int32   `json:"type_id" binding:"required"`
+		KnowledgePoints []int32 `json:"knowledge_points"`
+	}
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -24,7 +32,6 @@ func CreateQuestion(c *gin.Context) {
 	hasher := sha256.New()
 	hasher.Write([]byte(input.Content))
 	contentHash := hex.EncodeToString(hasher.Sum(nil))
-	input.Hash = contentHash
 
 	// 检查是否已存在相同的哈希值
 	existingQuestion, err := dal.Q.Question.GetQuestionByHash(contentHash)
@@ -35,31 +42,60 @@ func CreateQuestion(c *gin.Context) {
 	}
 
 	// 创建新题目
-	err = dal.Q.Question.CreateQuestion(
-		input.Content,
-		input.ImagePath,
-		input.OcrText,
-		input.Answer,
-		input.Explanation,
-		input.TypeID,
-		input.Hash,
-	)
+	newQuestion := &model.Question{
+		Content:     input.Content,
+		ImagePath:   input.ImagePath,
+		OcrText:     input.OcrText,
+		Answer:      input.Answer,
+		Explanation: input.Explanation,
+		TypeID:      input.TypeID,
+		Hash:        contentHash,
+	}
+
+	// 获取知识点
+	if len(input.KnowledgePoints) > 0 {
+		knowledgePoints, err := dal.Q.KnowledgePoint.Where(dal.Q.KnowledgePoint.ID.In(input.KnowledgePoints...)).Find()
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch knowledge points"})
+			return
+		}
+		newQuestion.KnowledgePoints = make([]model.KnowledgePoint, len(knowledgePoints))
+		for i, kp := range knowledgePoints {
+			newQuestion.KnowledgePoints[i] = *kp
+		}
+	}
+
+	// 创建题目
+	err = dal.Q.Question.Create(newQuestion)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(http.StatusCreated, gin.H{"message": "Question created successfully"})
+	c.JSON(http.StatusCreated, gin.H{"message": "Question created successfully", "id": newQuestion.ID})
 }
 
 // UpdateQuestion 更新题目
 func UpdateQuestion(c *gin.Context) {
 	id, _ := strconv.ParseInt(c.Param("id"), 10, 32)
-	var input model.Question
+	var input struct {
+		Content         string  `json:"content"`
+		ImagePath       *string `json:"image_path"`
+		OcrText         *string `json:"ocr_text"`
+		Answer          string  `json:"answer"`
+		Explanation     *string `json:"explanation"`
+		TypeID          int32   `json:"type_id"`
+		KnowledgePoints []int32 `json:"knowledge_points"`
+	}
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+
+	// 计算内容的哈希值
+	hasher := sha256.New()
+	hasher.Write([]byte(input.Content))
+	contentHash := hex.EncodeToString(hasher.Sum(nil))
 
 	// 更新题目
 	err := dal.Q.Question.UpdateQuestion(
@@ -70,7 +106,7 @@ func UpdateQuestion(c *gin.Context) {
 		input.Answer,
 		input.Explanation,
 		input.TypeID,
-		input.Hash,
+		contentHash,
 	)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -113,12 +149,25 @@ func GetQuestion(c *gin.Context) {
 func ListQuestions(c *gin.Context) {
 	// 获取分页参数
 	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
-	pageSize, _ := strconv.Atoi(c.DefaultQuery("pageSize", "10"))
+	pageSizeStr := c.DefaultQuery("pageSize", "10")
+	pageSize, err := strconv.Atoi(pageSizeStr)
+	if err != nil || pageSize <= 0 {
+		pageSize = 10
+	}
+
+	// 确保 page 的值是有效的
+	if page < 1 {
+		page = 1
+	}
 
 	// 计算偏移量
 	offset := (page - 1) * pageSize
+
 	// 查询题目列表
-	questions, err := dal.Q.Question.Where(dal.Q.Question.ID.Gt(0)).Offset(offset).Limit(pageSize).Find()
+	questions, err := dal.Q.Question.Preload(
+		dal.Q.Question.QuestionType,
+		dal.Q.Question.KnowledgePoints,
+	).Offset(offset).Limit(pageSize).Find()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "获取习题列表失败"})
 		return
@@ -133,9 +182,9 @@ func ListQuestions(c *gin.Context) {
 
 	// 返回结果
 	c.JSON(http.StatusOK, gin.H{
-		"items": questions,
-		"total": total,
-		"page": page,
+		"items":    questions,
+		"total":    total,
+		"page":     page,
 		"pageSize": pageSize,
 	})
 }

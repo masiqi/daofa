@@ -37,6 +37,23 @@ func newKnowledgePoint(db *gorm.DB, opts ...gen.DOOption) knowledgePoint {
 	_knowledgePoint.IsLeaf = field.NewBool(tableName, "is_leaf")
 	_knowledgePoint.CreatedAt = field.NewTime(tableName, "created_at")
 	_knowledgePoint.UpdatedAt = field.NewTime(tableName, "updated_at")
+	_knowledgePoint.Subject = knowledgePointBelongsToSubject{
+		db: db.Session(&gorm.Session{}),
+
+		RelationField: field.NewRelation("Subject", "model.Subject"),
+	}
+
+	_knowledgePoint.Children = knowledgePointHasManyChildren{
+		db: db.Session(&gorm.Session{}),
+
+		RelationField: field.NewRelation("Children", "model.KnowledgePoint"),
+	}
+
+	_knowledgePoint.Parent = knowledgePointBelongsToParent{
+		db: db.Session(&gorm.Session{}),
+
+		RelationField: field.NewRelation("Parent", "model.KnowledgePoint"),
+	}
 
 	_knowledgePoint.fillFieldMap()
 
@@ -55,6 +72,11 @@ type knowledgePoint struct {
 	IsLeaf      field.Bool
 	CreatedAt   field.Time
 	UpdatedAt   field.Time
+	Subject     knowledgePointBelongsToSubject
+
+	Children knowledgePointHasManyChildren
+
+	Parent knowledgePointBelongsToParent
 
 	fieldMap map[string]field.Expr
 }
@@ -95,7 +117,7 @@ func (k *knowledgePoint) GetFieldByName(fieldName string) (field.OrderExpr, bool
 }
 
 func (k *knowledgePoint) fillFieldMap() {
-	k.fieldMap = make(map[string]field.Expr, 8)
+	k.fieldMap = make(map[string]field.Expr, 11)
 	k.fieldMap["id"] = k.ID
 	k.fieldMap["subject_id"] = k.SubjectID
 	k.fieldMap["parent_id"] = k.ParentID
@@ -104,6 +126,7 @@ func (k *knowledgePoint) fillFieldMap() {
 	k.fieldMap["is_leaf"] = k.IsLeaf
 	k.fieldMap["created_at"] = k.CreatedAt
 	k.fieldMap["updated_at"] = k.UpdatedAt
+
 }
 
 func (k knowledgePoint) clone(db *gorm.DB) knowledgePoint {
@@ -114,6 +137,219 @@ func (k knowledgePoint) clone(db *gorm.DB) knowledgePoint {
 func (k knowledgePoint) replaceDB(db *gorm.DB) knowledgePoint {
 	k.knowledgePointDo.ReplaceDB(db)
 	return k
+}
+
+type knowledgePointBelongsToSubject struct {
+	db *gorm.DB
+
+	field.RelationField
+}
+
+func (a knowledgePointBelongsToSubject) Where(conds ...field.Expr) *knowledgePointBelongsToSubject {
+	if len(conds) == 0 {
+		return &a
+	}
+
+	exprs := make([]clause.Expression, 0, len(conds))
+	for _, cond := range conds {
+		exprs = append(exprs, cond.BeCond().(clause.Expression))
+	}
+	a.db = a.db.Clauses(clause.Where{Exprs: exprs})
+	return &a
+}
+
+func (a knowledgePointBelongsToSubject) WithContext(ctx context.Context) *knowledgePointBelongsToSubject {
+	a.db = a.db.WithContext(ctx)
+	return &a
+}
+
+func (a knowledgePointBelongsToSubject) Session(session *gorm.Session) *knowledgePointBelongsToSubject {
+	a.db = a.db.Session(session)
+	return &a
+}
+
+func (a knowledgePointBelongsToSubject) Model(m *model.KnowledgePoint) *knowledgePointBelongsToSubjectTx {
+	return &knowledgePointBelongsToSubjectTx{a.db.Model(m).Association(a.Name())}
+}
+
+type knowledgePointBelongsToSubjectTx struct{ tx *gorm.Association }
+
+func (a knowledgePointBelongsToSubjectTx) Find() (result *model.Subject, err error) {
+	return result, a.tx.Find(&result)
+}
+
+func (a knowledgePointBelongsToSubjectTx) Append(values ...*model.Subject) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Append(targetValues...)
+}
+
+func (a knowledgePointBelongsToSubjectTx) Replace(values ...*model.Subject) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Replace(targetValues...)
+}
+
+func (a knowledgePointBelongsToSubjectTx) Delete(values ...*model.Subject) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Delete(targetValues...)
+}
+
+func (a knowledgePointBelongsToSubjectTx) Clear() error {
+	return a.tx.Clear()
+}
+
+func (a knowledgePointBelongsToSubjectTx) Count() int64 {
+	return a.tx.Count()
+}
+
+type knowledgePointHasManyChildren struct {
+	db *gorm.DB
+
+	field.RelationField
+}
+
+func (a knowledgePointHasManyChildren) Where(conds ...field.Expr) *knowledgePointHasManyChildren {
+	if len(conds) == 0 {
+		return &a
+	}
+
+	exprs := make([]clause.Expression, 0, len(conds))
+	for _, cond := range conds {
+		exprs = append(exprs, cond.BeCond().(clause.Expression))
+	}
+	a.db = a.db.Clauses(clause.Where{Exprs: exprs})
+	return &a
+}
+
+func (a knowledgePointHasManyChildren) WithContext(ctx context.Context) *knowledgePointHasManyChildren {
+	a.db = a.db.WithContext(ctx)
+	return &a
+}
+
+func (a knowledgePointHasManyChildren) Session(session *gorm.Session) *knowledgePointHasManyChildren {
+	a.db = a.db.Session(session)
+	return &a
+}
+
+func (a knowledgePointHasManyChildren) Model(m *model.KnowledgePoint) *knowledgePointHasManyChildrenTx {
+	return &knowledgePointHasManyChildrenTx{a.db.Model(m).Association(a.Name())}
+}
+
+type knowledgePointHasManyChildrenTx struct{ tx *gorm.Association }
+
+func (a knowledgePointHasManyChildrenTx) Find() (result []*model.KnowledgePoint, err error) {
+	return result, a.tx.Find(&result)
+}
+
+func (a knowledgePointHasManyChildrenTx) Append(values ...*model.KnowledgePoint) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Append(targetValues...)
+}
+
+func (a knowledgePointHasManyChildrenTx) Replace(values ...*model.KnowledgePoint) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Replace(targetValues...)
+}
+
+func (a knowledgePointHasManyChildrenTx) Delete(values ...*model.KnowledgePoint) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Delete(targetValues...)
+}
+
+func (a knowledgePointHasManyChildrenTx) Clear() error {
+	return a.tx.Clear()
+}
+
+func (a knowledgePointHasManyChildrenTx) Count() int64 {
+	return a.tx.Count()
+}
+
+type knowledgePointBelongsToParent struct {
+	db *gorm.DB
+
+	field.RelationField
+}
+
+func (a knowledgePointBelongsToParent) Where(conds ...field.Expr) *knowledgePointBelongsToParent {
+	if len(conds) == 0 {
+		return &a
+	}
+
+	exprs := make([]clause.Expression, 0, len(conds))
+	for _, cond := range conds {
+		exprs = append(exprs, cond.BeCond().(clause.Expression))
+	}
+	a.db = a.db.Clauses(clause.Where{Exprs: exprs})
+	return &a
+}
+
+func (a knowledgePointBelongsToParent) WithContext(ctx context.Context) *knowledgePointBelongsToParent {
+	a.db = a.db.WithContext(ctx)
+	return &a
+}
+
+func (a knowledgePointBelongsToParent) Session(session *gorm.Session) *knowledgePointBelongsToParent {
+	a.db = a.db.Session(session)
+	return &a
+}
+
+func (a knowledgePointBelongsToParent) Model(m *model.KnowledgePoint) *knowledgePointBelongsToParentTx {
+	return &knowledgePointBelongsToParentTx{a.db.Model(m).Association(a.Name())}
+}
+
+type knowledgePointBelongsToParentTx struct{ tx *gorm.Association }
+
+func (a knowledgePointBelongsToParentTx) Find() (result *model.KnowledgePoint, err error) {
+	return result, a.tx.Find(&result)
+}
+
+func (a knowledgePointBelongsToParentTx) Append(values ...*model.KnowledgePoint) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Append(targetValues...)
+}
+
+func (a knowledgePointBelongsToParentTx) Replace(values ...*model.KnowledgePoint) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Replace(targetValues...)
+}
+
+func (a knowledgePointBelongsToParentTx) Delete(values ...*model.KnowledgePoint) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Delete(targetValues...)
+}
+
+func (a knowledgePointBelongsToParentTx) Clear() error {
+	return a.tx.Clear()
+}
+
+func (a knowledgePointBelongsToParentTx) Count() int64 {
+	return a.tx.Count()
 }
 
 type knowledgePointDo struct{ gen.DO }
@@ -182,12 +418,15 @@ type IKnowledgePointDo interface {
 	ListKnowledgePointsBySubject(subjectID int32, offset int, limit int) (result []*model.KnowledgePoint, err error)
 	GetChildKnowledgePoints(parentID int32) (result []*model.KnowledgePoint, err error)
 	GetRootKnowledgePoints(subjectID int32) (result []*model.KnowledgePoint, err error)
-	SearchKnowledgePoints(subjectID int32, parentID *int32, name string, isLeaf *bool, level int32, offset int, limit int) (result []*model.KnowledgePoint, err error)
-	CountKnowledgePoints(subjectID int32, parentID *int32, name string, isLeaf *bool, level int32) (result int64, err error)
-	CreateKnowledgePoint(subjectID int32, parentID *int32, name string, description *string, isLeaf bool, level int32) (err error)
-	UpdateKnowledgePoint(id int32, subjectID int32, parentID *int32, name string, description *string, isLeaf *bool, level int32) (err error)
+	SearchKnowledgePoints(subjectID int32, parentID *int32, name string, isLeaf *bool, offset int, limit int) (result []*model.KnowledgePoint, err error)
+	CountKnowledgePoints(subjectID int32, parentID *int32, name string, isLeaf *bool) (result int64, err error)
+	ListKnowledgePointsWithPagination(offset int, limit int) (result []*model.KnowledgePoint, err error)
+	CreateKnowledgePoint(subjectID int32, parentID *int32, name string, description *string, isLeaf bool) (err error)
+	UpdateKnowledgePoint(id int32, subjectID int32, parentID *int32, name string, description *string, isLeaf *bool) (err error)
 	DeleteKnowledgePoint(id int32) (err error)
 	GetKnowledgePointByName(name string) (result *model.KnowledgePoint, err error)
+	GetKnowledgePointByNameAndSubject(name string, subjectID int32) (result *model.KnowledgePoint, err error)
+	CreateKnowledgePointWithSubject(subjectID int32, parentID *int32, name string, description *string, isLeaf bool) (err error)
 }
 
 // SELECT * FROM @@table WHERE id=@id LIMIT 1
@@ -259,11 +498,10 @@ func (k knowledgePointDo) GetRootKnowledgePoints(subjectID int32) (result []*mod
 //	  {{if parentID != nil}}AND parent_id=@parentID{{end}}
 //	  {{if name != ""}}AND name LIKE CONCAT('%', @name, '%'){{end}}
 //	  {{if isLeaf != nil}}AND is_leaf=@isLeaf{{end}}
-//	  {{if level != 0}}AND level=@level{{end}}
 //	{{end}}
 //
 // ORDER BY id LIMIT @limit OFFSET @offset
-func (k knowledgePointDo) SearchKnowledgePoints(subjectID int32, parentID *int32, name string, isLeaf *bool, level int32, offset int, limit int) (result []*model.KnowledgePoint, err error) {
+func (k knowledgePointDo) SearchKnowledgePoints(subjectID int32, parentID *int32, name string, isLeaf *bool, offset int, limit int) (result []*model.KnowledgePoint, err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder
@@ -285,10 +523,6 @@ func (k knowledgePointDo) SearchKnowledgePoints(subjectID int32, parentID *int32
 		params = append(params, isLeaf)
 		whereSQL0.WriteString("AND is_leaf=? ")
 	}
-	if level != 0 {
-		params = append(params, level)
-		whereSQL0.WriteString("AND level=? ")
-	}
 	helper.JoinWhereBuilder(&generateSQL, whereSQL0)
 	params = append(params, limit)
 	params = append(params, offset)
@@ -308,9 +542,8 @@ func (k knowledgePointDo) SearchKnowledgePoints(subjectID int32, parentID *int32
 //	  {{if parentID != nil}}AND parent_id=@parentID{{end}}
 //	  {{if name != ""}}AND name LIKE CONCAT('%', @name, '%'){{end}}
 //	  {{if isLeaf != nil}}AND is_leaf=@isLeaf{{end}}
-//	  {{if level != 0}}AND level=@level{{end}}
 //	{{end}}
-func (k knowledgePointDo) CountKnowledgePoints(subjectID int32, parentID *int32, name string, isLeaf *bool, level int32) (result int64, err error) {
+func (k knowledgePointDo) CountKnowledgePoints(subjectID int32, parentID *int32, name string, isLeaf *bool) (result int64, err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder
@@ -332,10 +565,6 @@ func (k knowledgePointDo) CountKnowledgePoints(subjectID int32, parentID *int32,
 		params = append(params, isLeaf)
 		whereSQL0.WriteString("AND is_leaf=? ")
 	}
-	if level != 0 {
-		params = append(params, level)
-		whereSQL0.WriteString("AND level=? ")
-	}
 	helper.JoinWhereBuilder(&generateSQL, whereSQL0)
 
 	var executeSQL *gorm.DB
@@ -345,9 +574,25 @@ func (k knowledgePointDo) CountKnowledgePoints(subjectID int32, parentID *int32,
 	return
 }
 
-// INSERT INTO @@table (subject_id, parent_id, name, description, is_leaf, level)
-// VALUES (@subjectID, @parentID, @name, @description, @isLeaf, @level)
-func (k knowledgePointDo) CreateKnowledgePoint(subjectID int32, parentID *int32, name string, description *string, isLeaf bool, level int32) (err error) {
+// SELECT * FROM @@table ORDER BY id LIMIT @limit OFFSET @offset
+func (k knowledgePointDo) ListKnowledgePointsWithPagination(offset int, limit int) (result []*model.KnowledgePoint, err error) {
+	var params []interface{}
+
+	var generateSQL strings.Builder
+	params = append(params, limit)
+	params = append(params, offset)
+	generateSQL.WriteString("SELECT * FROM knowledge_point ORDER BY id LIMIT ? OFFSET ? ")
+
+	var executeSQL *gorm.DB
+	executeSQL = k.UnderlyingDB().Raw(generateSQL.String(), params...).Find(&result) // ignore_security_alert
+	err = executeSQL.Error
+
+	return
+}
+
+// INSERT INTO @@table (subject_id, parent_id, name, description, is_leaf )
+// VALUES (@subjectID, @parentID, @name, @description, @isLeaf )
+func (k knowledgePointDo) CreateKnowledgePoint(subjectID int32, parentID *int32, name string, description *string, isLeaf bool) (err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder
@@ -356,8 +601,7 @@ func (k knowledgePointDo) CreateKnowledgePoint(subjectID int32, parentID *int32,
 	params = append(params, name)
 	params = append(params, description)
 	params = append(params, isLeaf)
-	params = append(params, level)
-	generateSQL.WriteString("INSERT INTO knowledge_point (subject_id, parent_id, name, description, is_leaf, level) VALUES (?, ?, ?, ?, ?, ?) ")
+	generateSQL.WriteString("INSERT INTO knowledge_point (subject_id, parent_id, name, description, is_leaf ) VALUES (?, ?, ?, ?, ? ) ")
 
 	var executeSQL *gorm.DB
 	executeSQL = k.UnderlyingDB().Exec(generateSQL.String(), params...) // ignore_security_alert
@@ -373,10 +617,9 @@ func (k knowledgePointDo) CreateKnowledgePoint(subjectID int32, parentID *int32,
 //	{{if name != ""}}name=@name,{{end}}
 //	{{if description != nil}}description=@description,{{end}}
 //	{{if isLeaf != nil}}is_leaf=@isLeaf,{{end}}
-//	{{if level != 0}}level=@level{{end}}
 //
 // WHERE id=@id
-func (k knowledgePointDo) UpdateKnowledgePoint(id int32, subjectID int32, parentID *int32, name string, description *string, isLeaf *bool, level int32) (err error) {
+func (k knowledgePointDo) UpdateKnowledgePoint(id int32, subjectID int32, parentID *int32, name string, description *string, isLeaf *bool) (err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder
@@ -400,10 +643,6 @@ func (k knowledgePointDo) UpdateKnowledgePoint(id int32, subjectID int32, parent
 	if isLeaf != nil {
 		params = append(params, isLeaf)
 		generateSQL.WriteString("is_leaf=?, ")
-	}
-	if level != 0 {
-		params = append(params, level)
-		generateSQL.WriteString("level=? ")
 	}
 	params = append(params, id)
 	generateSQL.WriteString("WHERE id=? ")
@@ -440,6 +679,42 @@ func (k knowledgePointDo) GetKnowledgePointByName(name string) (result *model.Kn
 
 	var executeSQL *gorm.DB
 	executeSQL = k.UnderlyingDB().Raw(generateSQL.String(), params...).Take(&result) // ignore_security_alert
+	err = executeSQL.Error
+
+	return
+}
+
+// SELECT * FROM @@table WHERE subject_id = @subjectID AND name = @name LIMIT 1
+func (k knowledgePointDo) GetKnowledgePointByNameAndSubject(name string, subjectID int32) (result *model.KnowledgePoint, err error) {
+	var params []interface{}
+
+	var generateSQL strings.Builder
+	params = append(params, subjectID)
+	params = append(params, name)
+	generateSQL.WriteString("SELECT * FROM knowledge_point WHERE subject_id = ? AND name = ? LIMIT 1 ")
+
+	var executeSQL *gorm.DB
+	executeSQL = k.UnderlyingDB().Raw(generateSQL.String(), params...).Take(&result) // ignore_security_alert
+	err = executeSQL.Error
+
+	return
+}
+
+// INSERT INTO @@table (subject_id, parent_id, name, description, is_leaf)
+// VALUES (@subjectID, @parentID, @name, @description, @isLeaf)
+func (k knowledgePointDo) CreateKnowledgePointWithSubject(subjectID int32, parentID *int32, name string, description *string, isLeaf bool) (err error) {
+	var params []interface{}
+
+	var generateSQL strings.Builder
+	params = append(params, subjectID)
+	params = append(params, parentID)
+	params = append(params, name)
+	params = append(params, description)
+	params = append(params, isLeaf)
+	generateSQL.WriteString("INSERT INTO knowledge_point (subject_id, parent_id, name, description, is_leaf) VALUES (?, ?, ?, ?, ?) ")
+
+	var executeSQL *gorm.DB
+	executeSQL = k.UnderlyingDB().Exec(generateSQL.String(), params...) // ignore_security_alert
 	err = executeSQL.Error
 
 	return

@@ -163,10 +163,11 @@ type IQuestionKnowledgePointDo interface {
 
 	CreateQuestionKnowledgePoint(questionID int32, knowledgePointID int32) (err error)
 	DeleteQuestionKnowledgePoint(questionID int32, knowledgePointID int32) (err error)
-	GetKnowledgePointsByQuestionID(questionID int32) (result []*model.QuestionKnowledgePoint, err error)
-	GetQuestionsByKnowledgePointID(knowledgePointID int32) (result []*model.QuestionKnowledgePoint, err error)
+	GetKnowledgePointsByQuestionIDWithPagination(questionID int32, offset int, limit int) (result []*model.QuestionKnowledgePoint, err error)
 	CountKnowledgePointsByQuestionID(questionID int32) (result int64, err error)
+	GetQuestionsByKnowledgePointIDWithPagination(knowledgePointID int32, offset int, limit int) (result []*model.QuestionKnowledgePoint, err error)
 	CountQuestionsByKnowledgePointID(knowledgePointID int32) (result int64, err error)
+	GetKnowledgePointsByQuestionID(questionID int32) (result []*model.QuestionKnowledgePoint, err error)
 }
 
 // INSERT INTO @@table (question_id, knowledge_point_id) VALUES (@questionID, @knowledgePointID)
@@ -201,28 +202,15 @@ func (q questionKnowledgePointDo) DeleteQuestionKnowledgePoint(questionID int32,
 	return
 }
 
-// SELECT * FROM @@table WHERE question_id=@questionID
-func (q questionKnowledgePointDo) GetKnowledgePointsByQuestionID(questionID int32) (result []*model.QuestionKnowledgePoint, err error) {
+// SELECT * FROM @@table WHERE question_id=@questionID LIMIT @limit OFFSET @offset
+func (q questionKnowledgePointDo) GetKnowledgePointsByQuestionIDWithPagination(questionID int32, offset int, limit int) (result []*model.QuestionKnowledgePoint, err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder
 	params = append(params, questionID)
-	generateSQL.WriteString("SELECT * FROM question_knowledge_point WHERE question_id=? ")
-
-	var executeSQL *gorm.DB
-	executeSQL = q.UnderlyingDB().Raw(generateSQL.String(), params...).Find(&result) // ignore_security_alert
-	err = executeSQL.Error
-
-	return
-}
-
-// SELECT * FROM @@table WHERE knowledge_point_id=@knowledgePointID
-func (q questionKnowledgePointDo) GetQuestionsByKnowledgePointID(knowledgePointID int32) (result []*model.QuestionKnowledgePoint, err error) {
-	var params []interface{}
-
-	var generateSQL strings.Builder
-	params = append(params, knowledgePointID)
-	generateSQL.WriteString("SELECT * FROM question_knowledge_point WHERE knowledge_point_id=? ")
+	params = append(params, limit)
+	params = append(params, offset)
+	generateSQL.WriteString("SELECT * FROM question_knowledge_point WHERE question_id=? LIMIT ? OFFSET ? ")
 
 	var executeSQL *gorm.DB
 	executeSQL = q.UnderlyingDB().Raw(generateSQL.String(), params...).Find(&result) // ignore_security_alert
@@ -246,6 +234,23 @@ func (q questionKnowledgePointDo) CountKnowledgePointsByQuestionID(questionID in
 	return
 }
 
+// SELECT * FROM @@table WHERE knowledge_point_id=@knowledgePointID LIMIT @limit OFFSET @offset
+func (q questionKnowledgePointDo) GetQuestionsByKnowledgePointIDWithPagination(knowledgePointID int32, offset int, limit int) (result []*model.QuestionKnowledgePoint, err error) {
+	var params []interface{}
+
+	var generateSQL strings.Builder
+	params = append(params, knowledgePointID)
+	params = append(params, limit)
+	params = append(params, offset)
+	generateSQL.WriteString("SELECT * FROM question_knowledge_point WHERE knowledge_point_id=? LIMIT ? OFFSET ? ")
+
+	var executeSQL *gorm.DB
+	executeSQL = q.UnderlyingDB().Raw(generateSQL.String(), params...).Find(&result) // ignore_security_alert
+	err = executeSQL.Error
+
+	return
+}
+
 // SELECT COUNT(*) FROM @@table WHERE knowledge_point_id=@knowledgePointID
 func (q questionKnowledgePointDo) CountQuestionsByKnowledgePointID(knowledgePointID int32) (result int64, err error) {
 	var params []interface{}
@@ -256,6 +261,23 @@ func (q questionKnowledgePointDo) CountQuestionsByKnowledgePointID(knowledgePoin
 
 	var executeSQL *gorm.DB
 	executeSQL = q.UnderlyingDB().Raw(generateSQL.String(), params...).Take(&result) // ignore_security_alert
+	err = executeSQL.Error
+
+	return
+}
+
+// SELECT k.* FROM @@table qkp
+// JOIN knowledge_point k ON qkp.knowledge_point_id = k.id
+// WHERE qkp.question_id = @questionID
+func (q questionKnowledgePointDo) GetKnowledgePointsByQuestionID(questionID int32) (result []*model.QuestionKnowledgePoint, err error) {
+	var params []interface{}
+
+	var generateSQL strings.Builder
+	params = append(params, questionID)
+	generateSQL.WriteString("SELECT k.* FROM question_knowledge_point qkp JOIN knowledge_point k ON qkp.knowledge_point_id = k.id WHERE qkp.question_id = ? ")
+
+	var executeSQL *gorm.DB
+	executeSQL = q.UnderlyingDB().Raw(generateSQL.String(), params...).Find(&result) // ignore_security_alert
 	err = executeSQL.Error
 
 	return

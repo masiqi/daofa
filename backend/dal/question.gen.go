@@ -39,6 +39,32 @@ func newQuestion(db *gorm.DB, opts ...gen.DOOption) question {
 	_question.Hash = field.NewString(tableName, "hash")
 	_question.CreatedAt = field.NewTime(tableName, "created_at")
 	_question.UpdatedAt = field.NewTime(tableName, "updated_at")
+	_question.QuestionType = questionBelongsToQuestionType{
+		db: db.Session(&gorm.Session{}),
+
+		RelationField: field.NewRelation("QuestionType", "model.QuestionType"),
+	}
+
+	_question.KnowledgePoints = questionManyToManyKnowledgePoints{
+		db: db.Session(&gorm.Session{}),
+
+		RelationField: field.NewRelation("KnowledgePoints", "model.KnowledgePoint"),
+		Subject: struct {
+			field.RelationField
+		}{
+			RelationField: field.NewRelation("KnowledgePoints.Subject", "model.Subject"),
+		},
+		Children: struct {
+			field.RelationField
+		}{
+			RelationField: field.NewRelation("KnowledgePoints.Children", "model.KnowledgePoint"),
+		},
+		Parent: struct {
+			field.RelationField
+		}{
+			RelationField: field.NewRelation("KnowledgePoints.Parent", "model.KnowledgePoint"),
+		},
+	}
 
 	_question.fillFieldMap()
 
@@ -48,17 +74,20 @@ func newQuestion(db *gorm.DB, opts ...gen.DOOption) question {
 type question struct {
 	questionDo
 
-	ALL         field.Asterisk
-	ID          field.Int32
-	Content     field.String
-	ImagePath   field.String
-	OcrText     field.String
-	Answer      field.String
-	Explanation field.String
-	TypeID      field.Int32
-	Hash        field.String
-	CreatedAt   field.Time
-	UpdatedAt   field.Time
+	ALL          field.Asterisk
+	ID           field.Int32
+	Content      field.String
+	ImagePath    field.String
+	OcrText      field.String
+	Answer       field.String
+	Explanation  field.String
+	TypeID       field.Int32
+	Hash         field.String
+	CreatedAt    field.Time
+	UpdatedAt    field.Time
+	QuestionType questionBelongsToQuestionType
+
+	KnowledgePoints questionManyToManyKnowledgePoints
 
 	fieldMap map[string]field.Expr
 }
@@ -101,7 +130,7 @@ func (q *question) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (q *question) fillFieldMap() {
-	q.fieldMap = make(map[string]field.Expr, 10)
+	q.fieldMap = make(map[string]field.Expr, 12)
 	q.fieldMap["id"] = q.ID
 	q.fieldMap["content"] = q.Content
 	q.fieldMap["image_path"] = q.ImagePath
@@ -112,6 +141,7 @@ func (q *question) fillFieldMap() {
 	q.fieldMap["hash"] = q.Hash
 	q.fieldMap["created_at"] = q.CreatedAt
 	q.fieldMap["updated_at"] = q.UpdatedAt
+
 }
 
 func (q question) clone(db *gorm.DB) question {
@@ -122,6 +152,158 @@ func (q question) clone(db *gorm.DB) question {
 func (q question) replaceDB(db *gorm.DB) question {
 	q.questionDo.ReplaceDB(db)
 	return q
+}
+
+type questionBelongsToQuestionType struct {
+	db *gorm.DB
+
+	field.RelationField
+}
+
+func (a questionBelongsToQuestionType) Where(conds ...field.Expr) *questionBelongsToQuestionType {
+	if len(conds) == 0 {
+		return &a
+	}
+
+	exprs := make([]clause.Expression, 0, len(conds))
+	for _, cond := range conds {
+		exprs = append(exprs, cond.BeCond().(clause.Expression))
+	}
+	a.db = a.db.Clauses(clause.Where{Exprs: exprs})
+	return &a
+}
+
+func (a questionBelongsToQuestionType) WithContext(ctx context.Context) *questionBelongsToQuestionType {
+	a.db = a.db.WithContext(ctx)
+	return &a
+}
+
+func (a questionBelongsToQuestionType) Session(session *gorm.Session) *questionBelongsToQuestionType {
+	a.db = a.db.Session(session)
+	return &a
+}
+
+func (a questionBelongsToQuestionType) Model(m *model.Question) *questionBelongsToQuestionTypeTx {
+	return &questionBelongsToQuestionTypeTx{a.db.Model(m).Association(a.Name())}
+}
+
+type questionBelongsToQuestionTypeTx struct{ tx *gorm.Association }
+
+func (a questionBelongsToQuestionTypeTx) Find() (result *model.QuestionType, err error) {
+	return result, a.tx.Find(&result)
+}
+
+func (a questionBelongsToQuestionTypeTx) Append(values ...*model.QuestionType) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Append(targetValues...)
+}
+
+func (a questionBelongsToQuestionTypeTx) Replace(values ...*model.QuestionType) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Replace(targetValues...)
+}
+
+func (a questionBelongsToQuestionTypeTx) Delete(values ...*model.QuestionType) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Delete(targetValues...)
+}
+
+func (a questionBelongsToQuestionTypeTx) Clear() error {
+	return a.tx.Clear()
+}
+
+func (a questionBelongsToQuestionTypeTx) Count() int64 {
+	return a.tx.Count()
+}
+
+type questionManyToManyKnowledgePoints struct {
+	db *gorm.DB
+
+	field.RelationField
+
+	Subject struct {
+		field.RelationField
+	}
+	Children struct {
+		field.RelationField
+	}
+	Parent struct {
+		field.RelationField
+	}
+}
+
+func (a questionManyToManyKnowledgePoints) Where(conds ...field.Expr) *questionManyToManyKnowledgePoints {
+	if len(conds) == 0 {
+		return &a
+	}
+
+	exprs := make([]clause.Expression, 0, len(conds))
+	for _, cond := range conds {
+		exprs = append(exprs, cond.BeCond().(clause.Expression))
+	}
+	a.db = a.db.Clauses(clause.Where{Exprs: exprs})
+	return &a
+}
+
+func (a questionManyToManyKnowledgePoints) WithContext(ctx context.Context) *questionManyToManyKnowledgePoints {
+	a.db = a.db.WithContext(ctx)
+	return &a
+}
+
+func (a questionManyToManyKnowledgePoints) Session(session *gorm.Session) *questionManyToManyKnowledgePoints {
+	a.db = a.db.Session(session)
+	return &a
+}
+
+func (a questionManyToManyKnowledgePoints) Model(m *model.Question) *questionManyToManyKnowledgePointsTx {
+	return &questionManyToManyKnowledgePointsTx{a.db.Model(m).Association(a.Name())}
+}
+
+type questionManyToManyKnowledgePointsTx struct{ tx *gorm.Association }
+
+func (a questionManyToManyKnowledgePointsTx) Find() (result []*model.KnowledgePoint, err error) {
+	return result, a.tx.Find(&result)
+}
+
+func (a questionManyToManyKnowledgePointsTx) Append(values ...*model.KnowledgePoint) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Append(targetValues...)
+}
+
+func (a questionManyToManyKnowledgePointsTx) Replace(values ...*model.KnowledgePoint) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Replace(targetValues...)
+}
+
+func (a questionManyToManyKnowledgePointsTx) Delete(values ...*model.KnowledgePoint) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Delete(targetValues...)
+}
+
+func (a questionManyToManyKnowledgePointsTx) Clear() error {
+	return a.tx.Clear()
+}
+
+func (a questionManyToManyKnowledgePointsTx) Count() int64 {
+	return a.tx.Count()
 }
 
 type questionDo struct{ gen.DO }

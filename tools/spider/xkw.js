@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         组卷网题目抓取
 // @namespace    http://tampermonkey.net/
-// @version      0.3
-// @description  从组卷网抓取题目并下载,去除无用HTML标签
-// @match        https://zujuan.xkw.com/*
+// @version      0.4
+// @description  抓取组卷网题目,包括题目类型和相关知识点
+// @match        https://www.zujuan.com/*
 // @grant        none
 // ==/UserScript==
 
@@ -11,31 +11,13 @@
     'use strict';
 
     function cleanHtml(html) {
-        // 创建一个临时的div元素
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = html;
-
-        // 移除所有字体相关的标签,包括span
-        const tagsToRemove = ['font', 'b', 'strong', 'i', 'em', 'u', 'strike', 's', 'span'];
-        tagsToRemove.forEach(tag => {
-            const elements = tempDiv.getElementsByTagName(tag);
-            for (let i = elements.length - 1; i >= 0; i--) {
-                const parent = elements[i].parentNode;
-                while (elements[i].firstChild) {
-                    parent.insertBefore(elements[i].firstChild, elements[i]);
-                }
-                parent.removeChild(elements[i]);
-            }
-        });
-
-        // 移除所有样式属性
-        const allElements = tempDiv.getElementsByTagName('*');
+        const allElements = tempDiv.getElementsByTagName("*");
         for (let i = 0; i < allElements.length; i++) {
             allElements[i].removeAttribute('style');
             allElements[i].removeAttribute('class');
         }
-
-        // 返回清理后的HTML
         return tempDiv.innerHTML;
     }
 
@@ -49,6 +31,12 @@
             const answerElement = element.querySelector('.exam-item__opt .item.answer img');
             const parseElement = element.querySelector('.exam-item__opt .item.parse img');
 
+            // 获取题目类型
+            const questionType = element.querySelector('.msg-box .left-msg .addi-info:first-child .info-cnt')?.textContent.trim() || '';
+
+            // 获取相关知识点
+            const knowledgePoints = Array.from(element.querySelectorAll('.knowledge-list .knowledge-item')).map(item => item.textContent.trim());
+
             const answerImageSrc = answerElement ? answerElement.src : '';
             const parseImageSrc = parseElement ? parseElement.src : '';
 
@@ -56,7 +44,9 @@
                 id: questionId,
                 question: cleanHtml(questionText),
                 answerImage: answerImageSrc,
-                parseImage: parseImageSrc
+                parseImage: parseImageSrc,
+                type: questionType,
+                knowledgePoints: knowledgePoints
             });
         });
 

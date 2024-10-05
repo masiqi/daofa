@@ -15,6 +15,9 @@ import os
 from paddleocr import PaddleOCR
 import paddle
 import uvicorn
+from urllib.parse import quote
+import uuid
+import numpy as np
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -137,16 +140,57 @@ async def ocr(
             contents = await file.read()
             image = Image.open(io.BytesIO(contents))
         elif url:
-            response = requests.get(url)
-            image = Image.open(io.BytesIO(response.content))
+            # 对URL进行编码
+            encoded_url = quote(url, safe=':/?=&')
+            print(f"编码后的URL: {encoded_url}")
+            
+            # 设置请求头
+            headers = {
+                'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+                'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8',
+                'cache-control': 'no-cache',
+                'cookie': 'xkw-device-id=3E125481C664E0ACDABB100C68179702; UT1=ut-1246539-x2R-Y-6A59NG0A',
+                'pragma': 'no-cache',
+                'sec-ch-ua': '"Google Chrome";v="129", "Not=A?Brand";v="8", "Chromium";v="129"',
+                'sec-ch-ua-mobile': '?0',
+                'sec-ch-ua-platform': '"macOS"',
+                'sec-fetch-dest': 'document',
+                'sec-fetch-mode': 'navigate',
+                'sec-fetch-site': 'none',
+                'sec-fetch-user': '?1',
+                'upgrade-insecure-requests': '1',
+                'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36'
+            }
+            
+            # 发送请求
+            response = requests.get(encoded_url, headers=headers, allow_redirects=True)
+            print(f"响应状态码: {response.status_code}")
+            print(f"响应头: {response.headers}")
+            
+            if response.status_code != 200:
+                return {"error": f"无法获取图像，状态码: {response.status_code}"}
+            
+            # 生成唯一的文件名
+            file_name = f"/tmp/image_{uuid.uuid4().hex}.jpg"
+            
+            # 保存响应内容到文件
+            with open(file_name, "wb") as f:
+                f.write(response.content)
+            
+            print(f"图像已保存到: {file_name}")
+            
+            # 尝试打开保存的文件
+            try:
+                image = Image.open(file_name)
+            except Exception as e:
+                return {"error": f"无法打开保存的图像文件: {str(e)}"}
         else:
-            return {"error": "Either file or URL must be provided"}
+            return {"error": "必须提供文件或URL"}
 
         logger.info(f"处理的图像大小: {image.size}, 模式: {image.mode}, 格式: {image.format}")
         
         # 创建一个目录来保存处理后的图像
         os.makedirs("processed_images", exist_ok=True)
-        save_path = f"processed_images/processed_image.png"
         
         # 处理图像格式
         image = process_image(image)

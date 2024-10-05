@@ -108,7 +108,7 @@ func insertKnowledgePoints(points []KnowledgePointJSON, parentID *int32) {
 			SubjectID: 1, // 假设所有知识点属于同一个学科,实际使用时可能需要调整
 		}
 
-		err := dal.Q.KnowledgePoint.CreateKnowledgePoint(newPoint.SubjectID, newPoint.ParentID, newPoint.Name, nil, newPoint.IsLeaf, 0) // 添加了 level 参数，暂时设为 0
+		err := dal.Q.KnowledgePoint.CreateKnowledgePoint(newPoint.SubjectID, newPoint.ParentID, newPoint.Name, nil, newPoint.IsLeaf)
 		if err != nil {
 			log.Printf("插入知识点失败: %v", err)
 			continue
@@ -183,6 +183,7 @@ func runServer() {
 		admin.POST("/knowledge-points", handler.CreateKnowledgePoint)
 		admin.PUT("/knowledge-points/:id", handler.UpdateKnowledgePoint)
 		admin.DELETE("/knowledge-points/:id", handler.DeleteKnowledgePoint)
+		admin.GET("/knowledge-points/:id", handler.GetKnowledgePoint) // 新增这一行
 
 		// 管理员相关API
 		admin.GET("/admins", handler.GetAdmins)
@@ -205,9 +206,8 @@ func runServer() {
 		// 题目知识点关联的路由
 		admin.POST("/questions/:id/knowledge-points", handler.AddQuestionKnowledgePoint)
 		admin.DELETE("/questions/:id/knowledge-points/:knowledge_point_id", handler.RemoveQuestionKnowledgePoint)
-		admin.GET("/questions/:id/knowledge-points", handler.GetQuestionKnowledgePoints)
 
-		// 题目类型关的路由
+		// 题目类型关路由
 		admin.POST("/question-types", handler.CreateQuestionType)
 		admin.GET("/question-types", handler.ListQuestionTypes)
 		admin.GET("/question-types/:id", handler.GetQuestionType)

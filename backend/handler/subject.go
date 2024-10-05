@@ -34,9 +34,9 @@ func GetSubjects(c *gin.Context) {
 
 	// 返回结果
 	c.JSON(http.StatusOK, gin.H{
-		"items": subjects,
-		"total": total,
-		"page": page,
+		"items":    subjects,
+		"total":    total,
+		"page":     page,
 		"pageSize": pageSize,
 	})
 }
@@ -89,4 +89,45 @@ func DeleteSubject(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"status": 0, "msg": "科目删除成功"})
+}
+
+// ListSubjects 列出所有科目（分页）
+func ListSubjects(c *gin.Context) {
+	// 获取分页参数
+	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
+	pageSizeStr := c.DefaultQuery("pageSize", "10")
+	pageSize, err := strconv.Atoi(pageSizeStr)
+	if err != nil || pageSize <= 0 {
+		pageSize = 10
+	}
+
+	// 确保 page 的值是有效的
+	if page < 1 {
+		page = 1
+	}
+
+	// 计算偏移量
+	offset := (page - 1) * pageSize
+
+	// 查询科目列表
+	subjects, err := dal.Q.Subject.Offset(offset).Limit(pageSize).Find()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "获取科目列表失败"})
+		return
+	}
+
+	// 获取总数
+	total, err := dal.Q.Subject.Count()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "获取科目总数失败"})
+		return
+	}
+
+	// 返回结果
+	c.JSON(http.StatusOK, gin.H{
+		"items":    subjects,
+		"total":    total,
+		"page":     page,
+		"pageSize": pageSize,
+	})
 }
