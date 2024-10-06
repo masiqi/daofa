@@ -3,6 +3,7 @@ package queue
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 
 	"github.com/go-redis/redis/v8"
 )
@@ -13,7 +14,7 @@ func InitRedis(client *redis.Client) {
 	redisClient = client
 }
 
-const questionQueueKey = "pending_questions"
+const QuestionQueueKey = "pending_questions"
 
 type QuestionItem struct {
 	ID              string   `json:"id"`
@@ -31,11 +32,11 @@ func EnqueueQuestion(ctx context.Context, question QuestionItem) error {
 	if err != nil {
 		return err
 	}
-	return redisClient.RPush(ctx, questionQueueKey, data).Err()
+	return redisClient.RPush(ctx, QuestionQueueKey, data).Err()
 }
 
 func DequeueQuestion(ctx context.Context) (*QuestionItem, error) {
-	data, err := redisClient.LPop(ctx, questionQueueKey).Bytes()
+	data, err := redisClient.LPop(ctx, QuestionQueueKey).Bytes()
 	if err != nil {
 		return nil, err
 	}
@@ -45,11 +46,30 @@ func DequeueQuestion(ctx context.Context) (*QuestionItem, error) {
 }
 
 func GetQueueStatus(ctx context.Context) (map[string]interface{}, error) {
-	length, err := redisClient.LLen(ctx, questionQueueKey).Result()
+	length, err := redisClient.LLen(ctx, QuestionQueueKey).Result()
 	if err != nil {
 		return nil, err
 	}
 	return map[string]interface{}{
 		"queue_length": length,
 	}, nil
+}
+
+func BLPOPQuestion(ctx context.Context) (*QuestionItem, error) {
+	result, err := redisClient.BLPop(ctx, 0, QuestionQueueKey).Result()
+	if err != nil {
+		return nil, err
+	}
+
+	if len(result) != 2 {
+		return nil, fmt.Errorf("unexpected result length from BLPOP")
+	}
+
+	var question QuestionItem
+	err = json.Unmarshal([]byte(result[1]), &question)
+	if err != nil {
+		return nil, err
+	}
+
+	return &question, nil
 }

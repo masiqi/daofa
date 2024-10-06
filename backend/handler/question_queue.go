@@ -14,12 +14,14 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"time"
 
 	"daofa/backend/dal"
 	"daofa/backend/model"
 	"daofa/backend/queue"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-redis/redis/v8"
 	"github.com/spf13/viper"
 )
 
@@ -92,7 +94,7 @@ func GetQueueStatus(c *gin.Context) {
 	ctx := context.Background()
 	status, err := queue.GetQueueStatus(ctx)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "获取队列状态失败"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "获队列状态失败"})
 		return
 	}
 
@@ -101,16 +103,27 @@ func GetQueueStatus(c *gin.Context) {
 
 // ProcessPendingQuestions 处理队列中的题目
 func ProcessPendingQuestions(ctx context.Context) {
+	fmt.Println("开始处理队列中的题目")
 	for {
-		question, err := queue.DequeueQuestion(ctx)
+		fmt.Println("等待新的题目...")
+		question, err := queue.BLPOPQuestion(ctx)
 		if err != nil {
-			// 队列为空或出现错误，继续下一次循环
+			if err == redis.Nil {
+				// 队列为空，继续等待
+				continue
+			}
+			fmt.Printf("从队列中获取题目失败: %v\n", err)
+			// 添加一个短暂的睡眠以防止在错误情况下过度循环
+			time.Sleep(time.Second)
 			continue
 		}
 
+		fmt.Printf("开始处理题目: %s\n", question.ID)
 		err = processQuestion(question)
 		if err != nil {
-			fmt.Printf("处理题目失败: %v\n", err)
+			fmt.Printf("处理题目 %s 失败: %v\n", question.ID, err)
+		} else {
+			fmt.Printf("成功处理题目: %s\n", question.ID)
 		}
 	}
 }

@@ -203,11 +203,11 @@ func runServer() {
 		admin.DELETE("/questions/:id", handler.DeleteQuestion)
 		admin.GET("/questions/search", handler.SearchQuestions)
 
-		// 题目知识点关联的路由
+		// ���目知识点关联的路由
 		admin.POST("/questions/:id/knowledge-points", handler.AddQuestionKnowledgePoint)
 		admin.DELETE("/questions/:id/knowledge-points/:knowledge_point_id", handler.RemoveQuestionKnowledgePoint)
 
-		// 题目类型关路由
+		// 题目类型关由
 		admin.POST("/question-types", handler.CreateQuestionType)
 		admin.GET("/question-types", handler.ListQuestionTypes)
 		admin.GET("/question-types/:id", handler.GetQuestionType)
