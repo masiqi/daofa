@@ -164,7 +164,7 @@
                       },
                       {
                         "name": "name",
-                        "label": "知识点名称"
+                        "label": "知识点称"
                       },
                       {
                         "name": "subject.name",
@@ -281,8 +281,17 @@
                             "url": "${API_HOST}/admin/questions?page=${page}&pageSize=${perPage}",
                             "adaptor": "return {\
                               ...payload,\
-                              data: payload.items\
+                              items: payload.items,\
+                              total: payload.total\
                             };"
+                          },
+                          "syncLocation": true,
+                          "perPage": 10,
+                          "pageField": "page",
+                          "perPageField": "pageSize",
+                          "defaultParams": {
+                            "page": 1,
+                            "pageSize": 10
                           },
                           "columns": [
                             {
@@ -389,6 +398,9 @@
                                 }
                               ]
                             }
+                          ],
+                          "footerToolbar": [
+                            "pagination"
                           ],
                           "headerToolbar": [
                             {

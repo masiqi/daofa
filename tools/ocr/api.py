@@ -113,7 +113,7 @@ def paddle_ocr_process(image):
     
     # 修改结果处理逻辑
     text_lines = []
-    if isinstance(result, list) and len(result) > 0:
+    if result and isinstance(result, list) and len(result) > 0 and result[0] is not None:
         for item in result[0]:
             if isinstance(item, list) and len(item) == 2:
                 text, confidence = item[1]
@@ -232,6 +232,13 @@ async def ocr(
             logger.info(f"PaddleOCR result length: {len(converted_result)}")
             ocr_method = "PADDLE_OCR"
         
+        if len(converted_result.strip()) == 0:
+            logger.info("GOT_OCR 和 PaddleOCR 都未检测到有效文本")
+            return {
+                "result": "",
+                "ocr_method": "NO_TEXT_DETECTED"
+            }
+
         logger.info(f"最终转换结果: {converted_result}")
         
         return {
