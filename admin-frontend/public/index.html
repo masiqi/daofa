@@ -242,7 +242,7 @@
                                     "name": "is_leaf",
                                     "label": "是否为叶子节点",
                                     "onText": "是",
-                                    "offText": "否"
+                                    "offText": ""
                                   }
                                 ]
                               }
@@ -379,12 +379,13 @@
                               "source": {
                                 "method": "get",
                                 "url": "${API_HOST}/admin/knowledge-points",
-                                "responseData": {
-                                  "options": "${items}"
-                                }
+                                "adaptor": "return {\
+                                  options: payload.items.map(item => ({\
+                                    label: item.name,\
+                                    value: item.id\
+                                  }))\
+                                };"
                               },
-                              "labelField": "name",
-                              "valueField": "id",
                               "joinValues": false,
                               "extractValue": true,
                               "searchable": true,
@@ -415,7 +416,11 @@
                     "schema": {
                       "type": "page",
                       "title": "编辑习题",
-                      "initApi": "${API_HOST}/admin/questions/${id}",
+                      "initApi": {
+                        "method": "get",
+                        "url": "${API_HOST}/admin/questions/${id}",
+                        "adaptor": "const knowledgePoints = payload.knowledge_points.map(kp => ({ label: kp.name, value: kp.id })); return {...payload, knowledge_points: knowledgePoints};"
+                      },
                       "body": [
                         {
                           "type": "form",
@@ -461,15 +466,7 @@
                               "name": "knowledge_points",
                               "label": "知识点",
                               "multiple": true,
-                              "source": {
-                                "method": "get",
-                                "url": "${API_HOST}/admin/knowledge-points",
-                                "responseData": {
-                                  "options": "${items}"
-                                }
-                              },
-                              "labelField": "name",
-                              "valueField": "id",
+                              "source": "${knowledge_points}",
                               "joinValues": false,
                               "extractValue": true,
                               "searchable": true,

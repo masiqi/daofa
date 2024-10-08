@@ -136,7 +136,12 @@ func GetQuestion(c *gin.Context) {
 		return
 	}
 
-	question, err := dal.Q.Question.GetQuestionByID(int32(id))
+	question, err := dal.Q.Question.
+		Preload(dal.Q.Question.QuestionType).
+		Preload(dal.Q.Question.KnowledgePoints).
+		Where(dal.Q.Question.ID.Eq(int32(id))).
+		First()
+
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Question not found"})
 		return
