@@ -11,7 +11,7 @@
   <!-- 引入amis的JS SDK -->
   <script src="https://unpkg.com/amis@6.8.0/sdk/sdk.js"></script>
   <script>
-    window.addEventListener('error', function(e) {
+    window.addEventListener('error', function (e) {
       if (e.message.indexOf('IndexSizeError') !== -1) {
         e.stopPropagation();
         e.preventDefault();
@@ -266,54 +266,32 @@
               },
               {
                 "label": "习题管理",
+                "icon": "fa fa-book",
                 "children": [
                   {
                     "label": "习题列表",
-                    "url": "/questions",
+                    "url": "questions",
                     "schema": {
                       "type": "page",
                       "title": "习题列表",
                       "body": [
                         {
                           "type": "crud",
-                          "api": {
-                            "method": "get",
-                            "url": "${API_HOST}/admin/questions?page=${page}&pageSize=${perPage}",
-                            "adaptor": "return {\
-                              ...payload,\
-                              items: payload.items,\
-                              total: payload.total\
-                            };"
-                          },
-                          "syncLocation": true,
-                          "perPage": 10,
-                          "pageField": "page",
-                          "perPageField": "pageSize",
-                          "defaultParams": {
-                            "page": 1,
-                            "pageSize": 10
-                          },
+                          "api": "${API_HOST}/admin/questions",
                           "columns": [
                             {
                               "name": "id",
-                              "label": "ID",
-                              "sortable": true
+                              "label": "ID"
                             },
                             {
                               "name": "content",
                               "label": "题目内容",
                               "type": "tpl",
-                              "tpl": "<div class='text-ellipsis' title='${content}'>${content|truncate:50}</div>"
+                              "tpl": "<div class='text-ellipsis' style='max-width: 300px;'>${content}</div>"
                             },
                             {
                               "name": "question_type.name",
                               "label": "题目类型"
-                            },
-                            {
-                              "name": "created_at",
-                              "label": "创建时间",
-                              "type": "datetime",
-                              "sortable": true
                             },
                             {
                               "type": "operation",
@@ -322,153 +300,25 @@
                                 {
                                   "type": "button",
                                   "label": "编辑",
-                                  "actionType": "dialog",
-                                  "dialog": {
-                                    "title": "编辑习题",
-                                    "body": {
-                                      "type": "form",
-                                      "api": {
-                                        "method": "put",
-                                        "url": "${API_HOST}/admin/questions/${id}"
-                                      },
-                                      "body": [
-                                        {
-                                          "type": "textarea",
-                                          "name": "content",
-                                          "label": "题目内容",
-                                          "required": true
-                                        },
-                                        {
-                                          "type": "textarea",
-                                          "name": "answer",
-                                          "label": "答案",
-                                          "required": true
-                                        },
-                                        {
-                                          "type": "textarea",
-                                          "name": "explanation",
-                                          "label": "解析"
-                                        },
-                                        {
-                                          "type": "select",
-                                          "name": "type_id",
-                                          "label": "题目类型",
-                                          "source": {
-                                            "method": "get",
-                                            "url": "${API_HOST}/admin/question-types",
-                                            "responseData": {
-                                              "options": "${items|pick:label~name,value~id}"
-                                            }
-                                          },
-                                          "required": true
-                                        },
-                                        {
-                                          "type": "input-array",
-                                          "name": "knowledge_points",
-                                          "label": "知识点",
-                                          "addable": true,
-                                          "removable": true,
-                                          "draggable": true,
-                                          "items": {
-                                            "type": "select",
-                                            "name": "knowledge_point_id",
-                                            "label": false,
-                                            "source": {
-                                              "method": "get",
-                                              "url": "${API_HOST}/admin/knowledge-points",
-                                              "responseData": {
-                                                "options": "${items|pick:label~name,value~id}"
-                                              }
-                                            }
-                                          }
-                                        }
-                                      ]
-                                    }
-                                  }
+                                  "actionType": "link",
+                                  "link": "/edit-question?id=${id}"
                                 },
                                 {
                                   "type": "button",
                                   "label": "删除",
                                   "actionType": "ajax",
                                   "confirmText": "确定要删除该习题吗？",
-                                  "api": {
-                                    "method": "delete",
-                                    "url": "${API_HOST}/admin/questions/${id}"
-                                  }
+                                  "api": "delete:${API_HOST}/admin/questions/${id}"
                                 }
                               ]
                             }
                           ],
-                          "footerToolbar": [
-                            "pagination"
-                          ],
                           "headerToolbar": [
                             {
                               "type": "button",
-                              "label": "新增习题",
-                              "actionType": "dialog",
-                              "dialog": {
-                                "title": "新增习题",
-                                "body": {
-                                  "type": "form",
-                                  "api": {
-                                    "method": "post",
-                                    "url": "${API_HOST}/admin/questions"
-                                  },
-                                  "body": [
-                                    {
-                                      "type": "textarea",
-                                      "name": "content",
-                                      "label": "题目内容",
-                                      "required": true
-                                    },
-                                    {
-                                      "type": "textarea",
-                                      "name": "answer",
-                                      "label": "答案",
-                                      "required": true
-                                    },
-                                    {
-                                      "type": "textarea",
-                                      "name": "explanation",
-                                      "label": "解析"
-                                    },
-                                    {
-                                      "type": "select",
-                                      "name": "type_id",
-                                      "label": "题目类型",
-                                      "source": {
-                                        "method": "get",
-                                        "url": "${API_HOST}/admin/question-types",
-                                        "responseData": {
-                                          "options": "${items|pick:label~name,value~id}"
-                                        }
-                                      },
-                                      "required": true
-                                    },
-                                    {
-                                      "type": "input-array",
-                                      "name": "knowledge_points",
-                                      "label": "知识点",
-                                      "addable": true,
-                                      "removable": true,
-                                      "draggable": true,
-                                      "items": {
-                                        "type": "select",
-                                        "name": "knowledge_point_id",
-                                        "label": false,
-                                        "source": {
-                                          "method": "get",
-                                          "url": "${API_HOST}/admin/knowledge-points",
-                                          "responseData": {
-                                            "options": "${items|pick:label~name,value~id}"
-                                          }
-                                        }
-                                      }
-                                    }
-                                  ]
-                                }
-                              }
+                              "label": "新建习题",
+                              "actionType": "link",
+                              "link": "/new-question"
                             }
                           ]
                         }
@@ -476,76 +326,177 @@
                     }
                   },
                   {
-                    "label": "新增习题",
-                    "url": "/questions/create",
+                    "label": "新建习题",
+                    "url": "new-question",
                     "schema": {
                       "type": "page",
-                      "title": "新增习题",
-                      "body": {
-                        "type": "form",
-                        "api": {
-                          "method": "post",
-                          "url": "${API_HOST}/admin/questions"
-                        },
-                        "body": [
-                          {
-                            "type": "textarea",
-                            "name": "content",
-                            "label": "题目内容",
-                            "required": true
+                      "title": "新建习题",
+                      "body": [
+                        {
+                          "type": "form",
+                          "api": {
+                            "method": "post",
+                            "url": "${API_HOST}/admin/questions"
                           },
-                          {
-                            "type": "textarea",
-                            "name": "answer",
-                            "label": "答案",
-                            "required": true
-                          },
-                          {
-                            "type": "textarea",
-                            "name": "explanation",
-                            "label": "解析"
-                          },
-                          {
-                            "type": "select",
-                            "name": "type_id",
-                            "label": "题目类型",
-                            "source": {
-                              "method": "get",
-                              "url": "${API_HOST}/admin/question-types",
-                              "responseData": {
-                                "options": "${items|pick:label~name,value~id}"
-                              }
+                          "body": [
+                            {
+                              "type": "textarea",
+                              "name": "content",
+                              "label": "题目内容",
+                              "required": true
                             },
-                            "required": true
-                          },
-                          {
-                            "type": "input-array",
-                            "name": "knowledge_points",
-                            "label": "知识点",
-                            "addable": true,
-                            "removable": true,
-                            "draggable": true,
-                            "items": {
+                            {
+                              "type": "textarea",
+                              "name": "answer",
+                              "label": "答案",
+                              "required": true
+                            },
+                            {
+                              "type": "textarea",
+                              "name": "explanation",
+                              "label": "解析"
+                            },
+                            {
                               "type": "select",
-                              "name": "knowledge_point_id",
-                              "label": false,
+                              "name": "type_id",
+                              "label": "题目类型",
+                              "source": {
+                                "method": "get",
+                                "url": "${API_HOST}/admin/question-types",
+                                "responseData": {
+                                  "options": "${items}"
+                                }
+                              },
+                              "labelField": "name",
+                              "valueField": "id",
+                              "required": true
+                            },
+                            {
+                              "type": "select",
+                              "name": "knowledge_points",
+                              "label": "知识点",
+                              "multiple": true,
                               "source": {
                                 "method": "get",
                                 "url": "${API_HOST}/admin/knowledge-points",
                                 "responseData": {
-                                  "options": "${items|pick:label~name,value~id}"
+                                  "options": "${items}"
                                 }
-                              }
+                              },
+                              "labelField": "name",
+                              "valueField": "id",
+                              "joinValues": false,
+                              "extractValue": true,
+                              "searchable": true,
+                              "clearable": true
+                            },
+                            {
+                              "type": "input-image",
+                              "name": "image_path",
+                              "label": "图片",
+                              "receiver": "${API_HOST}/admin/upload-image",
+                              "accept": ".jpg,.png,.gif",
+                              "autoUpload": true
+                            },
+                            {
+                              "type": "submit",
+                              "label": "保存",
+                              "primary": true
                             }
-                          }
-                        ]
-                      }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "label": "编辑习题",
+                    "url": "edit-question",
+                    "visible": false,
+                    "schema": {
+                      "type": "page",
+                      "title": "编辑习题",
+                      "initApi": "${API_HOST}/admin/questions/${id}",
+                      "body": [
+                        {
+                          "type": "form",
+                          "api": {
+                            "method": "put",
+                            "url": "${API_HOST}/admin/questions/${id}"
+                          },
+                          "body": [
+                            {
+                              "type": "textarea",
+                              "name": "content",
+                              "label": "题目内容",
+                              "required": true
+                            },
+                            {
+                              "type": "textarea",
+                              "name": "answer",
+                              "label": "答案",
+                              "required": true
+                            },
+                            {
+                              "type": "textarea",
+                              "name": "explanation",
+                              "label": "解析"
+                            },
+                            {
+                              "type": "select",
+                              "name": "type_id",
+                              "label": "题目类型",
+                              "source": {
+                                "method": "get",
+                                "url": "${API_HOST}/admin/question-types",
+                                "responseData": {
+                                  "options": "${items}"
+                                }
+                              },
+                              "labelField": "name",
+                              "valueField": "id",
+                              "required": true
+                            },
+                            {
+                              "type": "select",
+                              "name": "knowledge_points",
+                              "label": "知识点",
+                              "multiple": true,
+                              "source": {
+                                "method": "get",
+                                "url": "${API_HOST}/admin/knowledge-points",
+                                "responseData": {
+                                  "options": "${items}"
+                                }
+                              },
+                              "labelField": "name",
+                              "valueField": "id",
+                              "joinValues": false,
+                              "extractValue": true,
+                              "searchable": true,
+                              "clearable": true
+                            },
+                            {
+                              "type": "input-image",
+                              "name": "image_path",
+                              "label": "图片",
+                              "receiver": "${API_HOST}/admin/upload-image",
+                              "accept": ".jpg,.png,.gif",
+                              "autoUpload": true
+                            },
+                            {
+                              "type": "submit",
+                              "label": "保存",
+                              "primary": true
+                            }
+                          ]
+                        }
+                      ]
                     }
                   }
                 ]
               },
               {
-                "label": "习题类型管理",
+                "label": "习题类管理",
                 "url": "/question-types",
                 "schema": {
                   "type": "page",
@@ -725,8 +676,8 @@
                               "label": "上传JSON文件",
                               "accept": ".json",
                               "asBlob": true,
-                              "maxSize": 10485760,
-                              "description": "请上传包含习题数据的JSON文件,文件大小不超过10MB"
+                              "maxSize": 104857600,
+                              "description": "请上传包含习题数据的JSON文件,文件大小不超过100MB"
                             },
                             {
                               "type": "submit",

@@ -31,7 +31,7 @@ func LoadConfig() {
 	viper.SetDefault("DB_PASSWORD", "")
 	viper.SetDefault("DB_NAME", "daofa")
 	viper.SetDefault("JWT_SECRET", "your-secret-key")
-	viper.SetDefault("JWT_EXPIRATION", "24h")
+	viper.SetDefault("JWT_EXPIRATION", "720h") // 默认30天
 	viper.SetDefault("OCR_URL", "http://10.1.0.242:8000/ocr")
 	viper.SetDefault("REDIS_HOST", "localhost")
 	viper.SetDefault("REDIS_PORT", 6379)
