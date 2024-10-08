@@ -18,24 +18,77 @@ import uvicorn
 from urllib.parse import quote
 import uuid
 import numpy as np
+import threading
+import time
+import asyncio
+import aiohttp
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = FastAPI()
 
-# 初始化模型
-disable_torch_init()
-model_name = "stepfun-ai/GOT-OCR2_0"
-tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
-model = GOTQwenForCausalLM.from_pretrained(model_name, low_cpu_mem_usage=True, device_map='cuda', use_safetensors=True, pad_token_id=151643).eval()
-model.to(device='cuda', dtype=torch.bfloat16)
+# 全局变量
+got_model = None
+paddle_model = None
+got_last_used_time = None
+paddle_last_used_time = None
+model_lock = threading.Lock()
 
-# 确保 PaddlePaddle 使用 GPU
-paddle.set_device('gpu')
+def load_got_model():
+    global got_model, got_last_used_time
+    with model_lock:
+        if got_model is None:
+            logger.info("加载 GOT_OCR 模型")
+            disable_torch_init()
+            model_name = "stepfun-ai/GOT-OCR2_0"
+            tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+            got_model = GOTQwenForCausalLM.from_pretrained(model_name, low_cpu_mem_usage=True, device_map='cuda', use_safetensors=True, pad_token_id=151643).eval()
+            got_model.to(device='cuda', dtype=torch.bfloat16)
+        got_last_used_time = time.time()
 
-# 初始化 PaddleOCR
-paddle_ocr = PaddleOCR(use_angle_cls=True, lang='ch', use_gpu=True)
+def load_paddle_model():
+    global paddle_model, paddle_last_used_time
+    with model_lock:
+        if paddle_model is None:
+            logger.info("加载 PaddleOCR 模型")
+            paddle.set_device('gpu')
+            paddle_model = PaddleOCR(use_angle_cls=True, lang='ch', use_gpu=True)
+        paddle_last_used_time = time.time()
+
+def unload_got_model():
+    global got_model
+    with model_lock:
+        if got_model is not None:
+            logger.info("卸载 GOT_OCR 模型")
+            got_model = None
+            try:
+                torch.cuda.empty_cache()
+            except Exception as e:
+                logger.error(f"清理 PyTorch GPU 缓存时出错: {str(e)}")
+
+def unload_paddle_model():
+    global paddle_model
+    with model_lock:
+        if paddle_model is not None:
+            logger.info("卸载 PaddleOCR 模型")
+            paddle_model = None
+            try:
+                paddle.device.cuda.empty_cache()
+            except Exception as e:
+                logger.error(f"清理 PaddlePaddle GPU 缓存时出错: {str(e)}")
+
+def check_and_unload_models():
+    while True:
+        time.sleep(60)  # 每分钟检查一次
+        current_time = time.time()
+        if got_model is not None and current_time - got_last_used_time > 300:
+            unload_got_model()
+        if paddle_model is not None and current_time - paddle_last_used_time > 300:
+            unload_paddle_model()
+
+# 启动后台线程来检查和卸载模型
+threading.Thread(target=check_and_unload_models, daemon=True).start()
 
 def convert_p_to_rgb(image):
     if image.mode == 'P':
@@ -105,8 +158,12 @@ def process_image(image):
     return image
 
 def paddle_ocr_process(image):
-    # 使用 PaddleOCR 进行识别
-    result = paddle_ocr.ocr(np.array(image), cls=True)
+    global paddle_model
+    # 确保 PaddleOCR 模型已加载
+    load_paddle_model()
+    
+    # 用 PaddleOCR 进行识别
+    result = paddle_model.ocr(np.array(image), cls=True)
     
     # 打印结果结构以便调试
     logger.info(f"PaddleOCR 原始结果: {result}")
@@ -164,7 +221,7 @@ async def ocr(
             
             # 发送请求
             response = requests.get(encoded_url, headers=headers, allow_redirects=True)
-            print(f"响应状态码: {response.status_code}")
+            print(f"���应状态码: {response.status_code}")
             print(f"响应头: {response.headers}")
             
             if response.status_code != 200:
@@ -189,7 +246,7 @@ async def ocr(
 
         logger.info(f"处理的图像大小: {image.size}, 模式: {image.mode}, 格式: {image.format}")
         
-        # 创建一个目录来保存处理后的图像
+        # 创建一个目录来保存处后的图像
         os.makedirs("processed_images", exist_ok=True)
         
         # 处理图像格式
@@ -203,25 +260,23 @@ async def ocr(
             sub_images = dynamic_preprocess(image)
         logger.info(f"子图像数量: {len(sub_images)}")
         
+        # 首先尝试使用 GOT_OCR
+        load_got_model()
         args = Namespace(
-            model_name=model_name,
+            model_name="stepfun-ai/GOT-OCR2_0",
             multi_page=multi_page,
             render=render,
             conv_mode="mpt",
             output_format=output_format
         )
-        
-        # 准备对话模板
         conv = conv_templates[args.conv_mode].copy()
         
-        # 调用eval_model函数，传递处理好的参数
         logger.info("开始 GOT_OCR 处理")
-        result = eval_model(args, tokenizer, model, sub_images, conv)
+        result = eval_model(args, AutoTokenizer.from_pretrained("stepfun-ai/GOT-OCR2_0", trust_remote_code=True), got_model, sub_images, conv)
         
         logger.info(f"GOT_OCR 原始结果: {result}")
         logger.info(f"GOT_OCR result length: {len(result)}")
         
-        # 转换输出格式
         converted_result = convert_output_format(result, output_format)
         ocr_method = "GOT_OCR"
         
@@ -248,6 +303,36 @@ async def ocr(
     except Exception as e:
         logger.error(f"处理过程中发生错误: {str(e)}", exc_info=True)
         raise
+
+@app.post("/test_model_load_unload")
+async def test_model_load_unload():
+    try:
+        logger.info("开始测试模型加载和卸载")
+        
+        # 加载 GOT_OCR 模型
+        logger.info("加载 GOT_OCR 模型")
+        load_got_model()
+        
+        # 加载 PaddleOCR 模型
+        logger.info("加载 PaddleOCR 模型")
+        load_paddle_model()
+        
+        # 等待一秒，模拟短暂使用
+        await asyncio.sleep(1)
+        
+        # 卸载 GOT_OCR 模型
+        logger.info("卸载 GOT_OCR 模型")
+        unload_got_model()
+        
+        # 卸载 PaddleOCR 模型
+        logger.info("卸载 PaddleOCR 模型")
+        unload_paddle_model()
+        
+        logger.info("测试完成")
+        return {"message": "模型加载和卸载测试完成"}
+    except Exception as e:
+        logger.error(f"测试过程中发生错误: {str(e)}", exc_info=True)
+        return {"error": str(e)}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
