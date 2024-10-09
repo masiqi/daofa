@@ -21,5 +21,15 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       sendResponse({ apiUrl: data.apiUrl || "" });
     });
     return true;
+  } else if (request.action === "proxyRequest") {
+    fetch(request.url, {
+      method: request.method,
+      headers: request.headers,
+      body: request.body
+    })
+    .then(response => response.json())
+    .then(data => sendResponse({ success: true, data: data }))
+    .catch(error => sendResponse({ success: false, error: error.message }));
+    return true;
   }
 });

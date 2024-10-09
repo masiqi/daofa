@@ -12,27 +12,26 @@ function sendImageToOCR(imageUrl) {
       return;
     }
 
-    fetch(apiUrl, {
+    const requestData = {
+      imageUrl: imageUrl,
+      cookie: document.cookie
+    };
+
+    chrome.runtime.sendMessage({
+      action: "proxyRequest",
+      url: apiUrl,
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Referer": document.location.href
       },
-      body: JSON.stringify({
-        imageUrl: imageUrl,
-        cookie: document.cookie
-      })
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
+      body: JSON.stringify(requestData)
+    }, (response) => {
+      if (response.success) {
         showNotification("成功", "图片已成功发送到OCR处理队列");
       } else {
-        showNotification("错误", data.message || "发送失败");
+        showNotification("错误", response.error || "发送失败");
       }
-    })
-    .catch(error => {
-      showNotification("错误", "发送请求时出错：" + error.message);
     });
   });
 }
