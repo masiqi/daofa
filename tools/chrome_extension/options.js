@@ -13,8 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const apiUrl = apiUrlInput.value;
     chrome.storage.sync.set({ apiUrl }, () => {
       status.textContent = '选项已保存';
+      status.style.opacity = 1;
       setTimeout(() => {
-        status.textContent = '';
+        status.style.opacity = 0;
       }, 2000);
     });
   });

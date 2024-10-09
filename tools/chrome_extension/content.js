@@ -56,3 +56,21 @@ function showNotification(title, message) {
     document.body.removeChild(notification);
   }, 3000);
 }
+
+// 添加以下代码来启用右键菜单
+document.addEventListener('contextmenu', function(e) {
+    e.stopPropagation();
+}, true);
+
+// 移除可能禁用右键菜单的事件监听器
+document.oncontextmenu = null;
+document.body.oncontextmenu = null;
+
+// 遍历所有元素,移除可能的contextmenu事件监听器
+function removeContextMenuListeners(element) {
+    element.oncontextmenu = null;
+    for (let child of element.children) {
+        removeContextMenuListeners(child);
+    }
+}
+removeContextMenuListeners(document.body);
