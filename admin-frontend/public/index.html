@@ -51,6 +51,34 @@
             }
           ]
         },
+        "aside": {
+          "type": "nav",
+          "links": [
+            // ... 其他菜单项保持不变 ...
+            {
+              "label": "习题管理",
+              "to": "/questions"
+            },
+            {
+              "label": "OCR任务管理",
+              "children": [
+                {
+                  "label": "OCR任务列表",
+                  "to": "/image-ocr-tasks"
+                },
+                {
+                  "label": "新建OCR任务",
+                  "to": "/create-image-ocr-task"
+                }
+              ]
+            },
+            {
+              "label": "队列管理",
+              "to": "/queue-status"
+            },
+            // ... 其他菜单项保持不变 ...
+          ]
+        },
         "pages": [
           {
             "children": [
@@ -627,7 +655,11 @@
                               "body": [
                                 {
                                   "type": "tpl",
-                                  "tpl": "待处理消息数量: ${queue_length}"
+                                  "tpl": "习题队列待处理消息数量: ${question_queue_length}"
+                                },
+                                {
+                                  "type": "tpl",
+                                  "tpl": "OCR任务队列待处理消息数量: ${image_ocr_queue_length}"
                                 }
                               ]
                             }
@@ -684,6 +716,148 @@
                           ]
                         }
                       ]
+                    }
+                  }
+                ]
+              },
+              {
+                "label": "OCR任务管理",
+                "icon": "fa fa-list",
+                "children": [
+                  {
+                    "label": "OCR任务列表",
+                    "url": "image-ocr-tasks",
+                    "schema": {
+                      "type": "page",
+                      "title": "OCR任务管理",
+                      "body": {
+                        "type": "crud",
+                        "api": {
+                          "method": "get",
+                          "url": "${API_HOST}/admin/image-ocr-tasks?page=${page}&perPage=${perPage}",
+                          "adaptor": "return {\
+                        ...payload,\
+                        count: payload.total\
+                      };"
+                        },
+                        "syncLocation": true,
+                        "columns": [
+                          {
+                            "name": "id",
+                            "label": "ID"
+                          },
+                          {
+                            "name": "image_url",
+                            "label": "图片URL",
+                            "type": "image"
+                          },
+                          {
+                            "name": "status",
+                            "label": "状态"
+                          },
+                          {
+                            "name": "created_at",
+                            "label": "创建时间",
+                            "type": "datetime"
+                          },
+                          {
+                            "type": "operation",
+                            "label": "操作",
+                            "buttons": [
+                              {
+                                "type": "button",
+                                "label": "查看",
+                                "actionType": "dialog",
+                                "dialog": {
+                                  "title": "OCR任务详情",
+                                  "body": {
+                                    "type": "form",
+                                    "api": "${API_HOST}/admin/image-ocr-tasks/${id}",
+                                    "body": [
+                                      {
+                                        "type": "static-image",
+                                        "name": "image_url",
+                                        "label": "图片"
+                                      },
+                                      {
+                                        "type": "static",
+                                        "name": "status",
+                                        "label": "状态"
+                                      },
+                                      {
+                                        "type": "static",
+                                        "name": "ocr_result",
+                                        "label": "OCR结果"
+                                      },
+                                      {
+                                        "type": "static",
+                                        "name": "created_at",
+                                        "label": "创建时间"
+                                      },
+                                      {
+                                        "type": "static",
+                                        "name": "updated_at",
+                                        "label": "更新时间"
+                                      }
+                                    ]
+                                  }
+                                }
+                              },
+                              {
+                                "type": "button",
+                                "label": "删除",
+                                "actionType": "ajax",
+                                "confirmText": "确定要删除该OCR任务吗？",
+                                "api": "delete:${API_HOST}/admin/image-ocr-tasks/${id}"
+                              }
+                            ]
+                          }
+                        ],
+                        "footerToolbar": [
+                          "statistics",
+                          "pagination"
+                        ],
+                        "perPage": 10,
+                        "pageField": "page",
+                        "perPageField": "perPage"
+                      }
+                    }
+                  },
+                  {
+                    "label": "新建OCR任务",
+                    "url": "create-image-ocr-task",
+                    "schema": {
+                      "type": "page",
+                      "title": "新建OCR任务",
+                      "body": {
+                        "type": "form",
+                        "api": {
+                          "method": "post",
+                          "url": "${API_HOST}/admin/image-ocr-tasks"
+                        },
+                        "body": [
+                          {
+                            "type": "input-url",
+                            "name": "image_url",
+                            "label": "图片URL",
+                            "required": true
+                          },
+                          {
+                            "type": "input-text",
+                            "name": "cookie",
+                            "label": "Cookie"
+                          },
+                          {
+                            "type": "input-url",
+                            "name": "referer",
+                            "label": "Referer"
+                          },
+                          {
+                            "type": "submit",
+                            "label": "提交"
+                          }
+                        ]
+                      }
                     }
                   }
                 ]
