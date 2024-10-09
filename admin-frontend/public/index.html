@@ -739,16 +739,7 @@
                         "type": "crud",
                         "api": {
                           "method": "get",
-                          "url": "${API_HOST}/admin/image-ocr-tasks?page=${page}&perPage=${perPage}",
-                          "adaptor": "const API_HOST = window.amisConf && window.amisConf.API_HOST ? window.amisConf.API_HOST : '';\
-                          return {\
-                            ...payload,\
-                            data: payload.data.map(item => ({\
-                              ...item,\
-                              local_image_url: item.local_file_path ? `${API_HOST}/${item.local_file_path}` : ''\
-                            })),\
-                            count: payload.total\
-                          };"
+                          "url": "${API_HOST}/admin/image-ocr-tasks"
                         },
                         "syncLocation": true,
                         "columns": [
@@ -757,9 +748,10 @@
                             "label": "ID"
                           },
                           {
-                            "name": "local_image_url",
+                            "name": "local_file_path",
                             "label": "图片",
-                            "type": "image"
+                            "type": "image",
+                            "src": "${API_HOST}/${local_file_path}"
                           },
                           {
                             "name": "status",
@@ -853,8 +845,8 @@
                           "pagination"
                         ],
                         "perPage": 10,
-                        "pageField": "page",
-                        "perPageField": "perPage"
+                        "pageField": "offset",
+                        "perPageField": "limit"
                       }
                     }
                   },

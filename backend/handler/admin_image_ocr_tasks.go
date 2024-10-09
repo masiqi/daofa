@@ -17,19 +17,23 @@ func ListImageOCRTasks(c *gin.Context) {
 
 	tasks, err := dal.Q.ImageOcrTask.ListImageOCRTasksWithPagination(offset, limit)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "获取OCR任务列表失败"})
+		c.JSON(http.StatusInternalServerError, gin.H{"status": 1, "msg": "获取OCR任务列表失败"})
 		return
 	}
 
 	count, err := dal.Q.ImageOcrTask.CountImageOCRTasks()
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "获取OCR任务总数失败"})
+		c.JSON(http.StatusInternalServerError, gin.H{"status": 1, "msg": "获取OCR任务总数失败"})
 		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"data":  tasks,
-		"total": count,
+		"status": 0,
+		"msg":    "",
+		"data": gin.H{
+			"items": tasks,
+			"total": count,
+		},
 	})
 }
 
