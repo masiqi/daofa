@@ -239,6 +239,43 @@ type QuestionKnowledgePointQuerier interface {
 	GetKnowledgePointsByQuestionID(questionID int32) ([]*gen.T, error)
 }
 
+// ImageOCRTaskQuerier 定义 ImageOCRTask 表的查询接口
+type ImageOCRTaskQuerier interface {
+	// INSERT INTO @@table (image_url, cookie, referer, local_file_path, ocr_result, status)
+	// VALUES (@imageURL, @cookie, @referer, @localFilePath, @ocrResult, @status)
+	CreateImageOCRTask(imageURL string, cookie *string, referer *string, localFilePath *string, ocrResult *string, status string) error
+
+	// UPDATE @@table SET
+	//   {{if imageURL != ""}}image_url=@imageURL,{{end}}
+	//   {{if cookie != nil}}cookie=@cookie,{{end}}
+	//   {{if referer != nil}}referer=@referer,{{end}}
+	//   {{if localFilePath != nil}}local_file_path=@localFilePath,{{end}}
+	//   {{if ocrResult != nil}}ocr_result=@ocrResult,{{end}}
+	//   {{if status != ""}}status=@status,{{end}}
+	// WHERE id=@id
+	UpdateImageOCRTask(id int32, imageURL string, cookie *string, referer *string, localFilePath *string, ocrResult *string, status string) error
+
+	// SELECT * FROM @@table WHERE id=@id LIMIT 1
+	GetImageOCRTaskByID(id int32) (*gen.T, error)
+
+	// SELECT * FROM @@table ORDER BY id DESC LIMIT @limit OFFSET @offset
+	ListImageOCRTasksWithPagination(offset, limit int) ([]*gen.T, error)
+
+	// SELECT COUNT(*) FROM @@table
+	CountImageOCRTasks() (int64, error)
+
+	// SELECT * FROM @@table
+	//   {{where}}
+	//     {{if status != ""}}status = @status{{end}}
+	//   {{end}}
+	// ORDER BY id DESC
+	// LIMIT @limit OFFSET @offset
+	SearchImageOCRTasks(status string, offset, limit int) ([]*gen.T, error)
+
+	// DELETE FROM @@table WHERE id=@id
+	DeleteImageOCRTask(id int32) error
+}
+
 func main() {
 	// 连接到数据库
 	dsn := "daofa:123456@tcp(localhost:3306)/daofa?charset=utf8mb4&parseTime=True&loc=Local"
@@ -295,6 +332,7 @@ func main() {
 		questionType,
 		question,
 		g.GenerateModel("question_knowledge_point"),
+		g.GenerateModel("image_ocr_tasks"),
 	)
 
 	// 应用自定义查询接口
@@ -304,6 +342,8 @@ func main() {
 	g.ApplyInterface(func(QuestionTypeQuerier) {}, questionType)
 	g.ApplyInterface(func(QuestionQuerier) {}, question)
 	g.ApplyInterface(func(QuestionKnowledgePointQuerier) {}, g.GenerateModel("question_knowledge_point"))
+	// 添加新的接口
+	g.ApplyInterface(func(ImageOCRTaskQuerier) {}, g.GenerateModel("image_ocr_tasks"))
 
 	// 生成代码
 	g.Execute()

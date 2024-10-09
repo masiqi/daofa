@@ -79,3 +79,16 @@ CREATE TABLE IF NOT EXISTS `question_knowledge_point` (
   CONSTRAINT `fk_qkp_question` FOREIGN KEY (`question_id`) REFERENCES `question` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_qkp_knowledge_point` FOREIGN KEY (`knowledge_point_id`) REFERENCES `knowledge_point` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 图片OCR任务表
+CREATE TABLE image_ocr_tasks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    image_url TEXT NOT NULL,
+    cookie TEXT,
+    referer TEXT,
+    local_file_path TEXT,
+    ocr_result TEXT,
+    status ENUM('pending', 'processing', 'completed', 'failed') DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

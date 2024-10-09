@@ -92,10 +92,21 @@ func EnqueueQuestions(c *gin.Context) {
 // GetQueueStatus 获取队列状态
 func GetQueueStatus(c *gin.Context) {
 	ctx := context.Background()
-	status, err := queue.GetQueueStatus(ctx)
+	questionQueueStatus, err := queue.GetQueueStatus(ctx)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "获队列状态失败"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "获取队列状态失败"})
 		return
+	}
+
+	imageOCRQueueLength, err := queue.GetImageOCRQueueLength(ctx)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "获取OCR队列状态失败"})
+		return
+	}
+
+	status := gin.H{
+		"question_queue_length":  questionQueueStatus["queue_length"],
+		"image_ocr_queue_length": imageOCRQueueLength,
 	}
 
 	c.JSON(http.StatusOK, status)

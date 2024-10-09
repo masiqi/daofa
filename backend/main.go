@@ -150,6 +150,9 @@ func runServer() {
 	// 启动习题处理器
 	go handler.ProcessPendingQuestions(redisClient.Context())
 
+	// 启动图片OCR任务处理器
+	go handler.ProcessImageOCRTasks(redisClient.Context())
+
 	r := gin.Default()
 
 	// CORS 中间件配置
@@ -203,7 +206,7 @@ func runServer() {
 		admin.DELETE("/questions/:id", handler.DeleteQuestion)
 		admin.GET("/questions/search", handler.SearchQuestions)
 
-		// ���目知识点关联的路由
+		// 目知识点关联的路由
 		admin.POST("/questions/:id/knowledge-points", handler.AddQuestionKnowledgePoint)
 		admin.DELETE("/questions/:id/knowledge-points/:knowledge_point_id", handler.RemoveQuestionKnowledgePoint)
 
@@ -213,10 +216,21 @@ func runServer() {
 		admin.GET("/question-types/:id", handler.GetQuestionType)
 		admin.PUT("/question-types/:id", handler.UpdateQuestionType)
 		admin.DELETE("/question-types/:id", handler.DeleteQuestionType)
+
+		// 添加 image_ocr_tasks 相关的路由
+		admin.GET("/image-ocr-tasks", handler.ListImageOCRTasks)
+		admin.GET("/image-ocr-tasks/:id", handler.GetImageOCRTask)
+		admin.POST("/image-ocr-tasks", handler.CreateImageOCRTask)
+		admin.PUT("/image-ocr-tasks/:id", handler.UpdateImageOCRTask)
+		admin.DELETE("/image-ocr-tasks/:id", handler.DeleteImageOCRTask)
+		admin.GET("/image-ocr-tasks/search", handler.SearchImageOCRTasks)
 	}
 
 	// 提供图片加载接口，不需要JWT
 	r.StaticFS("/images", gin.Dir("./uploads", true))
+
+	// 添加新的路由,不需要JWT认证
+	r.POST("/enqueue-image-ocr", handler.EnqueueImageOCR)
 
 	r.Run(fmt.Sprintf(":%d", viper.GetInt("SERVER_PORT")))
 }

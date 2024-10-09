@@ -18,6 +18,7 @@ import (
 var (
 	Q                      = new(Query)
 	Admin                  *admin
+	ImageOcrTask           *imageOcrTask
 	KnowledgePoint         *knowledgePoint
 	Question               *question
 	QuestionKnowledgePoint *questionKnowledgePoint
@@ -28,6 +29,7 @@ var (
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
 	Admin = &Q.Admin
+	ImageOcrTask = &Q.ImageOcrTask
 	KnowledgePoint = &Q.KnowledgePoint
 	Question = &Q.Question
 	QuestionKnowledgePoint = &Q.QuestionKnowledgePoint
@@ -39,6 +41,7 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
 		db:                     db,
 		Admin:                  newAdmin(db, opts...),
+		ImageOcrTask:           newImageOcrTask(db, opts...),
 		KnowledgePoint:         newKnowledgePoint(db, opts...),
 		Question:               newQuestion(db, opts...),
 		QuestionKnowledgePoint: newQuestionKnowledgePoint(db, opts...),
@@ -51,6 +54,7 @@ type Query struct {
 	db *gorm.DB
 
 	Admin                  admin
+	ImageOcrTask           imageOcrTask
 	KnowledgePoint         knowledgePoint
 	Question               question
 	QuestionKnowledgePoint questionKnowledgePoint
@@ -64,6 +68,7 @@ func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
 		db:                     db,
 		Admin:                  q.Admin.clone(db),
+		ImageOcrTask:           q.ImageOcrTask.clone(db),
 		KnowledgePoint:         q.KnowledgePoint.clone(db),
 		Question:               q.Question.clone(db),
 		QuestionKnowledgePoint: q.QuestionKnowledgePoint.clone(db),
@@ -84,6 +89,7 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
 		db:                     db,
 		Admin:                  q.Admin.replaceDB(db),
+		ImageOcrTask:           q.ImageOcrTask.replaceDB(db),
 		KnowledgePoint:         q.KnowledgePoint.replaceDB(db),
 		Question:               q.Question.replaceDB(db),
 		QuestionKnowledgePoint: q.QuestionKnowledgePoint.replaceDB(db),
@@ -94,6 +100,7 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 
 type queryCtx struct {
 	Admin                  IAdminDo
+	ImageOcrTask           IImageOcrTaskDo
 	KnowledgePoint         IKnowledgePointDo
 	Question               IQuestionDo
 	QuestionKnowledgePoint IQuestionKnowledgePointDo
@@ -104,6 +111,7 @@ type queryCtx struct {
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
 		Admin:                  q.Admin.WithContext(ctx),
+		ImageOcrTask:           q.ImageOcrTask.WithContext(ctx),
 		KnowledgePoint:         q.KnowledgePoint.WithContext(ctx),
 		Question:               q.Question.WithContext(ctx),
 		QuestionKnowledgePoint: q.QuestionKnowledgePoint.WithContext(ctx),
