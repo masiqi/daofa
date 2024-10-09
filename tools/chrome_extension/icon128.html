@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Icon 128x128</title>
+</head>
+<body>
+    <canvas id="icon" width="128" height="128"></canvas>
+    <script>
+        const canvas = document.getElementById('icon');
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#4285F4';
+        ctx.fillRect(0, 0, 128, 128);
+        ctx.fillStyle = 'white';
+        ctx.font = '80px Arial';
+        ctx.fillText('D', 40, 95);
+        
+        // 将canvas转换为图片并下载
+        const link = document.createElement('a');
+        link.download = 'icon128.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    </script>
+</body>
+</html>
