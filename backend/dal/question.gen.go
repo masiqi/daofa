@@ -376,6 +376,7 @@ type IQuestionDo interface {
 	GetQuestionByID(id int32) (result *model.Question, err error)
 	GetQuestionByHash(hash string) (result *model.Question, err error)
 	SearchQuestions(content string, typeID int32, offset int, limit int) (result []*model.Question, err error)
+	GetQuestionsByIDRange(startID int, endID int) (result []*model.Question, err error)
 }
 
 // INSERT INTO @@table (content, image_path, ocr_text, answer, explanation, type_id, hash)
@@ -554,6 +555,22 @@ func (q questionDo) SearchQuestions(content string, typeID int32, offset int, li
 	params = append(params, limit)
 	params = append(params, offset)
 	generateSQL.WriteString("ORDER BY id DESC LIMIT ? OFFSET ? ")
+
+	var executeSQL *gorm.DB
+	executeSQL = q.UnderlyingDB().Raw(generateSQL.String(), params...).Find(&result) // ignore_security_alert
+	err = executeSQL.Error
+
+	return
+}
+
+// SELECT * FROM @@table WHERE id BETWEEN @startID AND @endID ORDER BY id
+func (q questionDo) GetQuestionsByIDRange(startID int, endID int) (result []*model.Question, err error) {
+	var params []interface{}
+
+	var generateSQL strings.Builder
+	params = append(params, startID)
+	params = append(params, endID)
+	generateSQL.WriteString("SELECT * FROM question WHERE id BETWEEN ? AND ? ORDER BY id ")
 
 	var executeSQL *gorm.DB
 	executeSQL = q.UnderlyingDB().Raw(generateSQL.String(), params...).Find(&result) // ignore_security_alert

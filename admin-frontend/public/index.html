@@ -143,7 +143,7 @@
                             "label": "编辑",
                             "actionType": "dialog",
                             "dialog": {
-                              "title": "编辑学科",
+                              "title": "���辑学科",
                               "body": {
                                 "type": "form",
                                 "api": {
@@ -739,7 +739,11 @@
                         "type": "crud",
                         "api": {
                           "method": "get",
-                          "url": "${API_HOST}/admin/image-ocr-tasks"
+                          "url": "${API_HOST}/admin/image-ocr-tasks?page=${page}&perPage=${perPage}",
+                          "adaptor": "return {\
+                            ...payload,\
+                            count: payload.total\
+                          };"
                         },
                         "syncLocation": true,
                         "columns": [
@@ -751,7 +755,9 @@
                             "name": "local_file_path",
                             "label": "图片",
                             "type": "image",
-                            "src": "${API_HOST}/${local_file_path}"
+                            "src": "${API_HOST}/${local_file_path}",
+                            "thumbMode": "cover",
+                            "enlargeAble": true
                           },
                           {
                             "name": "status",
@@ -787,9 +793,11 @@
                                     },
                                     "body": [
                                       {
-                                        "type": "static-image",
+                                        "type": "image",
                                         "name": "local_image_url",
-                                        "label": "图片"
+                                        "label": "图片",
+                                        "src": "${local_image_url}",
+                                        "enlargeAble": true
                                       },
                                       {
                                         "type": "static",
@@ -845,8 +853,8 @@
                           "pagination"
                         ],
                         "perPage": 10,
-                        "pageField": "offset",
-                        "perPageField": "limit"
+                        "pageField": "page",
+                        "perPageField": "perPage"
                       }
                     }
                   },

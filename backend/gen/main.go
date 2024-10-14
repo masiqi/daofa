@@ -211,6 +211,9 @@ type QuestionQuerier interface {
 	// ORDER BY id DESC
 	// LIMIT @limit OFFSET @offset
 	SearchQuestions(content string, typeID int32, offset, limit int) ([]*gen.T, error)
+
+	// SELECT * FROM @@table WHERE id BETWEEN @startID AND @endID ORDER BY id
+	GetQuestionsByIDRange(startID, endID int) ([]*gen.T, error)
 }
 
 // QuestionKnowledgePointQuerier 定义 QuestionKnowledgePoint 表的查询接口

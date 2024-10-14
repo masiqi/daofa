@@ -7,6 +7,8 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"regexp"
+	"strings"
 	"time"
 
 	"daofa/backend/dal"
@@ -34,12 +36,19 @@ type KnowledgePointJSON struct {
 	Children []KnowledgePointJSON `json:"children,omitempty"`
 }
 
+type AlpacaInstruction struct {
+	Instruction string `json:"instruction"`
+	Input       string `json:"input"`
+	Output      string `json:"output"`
+}
+
 func main() {
 	// 加载配置文件
 	loadConfig()
 
 	// 定义命令行参数
 	importKnowledgePoints := flag.Bool("import-knowledge-points", false, "导入知识点数据")
+	generateInstructions := flag.Bool("generate-instructions", false, "生成 Alpaca 指令集")
 	flag.Parse()
 
 	// 连接数据库
@@ -60,6 +69,11 @@ func main() {
 
 	if *importKnowledgePoints {
 		importKnowledgePointsFromJSON()
+	} else if *generateInstructions {
+		err := generateAlpacaInstructions(1, 3033) // 假设我们处理ID从1到30的习题
+		if err != nil {
+			log.Fatalf("生成指令集失败: %v", err)
+		}
 	} else {
 		// 其他主程序逻辑
 		runServer()
@@ -108,26 +122,127 @@ func insertKnowledgePoints(points []KnowledgePointJSON, parentID *int32) {
 			SubjectID: 1, // 假设所有知识点属于同一个学科,实际使用时可能需要调整
 		}
 
-		err := dal.Q.KnowledgePoint.CreateKnowledgePoint(newPoint.SubjectID, newPoint.ParentID, newPoint.Name, nil, newPoint.IsLeaf)
-		if err != nil {
+		if err := dal.Q.KnowledgePoint.Create(&newPoint); err != nil {
 			log.Printf("插入知识点失败: %v", err)
 			continue
 		}
 
-		// 获取刚插入的知识点ID
-		insertedPoint, err := dal.Q.KnowledgePoint.GetKnowledgePointByName(newPoint.Name)
-		if err != nil {
-			log.Printf("获取插入的知识点失败: %v", err)
-			continue
-		}
-
-		newID := insertedPoint.ID
-
-		// 递归插入子节点
 		if len(point.Children) > 0 {
-			insertKnowledgePoints(point.Children, &newID)
+			insertKnowledgePoints(point.Children, &newPoint.ID)
 		}
 	}
+}
+
+func generateAlpacaInstructions(startID, endID int) error {
+	questions, err := dal.Q.Question.Preload(dal.Q.Question.KnowledgePoints).GetQuestionsByIDRange(startID, endID)
+	if err != nil {
+		return fmt.Errorf("获取习题失败: %v", err)
+	}
+
+	instructions := []AlpacaInstruction{}
+
+	for _, q := range questions {
+		content := processQuestionContent(q.Content, q.OcrText)
+		knowledgePoints := getKnowledgePointsString(q.KnowledgePoints)
+
+		// 1. 习题知识��指令集
+		instructionKnowledgePoints := AlpacaInstruction{
+			Instruction: "根据以下习题内容，列出相关的知识点。",
+			Input:       content,
+			Output:      knowledgePoints,
+		}
+		instructions = append(instructions, instructionKnowledgePoints)
+
+		// 2. 习题内容+知识点做input，解析做output的指令集
+		if q.Explanation != nil && len(*q.Explanation) >= 10 {
+			instructionExplanation := AlpacaInstruction{
+				Instruction: "根据以下习题内容和相关知识点，提供解题思路。",
+				Input:       fmt.Sprintf("习题内容：\n%s\n\n相关知识点：\n%s", content, knowledgePoints),
+				Output:      *q.Explanation,
+			}
+			instructions = append(instructions, instructionExplanation)
+		}
+
+		// 3. 习题内容+知识点+解析做input，答案做output的指集
+		if q.Explanation != nil && len(*q.Explanation) >= 10 && len(q.Answer) >= 10 {
+			instructionAnswer := AlpacaInstruction{
+				Instruction: "根据以下习题内容、相关知识点和解题思路，给出答案。",
+				Input:       fmt.Sprintf("习题内容：\n%s\n\n相关知识点：\n%s\n\n解题思路：\n%s", content, knowledgePoints, *q.Explanation),
+				Output:      q.Answer,
+			}
+			instructions = append(instructions, instructionAnswer)
+		}
+
+		// 4. 习题内容做input答案做output的指令集
+		if len(q.Answer) >= 10 {
+			instructionDirectAnswer := AlpacaInstruction{
+				Instruction: "根据以下习题内容，直接给出答案。",
+				Input:       content,
+				Output:      q.Answer,
+			}
+			instructions = append(instructions, instructionDirectAnswer)
+		}
+	}
+
+	// 将指令集转换为JSON并写入文件
+	jsonData, err := json.MarshalIndent(instructions, "", "  ")
+	if err != nil {
+		return fmt.Errorf("JSON编码失败: %v", err)
+	}
+
+	err = ioutil.WriteFile("alpaca_instructions.json", jsonData, 0644)
+	if err != nil {
+		return fmt.Errorf("写入文件失败: %v", err)
+	}
+
+	fmt.Printf("成功生成 %d 条指令\n", len(instructions))
+	return nil
+}
+
+func getKnowledgePointsString(knowledgePoints []model.KnowledgePoint) string {
+	var points []string
+	for _, kp := range knowledgePoints {
+		points = append(points, kp.Name)
+	}
+	return strings.Join(points, ", ")
+}
+
+func processQuestionContent(content string, ocrText *string) string {
+	if ocrText == nil {
+		ocrText = new(string)
+	}
+
+	// 处理 IMG 标签
+	imgRe := regexp.MustCompile(`<img[^>]+src="([^"]+)"[^>]*>`)
+	content = imgRe.ReplaceAllStringFunc(content, func(match string) string {
+		submatches := imgRe.FindStringSubmatch(match)
+		if len(submatches) > 1 {
+			if *ocrText != "" {
+				return fmt.Sprintf("[图片，内容识别结果：%s]", *ocrText)
+			}
+			return fmt.Sprintf("[图片：%s]", submatches[1])
+		}
+		return match
+	})
+
+	// 保留允许的标签，移除其他所有 HTML 标签
+	allowedTags := []string{"table", "tbody", "tr", "td", "th", "thead", "tfoot", "caption", "colgroup", "col"}
+	for _, tag := range allowedTags {
+		content = regexp.MustCompile(`(?i)<`+tag+`[^>]*>`).ReplaceAllStringFunc(content, strings.ToLower)
+		content = regexp.MustCompile(`(?i)</`+tag+`>`).ReplaceAllStringFunc(content, strings.ToLower)
+	}
+
+	// 移除不允许的标签
+	content = regexp.MustCompile(`<[^>]*>`).ReplaceAllString(content, "")
+
+	// 将 &nbsp; 实体转换为普通空格
+	content = strings.ReplaceAll(content, "&nbsp;", " ")
+
+	// 清理多余的空白字符
+	content = strings.TrimSpace(content)
+	content = regexp.MustCompile(`\s+`).ReplaceAllString(content, " ")
+
+	return content
 }
 
 func runServer() {
